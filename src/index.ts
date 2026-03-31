@@ -90,3 +90,5 @@ manager.markTaskComplete(1);
 
 console.log("After completion");
 manager.listAllTasks();
+
+console.log('this is my typescript project');
