@@ -79,9 +79,11 @@ const manager = new TaskManager();
 
 const task1 = new Task(1, "learn", "Understand");
 const task2 = new Task(2, "build", "practice");
+const task3 = new Task(3,"music","coding");
 
 manager.addTask(task1);
 manager.addTask(task2);
+manager.addTask(task3);
 
 console.log("Before completion")
 manager.listAllTasks();
