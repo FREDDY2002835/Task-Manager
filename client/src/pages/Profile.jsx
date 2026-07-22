@@ -1,13 +1,13 @@
 import MainLayout from "../layouts/MainLayout";
 
-function Tasks() {
+function Profile() {
   return (
     <MainLayout>
 
-      <h1>Tasks</h1>
+      <h1>Profile</h1>
 
     </MainLayout>
   );
 }
 
-export default Tasks;
+export default Profile;
