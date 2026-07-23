@@ -31,6 +31,13 @@ function Sidebar() {
           Profile
         </Link>
 
+        <Link
+        to="/analytics"   // or "/stats" if that's the route you're using
+        className="hover:bg-emerald-800 p-3 rounded-lg transition"
+      >
+        Analytics
+      </Link>
+
       </nav>
 
     </aside>
