@@ -15,13 +15,19 @@ function Dashboard() {
         <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#0D1F10] to-[#12351A] p-5 sm:p-8 lg:p-12">
 
           {/* Glow Effects */}
-          <div className="absolute -right-10 -top-10 h-48 w-48 md:h-72 md:w-72 lg:h-96 lg:w-96 rounded-full bg-green-500 opacity-20 blur-3xl"></div>
+          <div
+          className="absolute -right-10 -top-10 h-48 w-48 md:h-72 md:w-72 lg:h-96 lg:w-96 rounded-full opacity-20 blur-3xl"
+          style={{ backgroundColor: "var(--primary)" }}
+        ></div>
 
-          <div className="absolute right-5 bottom-0 h-40 w-40 md:h-60 md:w-60 lg:h-72 lg:w-72 rounded-full bg-emerald-400 opacity-20 blur-3xl"></div>
+          <div
+          className="absolute right-5 bottom-0 h-40 w-40 md:h-60 md:w-60 lg:h-72 lg:w-72 rounded-full opacity-20 blur-3xl"
+          style={{ backgroundColor: "var(--primary-light)" }}
+        ></div>
 
           <div className="relative z-10 max-w-2xl">
 
-            <div className="w-16 sm:w-20 h-1 bg-green-500 rounded mb-6"></div>
+            <div className="w-16 sm:w-20 h-1 rounded mb-6 bg-[var(--primary)]"></div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
               Organize.
@@ -37,7 +43,7 @@ function Dashboard() {
               Stay productive and keep track of everything in one place.
             </p>
 
-            <button className="mt-8 w-full sm:w-fit flex items-center justify-center gap-3 border border-green-500 px-6 py-3 sm:px-8 sm:py-4 rounded-xl text-white hover:bg-green-500 transition duration-300">
+            <button className="mt-8 w-full sm:w-fit flex items-center justify-center gap-3 border border-[var(--primary)] px-6 py-3 sm:px-8 sm:py-4 rounded-xl text-white hover:bg-[var(--primary)] transition duration-300">
 
               <FaPlus />
 
@@ -53,9 +59,9 @@ function Dashboard() {
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-          <div className="bg-[#162117] border border-green-900 rounded-2xl p-6 hover:-translate-y-1 transition duration-300">
+          <div className="bg-[#162117] border border-[var(--primary-dark)] rounded-2xl p-6 hover:-translate-y-1 transition duration-300">
 
-            <FaTasks className="text-4xl text-green-400 mb-5" />
+            <FaTasks className="text-4xl text-[var(--primary-light)] mb-5" />
 
             <p className="text-gray-400 text-sm">
               Total Tasks
@@ -69,13 +75,13 @@ function Dashboard() {
 
           <div className="bg-[#162117] border border-green-900 rounded-2xl p-6 hover:-translate-y-1 transition duration-300">
 
-            <FaCheckCircle className="text-4xl text-green-400 mb-5" />
+            <FaCheckCircle className="text-4xl text-[var(--primary-light)] mb-5" />
 
             <p className="text-gray-400 text-sm">
               Completed
             </p>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-400 mt-2">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary-light)] mt-2">
               7
             </h2>
 
@@ -109,7 +115,7 @@ function Dashboard() {
 
             {/* Task */}
 
-            <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 sm:p-6 hover:border-green-500 transition">
+            <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 sm:p-6 hover:border-[var(--primary)] transition">
 
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
 

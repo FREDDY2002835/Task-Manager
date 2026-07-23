@@ -2,13 +2,21 @@
 
 function ProductivityCard() {
   return (
-    <div className="bg-[#162117] rounded-2xl border border-green-900 p-5 sm:p-8">
+    <div
+      className="rounded-2xl p-5 sm:p-8 border"
+      style={{
+        background: "#162117",
+        borderColor: "var(--primary-dark)",
+      }}
+    >
 
       <h2 className="text-xl lg:text-2xl font-bold text-white mb-8">
         Productivity
       </h2>
 
+
       <div className="space-y-8">
+
 
         {/* Weekly Goal */}
 
@@ -20,19 +28,27 @@ function ProductivityCard() {
               Weekly Goal
             </span>
 
-            <span className="text-green-400">
+            <span style={{ color: "var(--primary-light)" }}>
               80%
             </span>
 
           </div>
 
+
           <div className="mt-2 h-3 rounded-full bg-gray-700">
 
-            <div className="h-3 w-4/5 rounded-full bg-green-500"></div>
+            <div
+              className="h-3 w-4/5 rounded-full"
+              style={{
+                background: "var(--primary)",
+              }}
+            ></div>
 
           </div>
 
         </div>
+
+
 
         {/* Monthly Progress */}
 
@@ -44,52 +60,93 @@ function ProductivityCard() {
               Monthly Progress
             </span>
 
-            <span className="text-green-400">
+            <span style={{ color: "var(--primary-light)" }}>
               65%
             </span>
 
           </div>
 
+
           <div className="mt-2 h-3 rounded-full bg-gray-700">
 
-            <div className="h-3 w-2/3 rounded-full bg-green-500"></div>
+            <div
+              className="h-3 w-2/3 rounded-full"
+              style={{
+                background: "var(--primary)",
+              }}
+            ></div>
 
           </div>
 
         </div>
 
+
+
+
         {/* Achievement */}
 
-        <div className="rounded-xl bg-[#1D2C20] p-5">
+        <div
+          className="rounded-xl p-5"
+          style={{
+            background: "#1D2C20",
+          }}
+        >
 
           <h3 className="text-lg font-semibold text-white">
             🏆 Achievement
           </h3>
 
+
           <p className="mt-3 text-sm lg:text-base text-gray-300">
-            You completed <strong className="text-green-400">15 tasks</strong> this week.
+
+            You completed{" "}
+
+            <strong style={{ color: "var(--primary-light)" }}>
+              15 tasks
+            </strong>
+
+            {" "}this week.
             Keep up the amazing work!
+
           </p>
 
         </div>
 
+
+
+
         {/* Productivity Score */}
 
-        <div className="rounded-xl border border-green-900 bg-[#102417] p-5">
+        <div
+          className="rounded-xl p-5 border"
+          style={{
+            background: "#102417",
+            borderColor: "var(--primary-dark)",
+          }}
+        >
 
           <p className="text-xs uppercase tracking-wider text-gray-400">
             Productivity Score
           </p>
 
-          <h2 className="mt-2 text-3xl font-bold text-green-400">
+
+          <h2
+            className="mt-2 text-3xl font-bold"
+            style={{
+              color: "var(--primary-light)",
+            }}
+          >
             92%
           </h2>
+
 
           <p className="mt-2 text-sm text-gray-400">
             Excellent consistency this month.
           </p>
 
+
         </div>
+
 
       </div>
 

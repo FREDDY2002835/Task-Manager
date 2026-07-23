@@ -4,17 +4,25 @@ import BottomNav from "../components/layout/BottomNav";
 
 function MainLayout({ children }) {
   return (
-    <div className="min-h-screen bg-[#08110A] text-white">
+    <div
+      className="min-h-screen text-white"
+      style={{
+        background: "#08110A",
+      }}
+    >
 
       {/* Top Navbar */}
       <Navbar />
 
+
       <div className="flex">
+
 
         {/* Desktop Sidebar */}
         <aside className="hidden lg:block">
           <Sidebar />
         </aside>
+
 
         {/* Main Content */}
         <main
@@ -30,10 +38,13 @@ function MainLayout({ children }) {
           {children}
         </main>
 
+
       </div>
+
 
       {/* Mobile Bottom Navigation */}
       <BottomNav />
+
 
     </div>
   );
