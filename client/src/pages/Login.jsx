@@ -3,86 +3,60 @@ import { FaEnvelope, FaLock, FaArrowRight } from "react-icons/fa";
 
 function Login() {
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-[#08110A]">
+    <div className="min-h-screen bg-[#08110A] flex items-center justify-center px-4 py-8">
 
-      {/* LEFT SIDE */}
-      <div className="relative hidden lg:flex items-center justify-center overflow-hidden">
+      <div className="w-full max-w-md">
 
-        {/* Green Glow */}
-        <div className="absolute w-[700px] h-[700px] rounded-full bg-green-500 opacity-20 blur-[150px]"></div>
+        {/* Logo */}
 
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#08110A] via-[#102417] to-[#18452A]"></div>
+        <div className="text-center mb-10">
 
-        <div className="relative z-10 max-w-xl px-10">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-green-500/10 border border-green-700 shadow-lg">
 
-          <div className="w-20 h-1 bg-green-500 rounded mb-8"></div>
-
-          <h1 className="text-6xl font-extrabold text-white leading-tight">
-            TaskFlow
-          </h1>
-
-          <h2 className="text-5xl font-bold text-green-400 mt-8">
-            Organize.
-            <br />
-            Focus.
-            <br />
-            Deliver.
-          </h2>
-
-          <p className="mt-8 text-lg text-gray-300 leading-8">
-            Manage your projects, organize your work, and stay productive
-            with a modern task management platform designed for developers
-            and teams.
-          </p>
-
-          <div className="mt-12 flex gap-10">
-
-            <div>
-              <h3 className="text-4xl font-bold text-green-400">10K+</h3>
-              <p className="text-gray-400 mt-2">Active Users</p>
-            </div>
-
-            <div>
-              <h3 className="text-4xl font-bold text-green-400">500K+</h3>
-              <p className="text-gray-400 mt-2">Tasks Completed</p>
-            </div>
+            <span className="text-4xl font-bold text-green-400">
+              T
+            </span>
 
           </div>
 
+          <h1 className="mt-5 text-4xl font-extrabold text-white">
+            TaskFlow
+          </h1>
+
+          <p className="mt-2 text-gray-400">
+            Organize. Focus. Deliver.
+          </p>
+
         </div>
 
-      </div>
+        {/* Login Card */}
 
-      {/* RIGHT SIDE */}
+        <div className="bg-[#162117] border border-green-900 rounded-3xl shadow-2xl p-6 sm:p-8">
 
-      <div className="flex items-center justify-center px-6">
-
-        <div className="w-full max-w-md bg-[#162117] border border-green-900 rounded-3xl p-10 shadow-2xl">
-
-          <h2 className="text-4xl font-bold text-white">
-            Welcome Back
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            Welcome Back 👋
           </h2>
 
-          <p className="text-gray-400 mt-3">
-            Login to continue to TaskFlow.
+          <p className="mt-2 text-sm text-gray-400">
+            Login to continue managing your tasks.
           </p>
 
           {/* Email */}
 
-          <div className="mt-10">
+          <div className="mt-8">
 
-            <label className="text-gray-300 mb-2 block">
+            <label className="block mb-2 text-gray-300">
               Email Address
             </label>
 
-            <div className="flex items-center bg-[#1D2C20] rounded-xl px-4 border border-green-900">
+            <div className="flex items-center rounded-xl border border-green-900 bg-[#1D2C20] px-4">
 
               <FaEnvelope className="text-gray-500" />
 
               <input
                 type="email"
                 placeholder="john@example.com"
-                className="w-full bg-transparent p-4 outline-none text-white placeholder:text-gray-500"
+                className="w-full bg-transparent px-4 py-4 outline-none text-white placeholder:text-gray-500"
               />
 
             </div>
@@ -91,47 +65,52 @@ function Login() {
 
           {/* Password */}
 
-          <div className="mt-6">
+          <div className="mt-5">
 
-            <label className="text-gray-300 mb-2 block">
+            <label className="block mb-2 text-gray-300">
               Password
             </label>
 
-            <div className="flex items-center bg-[#1D2C20] rounded-xl px-4 border border-green-900">
+            <div className="flex items-center rounded-xl border border-green-900 bg-[#1D2C20] px-4">
 
               <FaLock className="text-gray-500" />
 
               <input
                 type="password"
                 placeholder="••••••••"
-                className="w-full bg-transparent p-4 outline-none text-white placeholder:text-gray-500"
+                className="w-full bg-transparent px-4 py-4 outline-none text-white placeholder:text-gray-500"
               />
 
             </div>
 
           </div>
 
-          {/* Remember */}
+          {/* Options */}
 
-          <div className="flex justify-between items-center mt-6">
+          <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 
-            <label className="flex items-center gap-2 text-gray-400">
+            <label className="flex items-center gap-2 text-sm text-gray-400">
 
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                className="accent-green-500"
+              />
 
               Remember me
 
             </label>
 
-            <button className="text-green-400 hover:text-green-300">
+            <button className="text-sm text-green-400 hover:text-green-300">
+
               Forgot Password?
+
             </button>
 
           </div>
 
-          {/* Login */}
+          {/* Login Button */}
 
-          <button className="w-full mt-8 bg-green-500 hover:bg-green-600 transition rounded-xl py-4 font-semibold flex justify-center items-center gap-3">
+          <button className="mt-8 w-full flex items-center justify-center gap-3 rounded-xl bg-green-500 py-4 font-semibold text-white transition hover:bg-green-600">
 
             Login
 
@@ -139,15 +118,29 @@ function Login() {
 
           </button>
 
+          {/* Divider */}
+
+          <div className="flex items-center gap-4 my-8">
+
+            <div className="flex-1 h-px bg-green-900"></div>
+
+            <span className="text-gray-500 text-sm">
+              OR
+            </span>
+
+            <div className="flex-1 h-px bg-green-900"></div>
+
+          </div>
+
           {/* Register */}
 
-          <p className="text-center text-gray-400 mt-8">
+          <p className="text-center text-gray-400">
 
             Don't have an account?
 
             <Link
               to="/register"
-              className="text-green-400 ml-2 hover:text-green-300 font-semibold"
+              className="ml-2 font-semibold text-green-400 hover:text-green-300"
             >
               Create One
             </Link>
