@@ -1,4 +1,5 @@
 import MainLayout from "../layouts/MainLayout";
+import PageTransition from "../components/PageTransition";
 
 import StatsHeader from "../components/stats/StatsHeader";
 import SummaryCards from "../components/stats/SummaryCards";
@@ -9,6 +10,10 @@ import RecentActivity from "../components/stats/RecentActivity";
 
 function Stats() {
   return (
+     <PageTransition>
+      
+      
+   
     <MainLayout>
 
       <div className="max-w-7xl mx-auto space-y-8">
@@ -36,6 +41,7 @@ function Stats() {
       </div>
 
     </MainLayout>
+     </PageTransition>
   );
 }
 

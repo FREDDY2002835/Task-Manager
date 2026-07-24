@@ -3,10 +3,15 @@ import ProfileHeader from "../components/profile/ProfileHeader";
 import StatsCards from "../components/profile/StatsCards";
 import PersonalInfo from "../components/profile/PersonalInfo";
 import ProductivityCard from "../components/profile/ProductivityCard";
+import PageTransition from "../components/PageTransition";
 
 function Profile() {
   return (
-    <MainLayout>
+    <PageTransition>
+      <MainLayout>
+        {/* Your dashboard content */}
+     
+    
       <div className="max-w-7xl mx-auto space-y-8">
 
         {/* Profile Header */}
@@ -26,6 +31,7 @@ function Profile() {
 
       </div>
     </MainLayout>
+    </PageTransition>
   );
 }
 

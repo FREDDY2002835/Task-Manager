@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PageTransition from "../components/PageTransition";
 import {
   FaHome,
   FaArrowLeft,
@@ -7,6 +8,11 @@ import {
 
 function NotFound() {
   return (
+
+    <PageTransition>
+      <MainLayout>
+        {/* Your dashboard content */}
+      
     <div className="min-h-screen bg-[#08110A] flex items-center justify-center px-4 py-8">
 
       {/* Background Glow */}
@@ -92,6 +98,9 @@ function NotFound() {
       </div>
 
     </div>
+
+    </MainLayout>
+    </PageTransition>
   );
 }
 

@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { FaEnvelope, FaLock, FaArrowRight } from "react-icons/fa";
+import PageTransition from "../components/PageTransition";
 
 function Login() {
   return (
+    <PageTransition>
+      <MainLayout>
+        {/* Your dashboard content */}
+      
     <div className="min-h-screen bg-[#08110A] flex items-center justify-center px-4 py-8">
 
       <div className="w-full max-w-md">
@@ -152,6 +157,9 @@ function Login() {
       </div>
 
     </div>
+
+    </MainLayout>
+    </PageTransition>
   );
 }
 

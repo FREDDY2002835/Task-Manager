@@ -1,4 +1,5 @@
 import MainLayout from "../layouts/MainLayout";
+import PageTransition from "../components/PageTransition";
 import {
   FaTasks,
   FaCheckCircle,
@@ -8,7 +9,8 @@ import {
 
 function Dashboard() {
   return (
-    <MainLayout>
+    <PageTransition>
+      <MainLayout>
       <div className="max-w-7xl mx-auto space-y-8">
 
         {/* ================= HERO ================= */}
@@ -38,7 +40,7 @@ function Dashboard() {
             </h1>
 
             <p className="mt-6 text-sm sm:text-base lg:text-lg text-gray-300 leading-6 lg:leading-8">
-              Welcome back 👋
+              Welcome back !
               <br />
               Stay productive and keep track of everything in one place.
             </p>
@@ -103,100 +105,10 @@ function Dashboard() {
 
         </section>
 
-        {/* ================= RECENT TASKS ================= */}
-
-        <section>
-
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
-            Recent Tasks
-          </h2>
-
-          <div className="space-y-5">
-
-            {/* Task */}
-
-            <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 sm:p-6 hover:border-[var(--primary)] transition">
-
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-
-                <div>
-
-                  <h3 className="text-lg sm:text-xl font-semibold text-white">
-                    Build MERN Authentication
-                  </h3>
-
-                  <p className="text-gray-400 mt-2">
-                    Due Tomorrow
-                  </p>
-
-                </div>
-
-                <span className="self-start sm:self-auto bg-red-500 px-3 py-2 rounded-full text-sm font-semibold">
-                  HIGH
-                </span>
-
-              </div>
-
-            </div>
-
-            {/* Task */}
-
-            <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 sm:p-6 hover:border-green-500 transition">
-
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-
-                <div>
-
-                  <h3 className="text-lg sm:text-xl font-semibold text-white">
-                    Finish Dashboard UI
-                  </h3>
-
-                  <p className="text-gray-400 mt-2">
-                    Friday
-                  </p>
-
-                </div>
-
-                <span className="self-start sm:self-auto bg-yellow-500 text-black px-3 py-2 rounded-full text-sm font-semibold">
-                  MEDIUM
-                </span>
-
-              </div>
-
-            </div>
-
-            {/* Task */}
-
-            <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 sm:p-6 hover:border-green-500 transition">
-
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-
-                <div>
-
-                  <h3 className="text-lg sm:text-xl font-semibold text-white">
-                    Connect MongoDB
-                  </h3>
-
-                  <p className="text-gray-400 mt-2">
-                    Next Week
-                  </p>
-
-                </div>
-
-                <span className="self-start sm:self-auto bg-green-500 text-black px-3 py-2 rounded-full text-sm font-semibold">
-                  LOW
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
 
       </div>
     </MainLayout>
+   </PageTransition>
   );
 }
 

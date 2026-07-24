@@ -1,9 +1,15 @@
 import MainLayout from "../layouts/MainLayout";
 import ThemeSwitcher from "../components/ThemeSwitcher";
 import { FaCog } from "react-icons/fa";
+import PageTransition from "../components/PageTransition";
 
 function Settings() {
   return (
+     <PageTransition>
+      
+        {/* Your dashboard content */}
+      
+   
     <MainLayout>
       <div className="max-w-5xl mx-auto space-y-8">
 
@@ -39,6 +45,7 @@ function Settings() {
 
       </div>
     </MainLayout>
+     </PageTransition>
   );
 }
 

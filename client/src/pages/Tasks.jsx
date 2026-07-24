@@ -1,4 +1,5 @@
 import MainLayout from "../layouts/MainLayout";
+import PageTransition from "../components/PageTransition";
 import {
   FaSearch,
   FaPlus,
@@ -9,6 +10,7 @@ import {
 
 function Tasks() {
   return (
+     <PageTransition>
     <MainLayout>
       <div className="max-w-7xl mx-auto space-y-6">
 
@@ -101,7 +103,7 @@ function Tasks() {
               </div>
 
               <span className="self-start rounded-full bg-red-500 px-3 py-1 text-xs font-semibold">
-                HIGH
+                LOW
               </span>
 
             </div>
@@ -209,7 +211,7 @@ function Tasks() {
               </div>
 
               <span className="self-start rounded-full bg-green-500 text-black px-3 py-1 text-xs font-semibold">
-                LOW
+                HIGH
               </span>
 
             </div>
@@ -248,6 +250,7 @@ function Tasks() {
 
       </div>
     </MainLayout>
+    </PageTransition>
   );
 }
 

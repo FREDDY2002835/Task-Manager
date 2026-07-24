@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PageTransition from "../components/PageTransition";
 import {
   FaUser,
   FaEnvelope,
@@ -8,6 +9,10 @@ import {
 
 function Register() {
   return (
+    <PageTransition>
+      <MainLayout>
+        {/* Your dashboard content */}
+      
     <div className="min-h-screen grid lg:grid-cols-2 bg-[#08110A]">
 
       {/* LEFT SIDE */}
@@ -221,6 +226,9 @@ function Register() {
       </div>
 
     </div>
+
+    </MainLayout>
+    </PageTransition>
   );
 }
 
