@@ -26,12 +26,22 @@ function PriorityChart() {
     datasets: [
       {
         label: "Tasks",
-        data: [8, 15, 19],
+        data: [19, 15, 8],
+
         backgroundColor: [
-          "#ef4444",
-          "#facc15",
-          "#22c55e",
+          "#22C55E", // High - Green
+          "#EAB308", // Medium - Yellow
+          "#EF4444", // Low - Red
         ],
+
+        borderColor: [
+          "#22C55E",
+          "#EAB308",
+          "#EF4444",
+        ],
+
+        borderWidth: 1,
+        borderRadius: 8,
       },
     ],
   };
@@ -44,22 +54,40 @@ function PriorityChart() {
       legend: {
         display: false,
       },
+
+      tooltip: {
+        backgroundColor: "#162117",
+        titleColor: "#ffffff",
+        bodyColor: "#d1d5db",
+        borderColor: "#22C55E",
+        borderWidth: 1,
+      },
     },
 
     scales: {
       x: {
         ticks: {
           color: "#9CA3AF",
+          font: {
+            size: 14,
+          },
         },
+
         grid: {
           color: "#1f2937",
         },
       },
 
       y: {
+        beginAtZero: true,
+
         ticks: {
           color: "#9CA3AF",
+          font: {
+            size: 14,
+          },
         },
+
         grid: {
           color: "#1f2937",
         },

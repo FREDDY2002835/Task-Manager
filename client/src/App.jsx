@@ -7,6 +7,7 @@ import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Stats from "./pages/Stats";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/analytics" element={<Stats />} />
+      <Route path="/settings" element={<Settings />} />
     </Routes>
   );
 }

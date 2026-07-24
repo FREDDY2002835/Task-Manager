@@ -17,29 +17,23 @@ function MainLayout({ children }) {
 
       <div className="flex">
 
+  <Sidebar />
 
-        {/* Desktop Sidebar */}
-        <aside className="hidden lg:block">
-          <Sidebar />
-        </aside>
+  <main
+    className="
+      flex-1
+      lg:ml-64
+      p-5
+      md:p-8
+      lg:p-10
+      pb-24
+      lg:pb-10
+    "
+  >
+    {children}
+  </main>
 
-
-        {/* Main Content */}
-        <main
-          className="
-            flex-1
-            p-5
-            md:p-8
-            lg:p-10
-            pb-24
-            lg:pb-10
-          "
-        >
-          {children}
-        </main>
-
-
-      </div>
+</div>
 
 
       {/* Mobile Bottom Navigation */}

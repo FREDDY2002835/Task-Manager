@@ -3,7 +3,6 @@ import ProfileHeader from "../components/profile/ProfileHeader";
 import StatsCards from "../components/profile/StatsCards";
 import PersonalInfo from "../components/profile/PersonalInfo";
 import ProductivityCard from "../components/profile/ProductivityCard";
-import ThemeSwitcher from "../components/ThemeSwitcher";
 
 function Profile() {
   return (
@@ -24,9 +23,6 @@ function Profile() {
           <ProductivityCard />
 
         </div>
-
-        {/* Theme Settings */}
-        <ThemeSwitcher />
 
       </div>
     </MainLayout>
