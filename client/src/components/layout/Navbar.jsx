@@ -1,15 +1,21 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEllipsisV, FaCog, FaSignOutAlt } from "react-icons/fa";
 import logo from "../../assets/logo.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   const menuRef = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
         setMenuOpen(false);
       }
     }
@@ -17,12 +23,25 @@ function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
   }, []);
+
+  const handleLogout = () => {
+    // Remove saved login data if you use it
+    localStorage.removeItem("token");
+
+    setMenuOpen(false);
+
+    navigate("/login");
+  };
 
   return (
     <>
-      {/* NAVBAR */}
+      {/* ================= NAVBAR ================= */}
+
       <header
         className="
           sticky
@@ -42,42 +61,49 @@ function Navbar() {
         "
         style={{
           background: "rgba(8,17,10,0.45)",
-          borderColor: "rgba(255,255,255,0.05)",
+          borderColor: "rgba(255,255,255,.05)",
         }}
       >
         {/* Logo */}
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-3">
+
           <img
             src={logo}
             alt="TaskFlow"
-            className="w-25 h-25 object-contain"
+            className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
           />
 
-          <span className="text-lg font-semibold ml-7">
+          <span className="text-sm sm:text-base lg:text-lg font-semibold">
             Task Manager
           </span>
+
         </div>
 
         {/* Three dots */}
+
         <button
-          onClick={() => setMenuOpen(true)}
+          onClick={() => setMenuOpen(!menuOpen)}
           className="p-2 rounded-full hover:bg-white/10 transition"
         >
           <FaEllipsisV className="text-lg" />
         </button>
       </header>
 
-      {/* MOBILE MENU */}
+      {/* ================= MOBILE MENU ================= */}
+
       {menuOpen && (
         <div className="fixed inset-0 z-[100] lg:hidden">
 
-          {/* Dark overlay */}
+          {/* Overlay */}
+
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setMenuOpen(false)}
-          ></div>
+          />
 
-          {/* Bottom sheet */}
+          {/* Bottom Sheet */}
+
           <div
             ref={menuRef}
             className="
@@ -87,14 +113,12 @@ function Navbar() {
               right-0
               rounded-t-3xl
               p-6
-              animate-[slideUp_0.25s_ease-out]
             "
             style={{
               background: "#111A12",
               borderTop: "1px solid var(--primary-dark)",
             }}
           >
-            {/* Handle */}
             <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-6"></div>
 
             <Link
@@ -113,16 +137,14 @@ function Navbar() {
               "
             >
               <FaCog className="text-xl" />
+
               <span className="text-base font-medium">
                 Settings
               </span>
             </Link>
 
             <button
-              onClick={() => {
-                setMenuOpen(false);
-                // logout logic
-              }}
+              onClick={handleLogout}
               className="
                 w-full
                 flex
@@ -137,18 +159,24 @@ function Navbar() {
               "
             >
               <FaSignOutAlt className="text-xl" />
+
               <span className="text-base font-medium">
                 Logout
               </span>
             </button>
+
           </div>
+
         </div>
       )}
 
-      {/* DESKTOP DROPDOWN */}
-      {menuOpen && (
-        <div className="hidden lg:block fixed top-16 right-6 z-[100]">
+      {/* ================= DESKTOP MENU ================= */}
 
+      {menuOpen && (
+        <div
+          ref={menuRef}
+          className="hidden lg:block fixed top-16 right-6 z-[100]"
+        >
           <div
             className="w-52 rounded-2xl overflow-hidden border shadow-2xl"
             style={{
@@ -171,11 +199,12 @@ function Navbar() {
               "
             >
               <FaCog />
+
               Settings
             </Link>
 
             <button
-              onClick={() => setMenuOpen(false)}
+              onClick={handleLogout}
               className="
                 w-full
                 flex
@@ -190,6 +219,7 @@ function Navbar() {
               "
             >
               <FaSignOutAlt />
+
               Logout
             </button>
           </div>

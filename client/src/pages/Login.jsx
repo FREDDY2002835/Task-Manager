@@ -2,33 +2,34 @@ import { Link } from "react-router-dom";
 import { FaEnvelope, FaLock, FaArrowRight } from "react-icons/fa";
 import PageTransition from "../components/PageTransition";
 
+
 function Login() {
   return (
     <PageTransition>
-      <MainLayout>
+      
         {/* Your dashboard content */}
       
-    <div className="min-h-screen bg-[#08110A] flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-[#08110A] flex items-center justify-center px-5 py-4">
 
       <div className="w-full max-w-md">
 
         {/* Logo */}
 
-        <div className="text-center mb-10">
+        <div className="text-center mb-6 sm:mb-10">
 
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-green-500/10 border border-green-700 shadow-lg">
+         <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-green-500/10 border border-green-700 shadow-lg">
 
-            <span className="text-4xl font-bold text-green-400">
+           <span className="text-2xl sm:text-4xl font-bold text-green-400">
               T
             </span>
 
           </div>
 
-          <h1 className="mt-5 text-4xl font-extrabold text-white">
+         <h1 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white">
             TaskFlow
           </h1>
 
-          <p className="mt-2 text-gray-400">
+         <p className="mt-1 text-xs sm:text-base text-gray-400">
             Organize. Focus. Deliver.
           </p>
 
@@ -36,13 +37,13 @@ function Login() {
 
         {/* Login Card */}
 
-        <div className="bg-[#162117] border border-green-900 rounded-3xl shadow-2xl p-6 sm:p-8">
+       <div className="bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-8">
 
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Welcome Back 👋
+        <h2 className="text-xl sm:text-3xl font-bold text-white">
+            Welcome Back !
           </h2>
 
-          <p className="mt-2 text-sm text-gray-400">
+         <p className="mt-1 text-xs sm:text-sm text-gray-400">
             Login to continue managing your tasks.
           </p>
 
@@ -50,7 +51,7 @@ function Login() {
 
           <div className="mt-8">
 
-            <label className="block mb-2 text-gray-300">
+            <label className="block mb-1 text-xs sm:text-sm text-gray-300">
               Email Address
             </label>
 
@@ -60,8 +61,8 @@ function Login() {
 
               <input
                 type="email"
-                placeholder="john@example.com"
-                className="w-full bg-transparent px-4 py-4 outline-none text-white placeholder:text-gray-500"
+                placeholder="youremail@example.com"
+               className="w-full bg-transparent px-3 py-3 sm:px-4 sm:py-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
               />
 
             </div>
@@ -83,7 +84,7 @@ function Login() {
               <input
                 type="password"
                 placeholder="••••••••"
-                className="w-full bg-transparent px-4 py-4 outline-none text-white placeholder:text-gray-500"
+               className="w-full bg-transparent px-3 py-3 sm:px-4 sm:py-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
               />
 
             </div>
@@ -92,9 +93,9 @@ function Login() {
 
           {/* Options */}
 
-          <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
 
-            <label className="flex items-center gap-2 text-sm text-gray-400">
+            <label className="flex items-center gap-2 text-xs sm:text-sm text-gray-400">
 
               <input
                 type="checkbox"
@@ -105,7 +106,7 @@ function Login() {
 
             </label>
 
-            <button className="text-sm text-green-400 hover:text-green-300">
+            <button className="text-xs sm:text-sm text-green-400 hover:text-green-300">
 
               Forgot Password?
 
@@ -115,7 +116,7 @@ function Login() {
 
           {/* Login Button */}
 
-          <button className="mt-8 w-full flex items-center justify-center gap-3 rounded-xl bg-green-500 py-4 font-semibold text-white transition hover:bg-green-600">
+          <button className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-green-500 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:bg-green-600">
 
             Login
 
@@ -125,11 +126,11 @@ function Login() {
 
           {/* Divider */}
 
-          <div className="flex items-center gap-4 my-8">
+         <div className="flex items-center gap-3 my-6">
 
             <div className="flex-1 h-px bg-green-900"></div>
 
-            <span className="text-gray-500 text-sm">
+           <span className="text-gray-500 text-xs sm:text-sm">
               OR
             </span>
 
@@ -139,7 +140,7 @@ function Login() {
 
           {/* Register */}
 
-          <p className="text-center text-gray-400">
+         <p className="text-center text-xs sm:text-sm text-gray-400">
 
             Don't have an account?
 
@@ -158,7 +159,6 @@ function Login() {
 
     </div>
 
-    </MainLayout>
     </PageTransition>
   );
 }
