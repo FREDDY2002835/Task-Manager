@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaEllipsisV, FaCog, FaSignOutAlt } from "react-icons/fa";
 import logo from "../../assets/logo.png";
 
@@ -11,11 +12,8 @@ function Navbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target)
-      ) {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
         setMenuOpen(false);
       }
     }
@@ -30,11 +28,8 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    // Remove saved login data if you use it
     localStorage.removeItem("token");
-
     setMenuOpen(false);
-
     navigate("/login");
   };
 
@@ -60,7 +55,7 @@ function Navbar() {
           border-b
         "
         style={{
-          background: "rgba(8,17,10,0.45)",
+          background: "rgba(8,17,10,.45)",
           borderColor: "rgba(255,255,255,.05)",
         }}
       >
@@ -80,151 +75,191 @@ function Navbar() {
 
         </div>
 
-        {/* Three dots */}
+        {/* Three Dots */}
 
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuOpen((prev) => !prev)}
           className="p-2 rounded-full hover:bg-white/10 transition"
         >
           <FaEllipsisV className="text-lg" />
         </button>
+
       </header>
 
       {/* ================= MOBILE MENU ================= */}
 
-      {menuOpen && (
-        <div className="fixed inset-0 z-[100] lg:hidden">
+      <AnimatePresence>
 
-          {/* Overlay */}
-
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setMenuOpen(false)}
-          />
-
-          {/* Bottom Sheet */}
-
-          <div
-            ref={menuRef}
-            className="
-              absolute
-              bottom-0
-              left-0
-              right-0
-              rounded-t-3xl
-              p-6
-            "
-            style={{
-              background: "#111A12",
-              borderTop: "1px solid var(--primary-dark)",
-            }}
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 z-[100] lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-6"></div>
+            {/* Overlay */}
 
-            <Link
-              to="/settings"
+            <div
+              className="absolute inset-0 bg-black/50"
               onClick={() => setMenuOpen(false)}
+            />
+
+            {/* Bottom Sheet */}
+
+            <motion.div
+              ref={menuRef}
+              initial={{ y: 250 }}
+              animate={{ y: 0 }}
+              exit={{ y: 250 }}
+              transition={{
+                duration: 0.28,
+                ease: "easeOut",
+              }}
               className="
-                flex
-                items-center
-                gap-4
-                px-4
-                py-4
-                rounded-2xl
-                text-white
-                hover:bg-white/5
-                transition
+                absolute
+                bottom-0
+                left-0
+                right-0
+                rounded-t-3xl
+                p-6
               "
+              style={{
+                background: "#111A12",
+                borderTop:
+                  "1px solid var(--primary-dark)",
+              }}
             >
-              <FaCog className="text-xl" />
+              <div className="w-12 h-1 rounded-full bg-gray-600 mx-auto mb-6"></div>
 
-              <span className="text-base font-medium">
-                Settings
-              </span>
-            </Link>
+              <Link
+                to="/settings"
+                onClick={() => setMenuOpen(false)}
+                className="
+                  flex
+                  items-center
+                  gap-4
+                  px-4
+                  py-4
+                  rounded-2xl
+                  hover:bg-white/5
+                  transition
+                "
+              >
+                <FaCog className="text-xl" />
 
-            <button
-              onClick={handleLogout}
-              className="
-                w-full
-                flex
-                items-center
-                gap-4
-                px-4
-                py-4
-                rounded-2xl
-                text-red-400
-                hover:bg-white/5
-                transition
-              "
-            >
-              <FaSignOutAlt className="text-xl" />
+                <span>Settings</span>
 
-              <span className="text-base font-medium">
-                Logout
-              </span>
-            </button>
+              </Link>
 
-          </div>
+              <button
+                onClick={handleLogout}
+                className="
+                  w-full
+                  flex
+                  items-center
+                  gap-4
+                  px-4
+                  py-4
+                  rounded-2xl
+                  text-red-400
+                  hover:bg-white/5
+                  transition
+                "
+              >
+                <FaSignOutAlt className="text-xl" />
 
-        </div>
-      )}
+                <span>Logout</span>
+
+              </button>
+
+            </motion.div>
+
+          </motion.div>
+        )}
+
+      </AnimatePresence>
 
       {/* ================= DESKTOP MENU ================= */}
 
-      {menuOpen && (
-        <div
-          ref={menuRef}
-          className="hidden lg:block fixed top-16 right-6 z-[100]"
-        >
-          <div
-            className="w-52 rounded-2xl overflow-hidden border shadow-2xl"
-            style={{
-              background: "#162117",
-              borderColor: "var(--primary-dark)",
+      <AnimatePresence>
+
+        {menuOpen && (
+          <motion.div
+            ref={menuRef}
+            className="hidden lg:block fixed top-16 right-6 z-[100]"
+            initial={{
+              opacity: 0,
+              scale: 0.9,
+              y: -12,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.9,
+              y: -12,
+            }}
+            transition={{
+              duration: 0.22,
+              ease: "easeOut",
             }}
           >
-            <Link
-              to="/settings"
-              onClick={() => setMenuOpen(false)}
-              className="
-                flex
-                items-center
-                gap-3
-                px-4
-                py-3
-                text-white
-                hover:bg-[#1d2c20]
-                transition
-              "
+            <div
+              className="w-52 rounded-2xl overflow-hidden border shadow-2xl"
+              style={{
+                background: "#162117",
+                borderColor: "var(--primary-dark)",
+              }}
             >
-              <FaCog />
+              <Link
+                to="/settings"
+                onClick={() => setMenuOpen(false)}
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  px-4
+                  py-3
+                  hover:bg-[#1d2c20]
+                  transition
+                "
+              >
+                <FaCog />
 
-              Settings
-            </Link>
+                Settings
 
-            <button
-              onClick={handleLogout}
-              className="
-                w-full
-                flex
-                items-center
-                gap-3
-                px-4
-                py-3
-                text-left
-                text-red-400
-                hover:bg-[#1d2c20]
-                transition
-              "
-            >
-              <FaSignOutAlt />
+              </Link>
 
-              Logout
-            </button>
-          </div>
-        </div>
-      )}
+              <button
+                onClick={handleLogout}
+                className="
+                  w-full
+                  flex
+                  items-center
+                  gap-3
+                  px-4
+                  py-3
+                  text-left
+                  text-red-400
+                  hover:bg-[#1d2c20]
+                  transition
+                "
+              >
+                <FaSignOutAlt />
+
+                Logout
+
+              </button>
+
+            </div>
+
+          </motion.div>
+        )}
+
+      </AnimatePresence>
     </>
   );
 }

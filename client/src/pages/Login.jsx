@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaArrowRight } from "react-icons/fa";
 import PageTransition from "../components/PageTransition";
 
 
 function Login() {
+  const navigate = useNavigate();
   return (
     <PageTransition>
       
@@ -116,12 +117,12 @@ function Login() {
 
           {/* Login Button */}
 
-          <button className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-green-500 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:bg-green-600">
-
+          <button
+            onClick={() => navigate("/")}
+            className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-green-500 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:bg-green-600"
+          >
             Login
-
             <FaArrowRight />
-
           </button>
 
           {/* Divider */}
