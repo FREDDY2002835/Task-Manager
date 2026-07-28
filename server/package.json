@@ -1,15 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "TaskFlow Backend",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
-},
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
