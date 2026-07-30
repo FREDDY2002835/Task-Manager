@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
+console.log("Mongo URI:", process.env.MONGO_URI);
 
 // Connect Database
 connectDB();
