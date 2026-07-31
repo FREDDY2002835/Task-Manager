@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import PageTransition from "../components/PageTransition";
+import { useAuth } from "../context/AuthContext";
 import {
   FaUser,
   FaEnvelope,
@@ -8,6 +10,43 @@ import {
 } from "react-icons/fa";
 
 function Register() {
+  const navigate = useNavigate();
+  const { register } = useAuth();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!name || !email || !password || !confirmPassword) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      await register(name, email, password);
+      navigate("/");
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Something went wrong. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <PageTransition>
       <div className="min-h-screen lg:grid lg:grid-cols-2 bg-[#08110A]">
@@ -95,7 +134,10 @@ function Register() {
             </div>
 
             {/* Register Card */}
-            <div className="w-full bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-10">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-10"
+            >
 
               <h2 className="text-2xl sm:text-4xl font-bold text-white">
                 Create Account
@@ -104,6 +146,12 @@ function Register() {
               <p className="text-xs sm:text-base text-gray-400 mt-2">
                 Join TaskFlow and boost your productivity.
               </p>
+
+              {error && (
+                <p className="mt-4 text-sm text-red-400 bg-red-500/10 border border-red-900 rounded-lg px-3 py-2">
+                  {error}
+                </p>
+              )}
 
               {/* Full Name */}
               <div className="mt-6">
@@ -118,6 +166,8 @@ function Register() {
 
                   <input
                     type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Fill your full name"
                     className="w-full bg-transparent px-3 py-3 sm:p-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
                   />
@@ -139,6 +189,8 @@ function Register() {
 
                   <input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="youremail@example.com"
                     className="w-full bg-transparent px-3 py-3 sm:p-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
                   />
@@ -160,6 +212,8 @@ function Register() {
 
                   <input
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     className="w-full bg-transparent px-3 py-3 sm:p-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
                   />
@@ -181,6 +235,8 @@ function Register() {
 
                   <input
                     type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
                     className="w-full bg-transparent px-3 py-3 sm:p-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
                   />
@@ -196,6 +252,7 @@ function Register() {
 
                   <input
                     type="checkbox"
+                    required
                     className="accent-green-500"
                   />
 
@@ -207,12 +264,14 @@ function Register() {
 
               {/* Register Button */}
               <button
-                className="w-full mt-6 bg-green-500 hover:bg-green-600 transition py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold text-white flex justify-center items-center gap-2"
+                type="submit"
+                disabled={submitting}
+                className="w-full mt-6 bg-green-500 hover:bg-green-600 transition py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold text-white flex justify-center items-center gap-2 disabled:opacity-60"
               >
 
                 <FaUserPlus />
 
-                Create Account
+                {submitting ? "Creating account..." : "Create Account"}
 
               </button>
 
@@ -230,7 +289,7 @@ function Register() {
 
               </p>
 
-            </div>
+            </form>
 
           </div>
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaEllipsisV, FaCog, FaSignOutAlt } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +11,7 @@ function Navbar() {
   const menuRef = useRef(null);
 
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -28,7 +30,7 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    logout();
     setMenuOpen(false);
     navigate("/login");
   };

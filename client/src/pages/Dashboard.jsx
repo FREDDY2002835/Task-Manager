@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import PageTransition from "../components/PageTransition";
+import { getTaskStats } from "../services/api";
 import {
   FaTasks,
   FaCheckCircle,
@@ -8,6 +11,17 @@ import {
 } from "react-icons/fa";
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const [stats, setStats] = useState({ total: 0, completed: 0, pending: 0 });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getTaskStats()
+      .then((res) => setStats(res.data))
+      .catch((err) => console.error("Failed to load stats:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <PageTransition>
       <MainLayout>
@@ -45,7 +59,10 @@ function Dashboard() {
               Stay productive and keep track of everything in one place.
             </p>
 
-            <button className="mt-8 w-full sm:w-fit flex items-center justify-center gap-3 border border-[var(--primary)] px-6 py-3 sm:px-8 sm:py-4 rounded-xl text-white hover:bg-[var(--primary)] transition duration-300">
+            <button
+              onClick={() => navigate("/tasks")}
+              className="mt-8 w-full sm:w-fit flex items-center justify-center gap-3 border border-[var(--primary)] px-6 py-3 sm:px-8 sm:py-4 rounded-xl text-white hover:bg-[var(--primary)] transition duration-300"
+            >
 
               <FaPlus />
 
@@ -70,7 +87,7 @@ function Dashboard() {
             </p>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-2">
-              12
+              {loading ? "-" : stats.total}
             </h2>
 
           </div>
@@ -84,7 +101,7 @@ function Dashboard() {
             </p>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary-light)] mt-2">
-              7
+              {loading ? "-" : stats.completed}
             </h2>
 
           </div>
@@ -98,7 +115,7 @@ function Dashboard() {
             </p>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mt-2">
-              5
+              {loading ? "-" : stats.pending}
             </h2>
 
           </div>

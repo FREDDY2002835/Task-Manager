@@ -8,6 +8,7 @@ import "./index.css";
 import "./styles/theme.css";
 
 import { ThemeProvider } from "./context/ThemeContext";
+import { AuthProvider } from "./context/AuthContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 
@@ -15,11 +16,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
     <BrowserRouter>
 
-      <ThemeProvider>
+      <AuthProvider>
 
-        <App />
+        <ThemeProvider>
 
-      </ThemeProvider>
+          <App />
+
+        </ThemeProvider>
+
+      </AuthProvider>
 
     </BrowserRouter>
 

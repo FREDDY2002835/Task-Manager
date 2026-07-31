@@ -1,14 +1,97 @@
+import { useEffect, useState, useCallback } from "react";
 import MainLayout from "../layouts/MainLayout";
 import PageTransition from "../components/PageTransition";
+import TaskCard from "../components/tasks/TaskCard";
+import TaskForm from "../components/tasks/TaskForm";
 import {
-  FaSearch,
-  FaPlus,
-  FaCalendarAlt,
-  FaFlag,
-  FaCheckCircle,
-} from "react-icons/fa";
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask as deleteTaskApi,
+} from "../services/api";
+import { FaSearch, FaPlus } from "react-icons/fa";
+
+const FILTERS = [
+  { label: "All", value: "" },
+  { label: "Pending", value: "Pending" },
+  { label: "Done", value: "Done" },
+];
 
 function Tasks() {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  const fetchTasks = useCallback(() => {
+    setLoading(true);
+    getTasks({ search: search || undefined, status: statusFilter || undefined })
+      .then((res) => setTasks(res.data))
+      .catch((err) => {
+        console.error("Failed to load tasks:", err);
+        setError("Could not load tasks. Please try again.");
+      })
+      .finally(() => setLoading(false));
+  }, [search, statusFilter]);
+
+  useEffect(() => {
+    // Debounce search slightly so we don't hit the API on every keystroke
+    const timeout = setTimeout(fetchTasks, 300);
+    return () => clearTimeout(timeout);
+  }, [fetchTasks]);
+
+  const handleCreateOrUpdate = async (data) => {
+    try {
+      setSubmitting(true);
+      if (editingTask) {
+        await updateTask(editingTask._id, data);
+      } else {
+        await createTask(data);
+      }
+      setShowForm(false);
+      setEditingTask(null);
+      fetchTasks();
+    } catch (err) {
+      console.error("Failed to save task:", err);
+      setError(err.response?.data?.message || "Failed to save task.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this task?")) return;
+    try {
+      await deleteTaskApi(id);
+      setTasks((prev) => prev.filter((t) => t._id !== id));
+    } catch (err) {
+      console.error("Failed to delete task:", err);
+      setError("Failed to delete task.");
+    }
+  };
+
+  const handleToggleStatus = async (task) => {
+    const nextStatus =
+      task.status === "Pending"
+        ? "In Progress"
+        : task.status === "In Progress"
+        ? "Done"
+        : "Pending";
+
+    try {
+      const res = await updateTask(task._id, { status: nextStatus });
+      setTasks((prev) =>
+        prev.map((t) => (t._id === task._id ? res.data : t))
+      );
+    } catch (err) {
+      console.error("Failed to update task status:", err);
+    }
+  };
+
   return (
      <PageTransition>
     <MainLayout>
@@ -34,7 +117,13 @@ function Tasks() {
 
             </div>
 
-            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 transition px-5 py-3 rounded-xl font-semibold text-sm lg:text-base">
+            <button
+              onClick={() => {
+                setEditingTask(null);
+                setShowForm(true);
+              }}
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 transition px-5 py-3 rounded-xl font-semibold text-sm lg:text-base"
+            >
 
               <FaPlus />
 
@@ -56,6 +145,8 @@ function Tasks() {
 
             <input
               type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search tasks..."
               className="ml-3 w-full bg-transparent outline-none text-sm lg:text-base text-white placeholder:text-gray-500"
             />
@@ -64,191 +155,74 @@ function Tasks() {
 
           <div className="grid grid-cols-3 gap-2 lg:flex">
 
-            <button className="rounded-xl bg-green-500 px-4 py-3 text-sm">
-              All
-            </button>
-
-            <button className="rounded-xl border border-green-900 bg-[#162117] px-4 py-3 text-sm text-gray-300 hover:bg-[#1D2C20]">
-              Pending
-            </button>
-
-            <button className="rounded-xl border border-green-900 bg-[#162117] px-4 py-3 text-sm text-gray-300 hover:bg-[#1D2C20]">
-              Done
-            </button>
+            {FILTERS.map((f) => (
+              <button
+                key={f.value}
+                onClick={() => setStatusFilter(f.value)}
+                className={`rounded-xl px-4 py-3 text-sm transition ${
+                  statusFilter === f.value
+                    ? "bg-green-500 text-white"
+                    : "border border-green-900 bg-[#162117] text-gray-300 hover:bg-[#1D2C20]"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
 
           </div>
 
         </section>
+
+        {error && (
+          <p className="text-sm text-red-400 bg-red-500/10 border border-red-900 rounded-xl px-4 py-3">
+            {error}
+          </p>
+        )}
 
         {/* ================= TASKS ================= */}
 
         <section className="space-y-5">
 
-          {/* Task Card */}
-
-          <div className="rounded-2xl border border-green-900 bg-[#162117] p-5 hover:border-green-500 transition">
-
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
-
-              <div className="flex-1">
-
-                <h2 className="text-lg lg:text-2xl font-semibold text-white">
-                  Build Authentication System
-                </h2>
-
-                <p className="mt-2 text-sm text-gray-400">
-                  Implement JWT authentication and protect private routes.
-                </p>
-
-              </div>
-
-              <span className="self-start rounded-full bg-red-500 px-3 py-1 text-xs font-semibold">
-                LOW
-              </span>
-
-            </div>
-
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs lg:text-sm text-gray-400">
-
-              <div className="flex items-center gap-2">
-
-                <FaCalendarAlt />
-
-                Tomorrow
-
-              </div>
-
-              <div className="flex items-center gap-2">
-
-                <FaFlag />
-
-                Development
-
-              </div>
-
-              <div className="flex items-center gap-2 text-green-400">
-
-                <FaCheckCircle />
-
-                Pending
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* Task Card */}
-
-          <div className="rounded-2xl border border-green-900 bg-[#162117] p-5 hover:border-green-500 transition">
-
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
-
-              <div className="flex-1">
-
-                <h2 className="text-lg lg:text-2xl font-semibold text-white">
-                  Design Dashboard UI
-                </h2>
-
-                <p className="mt-2 text-sm text-gray-400">
-                  Finish responsive dashboard and improve accessibility.
-                </p>
-
-              </div>
-
-              <span className="self-start rounded-full bg-yellow-500 text-black px-3 py-1 text-xs font-semibold">
-                MEDIUM
-              </span>
-
-            </div>
-
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs lg:text-sm text-gray-400">
-
-              <div className="flex items-center gap-2">
-
-                <FaCalendarAlt />
-
-                Friday
-
-              </div>
-
-              <div className="flex items-center gap-2">
-
-                <FaFlag />
-
-                UI / UX
-
-              </div>
-
-              <div className="flex items-center gap-2 text-green-400">
-
-                <FaCheckCircle />
-
-                In Progress
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* Task Card */}
-
-          <div className="rounded-2xl border border-green-900 bg-[#162117] p-5 hover:border-green-500 transition">
-
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
-
-              <div className="flex-1">
-
-                <h2 className="text-lg lg:text-2xl font-semibold text-white">
-                  Connect MongoDB
-                </h2>
-
-                <p className="mt-2 text-sm text-gray-400">
-                  Connect backend with MongoDB Atlas and test APIs.
-                </p>
-
-              </div>
-
-              <span className="self-start rounded-full bg-green-500 text-black px-3 py-1 text-xs font-semibold">
-                HIGH
-              </span>
-
-            </div>
-
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs lg:text-sm text-gray-400">
-
-              <div className="flex items-center gap-2">
-
-                <FaCalendarAlt />
-
-                Next Week
-
-              </div>
-
-              <div className="flex items-center gap-2">
-
-                <FaFlag />
-
-                Backend
-
-              </div>
-
-              <div className="flex items-center gap-2 text-green-400">
-
-                <FaCheckCircle />
-
-                Pending
-
-              </div>
-
-            </div>
-
-          </div>
+          {loading && (
+            <p className="text-center text-gray-400 py-10">Loading tasks...</p>
+          )}
+
+          {!loading && tasks.length === 0 && (
+            <p className="text-center text-gray-400 py-10">
+              No tasks yet — create your first one.
+            </p>
+          )}
+
+          {!loading &&
+            tasks.map((task) => (
+              <TaskCard
+                key={task._id}
+                task={task}
+                onEdit={(t) => {
+                  setEditingTask(t);
+                  setShowForm(true);
+                }}
+                onDelete={handleDelete}
+                onToggleStatus={handleToggleStatus}
+              />
+            ))}
 
         </section>
 
       </div>
+
+      {showForm && (
+        <TaskForm
+          initialData={editingTask}
+          submitting={submitting}
+          onSubmit={handleCreateOrUpdate}
+          onClose={() => {
+            setShowForm(false);
+            setEditingTask(null);
+          }}
+        />
+      )}
+
     </MainLayout>
     </PageTransition>
   );

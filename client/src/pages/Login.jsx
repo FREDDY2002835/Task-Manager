@@ -1,15 +1,45 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaArrowRight } from "react-icons/fa";
 import PageTransition from "../components/PageTransition";
-
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!email || !password) {
+      setError("Please fill in both fields.");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      await login(email, password);
+      navigate("/");
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Something went wrong. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <PageTransition>
-      
+
         {/* Your dashboard content */}
-      
+
     <div className="min-h-screen bg-[#08110A] flex items-center justify-center px-5 py-4">
 
       <div className="w-full max-w-md">
@@ -38,7 +68,10 @@ function Login() {
 
         {/* Login Card */}
 
-       <div className="bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-8">
+       <form
+        onSubmit={handleSubmit}
+        className="bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-8"
+       >
 
         <h2 className="text-xl sm:text-3xl font-bold text-white">
             Welcome Back !
@@ -47,6 +80,12 @@ function Login() {
          <p className="mt-1 text-xs sm:text-sm text-gray-400">
             Login to continue managing your tasks.
           </p>
+
+          {error && (
+            <p className="mt-4 text-sm text-red-400 bg-red-500/10 border border-red-900 rounded-lg px-3 py-2">
+              {error}
+            </p>
+          )}
 
           {/* Email */}
 
@@ -62,6 +101,8 @@ function Login() {
 
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="youremail@example.com"
                className="w-full bg-transparent px-3 py-3 sm:px-4 sm:py-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
               />
@@ -84,6 +125,8 @@ function Login() {
 
               <input
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                className="w-full bg-transparent px-3 py-3 sm:px-4 sm:py-4 outline-none text-sm sm:text-base text-white placeholder:text-gray-500"
               />
@@ -107,7 +150,7 @@ function Login() {
 
             </label>
 
-            <button className="text-xs sm:text-sm text-green-400 hover:text-green-300">
+            <button type="button" className="text-xs sm:text-sm text-green-400 hover:text-green-300">
 
               Forgot Password?
 
@@ -118,11 +161,12 @@ function Login() {
           {/* Login Button */}
 
           <button
-            onClick={() => navigate("/")}
-            className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-green-500 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:bg-green-600"
+            type="submit"
+            disabled={submitting}
+            className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-green-500 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:bg-green-600 disabled:opacity-60"
           >
-            Login
-            <FaArrowRight />
+            {submitting ? "Logging in..." : "Login"}
+            {!submitting && <FaArrowRight />}
           </button>
 
           {/* Divider */}
@@ -154,7 +198,7 @@ function Login() {
 
           </p>
 
-        </div>
+        </form>
 
       </div>
 
