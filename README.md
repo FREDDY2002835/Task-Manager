@@ -8,7 +8,7 @@
 TaskFlow is a full-stack task management app built with the MERN stack (MongoDB, Express, React, Node.js). It lets you register, log in, and manage your daily tasks with priorities, statuses, categories, and due dates — with a live dashboard summarizing your progress.
 
 ## Screenshots
-<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="https://github.com/user-attachments/assets/41a9d1ba-36e9-4fec-a0e7-e066dd29334a" />
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="https://github.com/user-attachments/assets/Screenshot 2026-07-27 152323.png" />
 
 ## Features
 
