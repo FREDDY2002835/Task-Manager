@@ -1,6 +1,11 @@
 // src/components/profile/ProductivityCard.jsx
 
-function ProductivityCard() {
+function ProductivityCard({ stats, loading }) {
+  const weeklyGoalPercent = loading ? 0 : stats.weeklyGoalPercent;
+  const monthlyProgressPercent = loading ? 0 : stats.monthlyProgressPercent;
+  const completedThisWeek = loading ? "-" : stats.completedThisWeek;
+  const productivityScore = loading ? "-" : stats.productivityScore;
+
   return (
     <div
       className="rounded-2xl p-5 sm:p-8 border"
@@ -29,7 +34,7 @@ function ProductivityCard() {
             </span>
 
             <span style={{ color: "var(--primary-light)" }}>
-              80%
+              {loading ? "-" : `${weeklyGoalPercent}%`}
             </span>
 
           </div>
@@ -38,9 +43,10 @@ function ProductivityCard() {
           <div className="mt-2 h-3 rounded-full bg-gray-700">
 
             <div
-              className="h-3 w-4/5 rounded-full"
+              className="h-3 rounded-full transition-all"
               style={{
                 background: "var(--primary)",
+                width: `${weeklyGoalPercent}%`,
               }}
             ></div>
 
@@ -61,7 +67,7 @@ function ProductivityCard() {
             </span>
 
             <span style={{ color: "var(--primary-light)" }}>
-              65%
+              {loading ? "-" : `${monthlyProgressPercent}%`}
             </span>
 
           </div>
@@ -70,9 +76,10 @@ function ProductivityCard() {
           <div className="mt-2 h-3 rounded-full bg-gray-700">
 
             <div
-              className="h-3 w-2/3 rounded-full"
+              className="h-3 rounded-full transition-all"
               style={{
                 background: "var(--primary)",
+                width: `${monthlyProgressPercent}%`,
               }}
             ></div>
 
@@ -102,11 +109,13 @@ function ProductivityCard() {
             You completed{" "}
 
             <strong style={{ color: "var(--primary-light)" }}>
-              15 tasks
+              {completedThisWeek} task{completedThisWeek === 1 ? "" : "s"}
             </strong>
 
             {" "}this week.
-            Keep up the amazing work!
+            {!loading && completedThisWeek > 0
+              ? " Keep up the amazing work!"
+              : " Get started on a task today!"}
 
           </p>
 
@@ -136,12 +145,12 @@ function ProductivityCard() {
               color: "var(--primary-light)",
             }}
           >
-            92%
+            {loading ? "-" : `${productivityScore}%`}
           </h2>
 
 
           <p className="mt-2 text-sm text-gray-400">
-            Excellent consistency this month.
+            Based on your all-time task completion rate.
           </p>
 
 

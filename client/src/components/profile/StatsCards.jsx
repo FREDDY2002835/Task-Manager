@@ -6,7 +6,7 @@ import {
   FaClock,
 } from "react-icons/fa";
 
-function StatsCards() {
+function StatsCards({ stats, loading }) {
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -30,7 +30,7 @@ function StatsCards() {
         </p>
 
         <h2 className="text-2xl lg:text-5xl font-bold text-white mt-2">
-          42
+          {loading ? "-" : stats.total}
         </h2>
 
       </div>
@@ -61,7 +61,7 @@ function StatsCards() {
             color: "var(--primary-light)",
           }}
         >
-          36
+          {loading ? "-" : stats.completed}
         </h2>
 
       </div>
@@ -92,7 +92,7 @@ function StatsCards() {
             color: "var(--primary-light)",
           }}
         >
-          6
+          {loading ? "-" : stats.pending}
         </h2>
 
       </div>

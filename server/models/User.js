@@ -31,6 +31,21 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
+    title: {
+      type: String,
+      default: "",
+    },
+
+    phone: {
+      type: String,
+      default: "",
+    },
+
+    location: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

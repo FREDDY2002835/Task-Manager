@@ -6,6 +6,7 @@ import {
   updateTask,
   deleteTask,
   getTaskStats,
+  getProductivityStats,
 } from "../controllers/taskController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -15,6 +16,7 @@ const router = express.Router();
 router.use(protect);
 
 router.get("/stats", getTaskStats); // must come before "/:id"
+router.get("/stats/productivity", getProductivityStats); // must come before "/:id"
 router.post("/", createTask);
 router.get("/", getTasks);
 router.get("/:id", getTaskById);

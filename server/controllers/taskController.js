@@ -153,3 +153,70 @@ export const getTaskStats = async (req, res) => {
     res.status(500).json({ message: error.message, error });
   }
 };
+
+// =======================
+// Productivity Stats (for Profile page)
+// All numbers are computed directly from the user's real tasks -
+// nothing here is hardcoded.
+// =======================
+export const getProductivityStats = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const now = new Date();
+    const sevenDaysAgo = new Date(now);
+    sevenDaysAgo.setDate(now.getDate() - 7);
+
+    const thirtyDaysAgo = new Date(now);
+    thirtyDaysAgo.setDate(now.getDate() - 30);
+
+    const [
+      total,
+      completedTotal,
+      tasksThisWeek,
+      completedThisWeek,
+      tasksThisMonth,
+      completedThisMonth,
+    ] = await Promise.all([
+      Task.countDocuments({ user: userId }),
+      Task.countDocuments({ user: userId, status: "Done" }),
+      Task.countDocuments({ user: userId, createdAt: { $gte: sevenDaysAgo } }),
+      Task.countDocuments({
+        user: userId,
+        status: "Done",
+        updatedAt: { $gte: sevenDaysAgo },
+      }),
+      Task.countDocuments({ user: userId, createdAt: { $gte: thirtyDaysAgo } }),
+      Task.countDocuments({
+        user: userId,
+        status: "Done",
+        updatedAt: { $gte: thirtyDaysAgo },
+      }),
+    ]);
+
+    // Guard against divide-by-zero when a user has no tasks yet in a window
+    const weeklyGoalPercent =
+      tasksThisWeek > 0
+        ? Math.round((completedThisWeek / tasksThisWeek) * 100)
+        : 0;
+
+    const monthlyProgressPercent =
+      tasksThisMonth > 0
+        ? Math.round((completedThisMonth / tasksThisMonth) * 100)
+        : 0;
+
+    const productivityScore =
+      total > 0 ? Math.round((completedTotal / total) * 100) : 0;
+
+    res.status(200).json({
+      weeklyGoalPercent,
+      monthlyProgressPercent,
+      completedThisWeek,
+      productivityScore,
+    });
+  } catch (error) {
+    console.error("GET PRODUCTIVITY STATS ERROR:");
+    console.error(error);
+    res.status(500).json({ message: error.message, error });
+  }
+};

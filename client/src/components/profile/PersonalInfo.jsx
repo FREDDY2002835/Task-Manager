@@ -8,7 +8,16 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 
-function PersonalInfo() {
+function formatMemberSince(dateStr) {
+  if (!dateStr) return "-";
+  const date = new Date(dateStr);
+  return date.toLocaleDateString(undefined, {
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function PersonalInfo({ user }) {
   return (
     <div
       className="rounded-2xl p-5 sm:p-8 border"
@@ -39,7 +48,7 @@ function PersonalInfo() {
             </p>
 
             <h3 className="text-sm lg:text-base text-white font-semibold">
-              Frederick
+              {user?.name || "-"}
             </h3>
           </div>
 
@@ -60,7 +69,7 @@ function PersonalInfo() {
             </p>
 
             <h3 className="text-sm lg:text-base text-white break-all">
-              fred@example.com
+              {user?.email || "-"}
             </h3>
           </div>
 
@@ -82,7 +91,7 @@ function PersonalInfo() {
             </p>
 
             <h3 className="text-sm lg:text-base text-white">
-              +256 700 000000
+              {user?.phone || "Not set"}
             </h3>
           </div>
 
@@ -104,7 +113,7 @@ function PersonalInfo() {
             </p>
 
             <h3 className="text-sm lg:text-base text-white">
-              Kampala, Uganda
+              {user?.location || "Not set"}
             </h3>
           </div>
 
@@ -126,7 +135,7 @@ function PersonalInfo() {
             </p>
 
             <h3 className="text-sm lg:text-base text-white">
-              July 2026
+              {formatMemberSince(user?.createdAt)}
             </h3>
           </div>
 

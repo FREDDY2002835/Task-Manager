@@ -162,7 +162,7 @@ export const getMe = async (req, res) => {
 
 export const updateMe = async (req, res) => {
   try {
-    const { name, avatar, bio } = req.body;
+    const { name, avatar, bio, title, phone, location } = req.body;
 
     const user = await User.findById(req.user.id);
 
@@ -173,6 +173,9 @@ export const updateMe = async (req, res) => {
     if (name !== undefined) user.name = name;
     if (avatar !== undefined) user.avatar = avatar;
     if (bio !== undefined) user.bio = bio;
+    if (title !== undefined) user.title = title;
+    if (phone !== undefined) user.phone = phone;
+    if (location !== undefined) user.location = location;
 
     await user.save();
 
@@ -184,6 +187,10 @@ export const updateMe = async (req, res) => {
         email: user.email,
         avatar: user.avatar,
         bio: user.bio,
+        title: user.title,
+        phone: user.phone,
+        location: user.location,
+        createdAt: user.createdAt,
       },
     });
   } catch (error) {

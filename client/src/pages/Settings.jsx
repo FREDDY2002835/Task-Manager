@@ -12,8 +12,6 @@ import {
   FaChevronRight,
 } from "react-icons/fa";
 
-
-
 function Settings() {
   return (
     <PageTransition>

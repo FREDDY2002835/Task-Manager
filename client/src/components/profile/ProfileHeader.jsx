@@ -2,7 +2,7 @@
 
 import { FaEdit } from "react-icons/fa";
 
-function ProfileHeader() {
+function ProfileHeader({ user, onEditClick }) {
   return (
     <section
       className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-gray-700 p-5 sm:p-8 lg:p-10"
@@ -23,7 +23,7 @@ function ProfileHeader() {
       <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-6">
 
         <img
-          src="https://i.pravatar.cc/300"
+          src={user?.avatar || "https://i.pravatar.cc/300"}
           alt="Profile"
           className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 object-cover"
           style={{
@@ -35,30 +35,34 @@ function ProfileHeader() {
         <div className="flex-1 text-center lg:text-left">
 
           <h1 className="text-2xl lg:text-5xl font-bold text-white">
-            Frederick
+            {user?.name || "..."}
           </h1>
 
 
-          <p
-            className="mt-2 text-sm lg:text-lg"
-            style={{
-              color: "var(--primary-light)",
-            }}
-          >
-            Full Stack Developer
-          </p>
+          {user?.title && (
+            <p
+              className="mt-2 text-sm lg:text-lg"
+              style={{
+                color: "var(--primary-light)",
+              }}
+            >
+              {user.title}
+            </p>
+          )}
 
 
-          <p className="mt-4 text-sm lg:text-base text-gray-300 max-w-xl">
-            Passionate about building modern web applications using React,
-            Node.js, Express and MongoDB.
-          </p>
+          {user?.bio && (
+            <p className="mt-4 text-sm lg:text-base text-gray-300 max-w-xl">
+              {user.bio}
+            </p>
+          )}
 
 
         </div>
 
 
         <button
+          onClick={onEditClick}
           className="w-full sm:w-auto flex items-center justify-center gap-3 px-5 py-3 rounded-xl font-semibold transition text-white"
           style={{
             background: "var(--primary)",
