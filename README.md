@@ -10,11 +10,11 @@ TaskFlow is a full-stack task management app built with the MERN stack (MongoDB,
 ## Features
 
 - **Authentication** — JWT-based register/login, protected routes
-- ✅ **Task management** — create, edit, delete tasks with title, description, category, priority, and due date
-- 📊 **Dashboard** — live stats (total, completed, pending tasks)
-- 🔍 **Search & filter** — find tasks by keyword or status (All / Pending / Done)
-- 📱 **Responsive UI** — dedicated mobile layout with bottom navigation, desktop sidebar layout
-- 👤 **Profile** — view and update your account details
+- **Task management** — create, edit, delete tasks with title, description, category, priority, and due date
+- **Dashboard** — live stats (total, completed, pending tasks)
+- **Search & filter** — find tasks by keyword or status (All / Pending / Done)
+- **Responsive UI** — dedicated mobile layout with bottom navigation, desktop sidebar layout
+- **Profile** — view and update your account details
 
 ## Tech Stack
 
