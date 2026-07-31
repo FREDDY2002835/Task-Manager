@@ -1,11 +1,14 @@
 <div align="center">
   <img src="assets/logo.png" alt="TaskFlow Logo" width="150"/>
 
-TaskFlow
+## TaskFlow
 
 **Organize. Focus. Deliver.**
 
 TaskFlow is a full-stack task management app built with the MERN stack (MongoDB, Express, React, Node.js). It lets you register, log in, and manage your daily tasks with priorities, statuses, categories, and due dates — with a live dashboard summarizing your progress.
+
+## Screenshots
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="https://github.com/user-attachments/assets/41a9d1ba-36e9-4fec-a0e7-e066dd29334a" />
 
 ## Features
 
@@ -60,7 +63,7 @@ Task-Manager/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/<your-username>/Task-Manager.git
+git clone https://github.com/FREDDY2002835/Task-Manager
 cd Task-Manager
 ```
 
