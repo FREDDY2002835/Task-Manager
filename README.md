@@ -1,6 +1,7 @@
 <div align="center">
   <img src="assets/logo.png" alt="TaskFlow Logo" width="150"/>
-# TaskFlow
+
+TaskFlow
 
 **Organize. Focus. Deliver.**
 
