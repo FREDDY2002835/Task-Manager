@@ -9,6 +9,12 @@ TaskFlow is a full-stack task management app built with the MERN stack (MongoDB,
 
 ## Screenshots
 <img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="assets/Screenshot 2026-07-27 152323.png" />
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="assets/Screenshot 2026-07-27 174357.png" />
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="assets/Screenshot 2026-07-27 174427.png" />
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="assets/Screenshot 2026-07-27 174449.png" />
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="assets/Screenshot 2026-07-27 174514.png" />
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="assets/Screenshot 2026-07-27 174555.png" />
+<img width="1348" height="639" alt="Screenshot 2026-06-08 151053" src="assets/Screenshot 2026-07-27 174611.png" />
 
 ## Features
 
