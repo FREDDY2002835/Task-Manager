@@ -1,12 +1,17 @@
 // src/components/profile/ProfileHeader.jsx
 
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { FaEdit } from "react-icons/fa";
 import { resolveAssetUrl } from "../../services/api";
 import Avatar from "../common/Avatar";
+import ImageLightbox from "../common/ImageLightbox";
 import { useLanguage } from "../../context/LanguageContext";
 
 function ProfileHeader({ user, onEditClick }) {
   const { t } = useLanguage();
+  const [showLightbox, setShowLightbox] = useState(false);
+  const avatarUrl = resolveAssetUrl(user?.avatar);
 
   return (
     <section
@@ -27,12 +32,17 @@ function ProfileHeader({ user, onEditClick }) {
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-6">
 
-        <Avatar
-          src={resolveAssetUrl(user?.avatar)}
-          sizeClass="w-24 h-24 sm:w-32 sm:h-32"
-          className="border-4"
-          style={{ borderColor: "var(--primary)" }}
-        />
+        <div
+          onClick={() => avatarUrl && setShowLightbox(true)}
+          className={avatarUrl ? "cursor-pointer" : ""}
+        >
+          <Avatar
+            src={avatarUrl}
+            sizeClass="w-24 h-24 sm:w-32 sm:h-32"
+            className="border-4"
+            style={{ borderColor: "var(--primary)" }}
+          />
+        </div>
 
 
         <div className="flex-1 text-center lg:text-left">
@@ -80,6 +90,16 @@ function ProfileHeader({ user, onEditClick }) {
 
 
       </div>
+
+      <AnimatePresence>
+        {showLightbox && (
+          <ImageLightbox
+            src={avatarUrl}
+            alt={user?.name || "Profile"}
+            onClose={() => setShowLightbox(false)}
+          />
+        )}
+      </AnimatePresence>
 
     </section>
   );
