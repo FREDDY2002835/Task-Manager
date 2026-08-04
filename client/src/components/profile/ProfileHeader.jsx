@@ -2,6 +2,7 @@
 
 import { FaEdit } from "react-icons/fa";
 import { resolveAssetUrl } from "../../services/api";
+import Avatar from "../common/Avatar";
 import { useLanguage } from "../../context/LanguageContext";
 
 function ProfileHeader({ user, onEditClick }) {
@@ -26,13 +27,11 @@ function ProfileHeader({ user, onEditClick }) {
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-6">
 
-        <img
-          src={resolveAssetUrl(user?.avatar) || "https://i.pravatar.cc/300"}
-          alt="Profile"
-          className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 object-cover"
-          style={{
-            borderColor: "var(--primary)",
-          }}
+        <Avatar
+          src={resolveAssetUrl(user?.avatar)}
+          sizeClass="w-24 h-24 sm:w-32 sm:h-32"
+          className="border-4"
+          style={{ borderColor: "var(--primary)" }}
         />
 
 

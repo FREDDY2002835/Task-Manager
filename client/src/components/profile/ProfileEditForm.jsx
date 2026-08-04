@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { FaTimes, FaCamera } from "react-icons/fa";
 import { uploadAvatar, resolveAssetUrl } from "../../services/api";
+import Avatar from "../common/Avatar";
 
 // Modal form for editing the logged-in user's profile fields.
 function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }) {
@@ -82,10 +83,11 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
             className="relative group"
             disabled={uploadingAvatar}
           >
-            <img
-              src={avatarPreview || "https://i.pravatar.cc/300"}
+            <Avatar
+              src={avatarPreview}
               alt="Avatar preview"
-              className="w-24 h-24 rounded-full object-cover border-4 border-green-700"
+              sizeClass="w-24 h-24"
+              className="border-4 border-green-700"
             />
 
             <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition">
