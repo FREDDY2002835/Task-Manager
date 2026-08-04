@@ -10,14 +10,18 @@ import {
   deleteTask as deleteTaskApi,
 } from "../services/api";
 import { FaSearch, FaPlus } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
-const FILTERS = [
-  { label: "All", value: "" },
-  { label: "Pending", value: "Pending" },
-  { label: "Done", value: "Done" },
-];
 
 function Tasks() {
+  const { t } = useLanguage();
+
+  const FILTERS = [
+    { label: t("tasks.all"), value: "" },
+    { label: t("tasks.pending"), value: "Pending" },
+    { label: t("tasks.done"), value: "Done" },
+  ];
+
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -108,11 +112,11 @@ function Tasks() {
             <div>
 
               <h1 className="text-2xl lg:text-5xl font-bold text-white">
-                My Tasks
+                {t("tasks.title")}
               </h1>
 
               <p className="mt-2 text-sm lg:text-base text-gray-300">
-                Stay organized and manage your daily work efficiently.
+                {t("tasks.subtitle")}
               </p>
 
             </div>
@@ -127,7 +131,7 @@ function Tasks() {
 
               <FaPlus />
 
-              New Task
+              {t("tasks.newTask")}
 
             </button>
 
@@ -147,7 +151,7 @@ function Tasks() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search tasks..."
+              placeholder={t("tasks.searchPlaceholder")}
               className="ml-3 w-full bg-transparent outline-none text-sm lg:text-base text-white placeholder:text-gray-500"
             />
 
@@ -184,12 +188,12 @@ function Tasks() {
         <section className="space-y-5">
 
           {loading && (
-            <p className="text-center text-gray-400 py-10">Loading tasks...</p>
+            <p className="text-center text-gray-400 py-10">{t("tasks.loading")}</p>
           )}
 
           {!loading && tasks.length === 0 && (
             <p className="text-center text-gray-400 py-10">
-              No tasks yet — create your first one.
+              {t("tasks.noTasks")}
             </p>
           )}
 

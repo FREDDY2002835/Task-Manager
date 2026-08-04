@@ -3,6 +3,18 @@ import axios from "axios";
 const API_BASE_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
+// The server root (without /api) - used to resolve uploaded file paths
+// like "/uploads/avatars/xyz.png" into a full, loadable URL.
+const SERVER_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, "");
+
+// Turns a relative path returned by the backend (e.g. "/uploads/avatars/x.png")
+// into a full URL. Leaves already-absolute URLs (http://...) untouched.
+export function resolveAssetUrl(pathOrUrl) {
+  if (!pathOrUrl) return "";
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
+  return `${SERVER_ORIGIN}${pathOrUrl}`;
+}
+
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
@@ -34,10 +46,21 @@ export const loginUser = (data) => api.post("/auth/login", data);
 export const getMe = () => api.get("/auth/me");
 export const updateMe = (data) => api.put("/auth/me", data);
 
+export const uploadAvatar = (file) => {
+  const formData = new FormData();
+  formData.append("avatar", file);
+  return api.post("/auth/me/avatar", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
+
+export const changePassword = (data) => api.put("/auth/change-password", data);
+
 // ================= Tasks =================
 export const getTasks = (params) => api.get("/tasks", { params });
 export const getTaskStats = () => api.get("/tasks/stats");
 export const getProductivityStats = () => api.get("/tasks/stats/productivity");
+export const getAnalyticsStats = () => api.get("/tasks/stats/analytics");
 export const getTaskById = (id) => api.get(`/tasks/${id}`);
 export const createTask = (data) => api.post("/tasks", data);
 export const updateTask = (id, data) => api.put(`/tasks/${id}`, data);

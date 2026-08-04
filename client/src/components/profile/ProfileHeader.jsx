@@ -1,8 +1,12 @@
 // src/components/profile/ProfileHeader.jsx
 
 import { FaEdit } from "react-icons/fa";
+import { resolveAssetUrl } from "../../services/api";
+import { useLanguage } from "../../context/LanguageContext";
 
 function ProfileHeader({ user, onEditClick }) {
+  const { t } = useLanguage();
+
   return (
     <section
       className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-gray-700 p-5 sm:p-8 lg:p-10"
@@ -23,7 +27,7 @@ function ProfileHeader({ user, onEditClick }) {
       <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-6">
 
         <img
-          src={user?.avatar || "https://i.pravatar.cc/300"}
+          src={resolveAssetUrl(user?.avatar) || "https://i.pravatar.cc/300"}
           alt="Profile"
           className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 object-cover"
           style={{
@@ -71,7 +75,7 @@ function ProfileHeader({ user, onEditClick }) {
 
           <FaEdit />
 
-          Edit Profile
+          {t("profile.editProfile")}
 
         </button>
 

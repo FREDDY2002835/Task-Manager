@@ -46,6 +46,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
+    notifications: {
+      taskReminders: {
+        type: Boolean,
+        default: true,
+      },
+      emailNotifications: {
+        type: Boolean,
+        default: true,
+      },
+    },
+
+    language: {
+      type: String,
+      enum: ["en", "fr"],
+      default: "en",
+    },
   },
   {
     timestamps: true,

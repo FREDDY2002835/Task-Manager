@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 function Sidebar() {
+  const { t } = useLanguage();
+
   return (
    <aside
   className="hidden lg:flex fixed left-0 top-14 w-64 h-[calc(100vh-3.5rem)] flex-col overflow-hidden px-6 py-6"
@@ -42,7 +45,7 @@ function Sidebar() {
               "transparent")
           }
         >
-          Dashboard
+          {t("nav.dashboard")}
         </Link>
 
 
@@ -58,7 +61,7 @@ function Sidebar() {
               "transparent")
           }
         >
-          Tasks
+          {t("nav.tasks")}
         </Link>
 
 
@@ -74,7 +77,7 @@ function Sidebar() {
               "transparent")
           }
         >
-          Profile
+          {t("nav.profile")}
         </Link>
 
 
@@ -90,7 +93,7 @@ function Sidebar() {
               "transparent")
           }
         >
-          Analytics
+          {t("nav.analytics")}
         </Link>
 
               <Link
@@ -105,7 +108,7 @@ function Sidebar() {
               "transparent")
           }
       >
-        Settings
+        {t("nav.settings")}
       </Link>
 
 

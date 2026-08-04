@@ -6,35 +6,38 @@ import {
   FaClock,
   FaBolt,
 } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
-const cards = [
-  {
-    icon: <FaTasks className="text-3xl text-green-400" />,
-    title: "Total Tasks",
-    value: 42,
-    color: "text-white",
-  },
-  {
-    icon: <FaCheckCircle className="text-3xl text-green-400" />,
-    title: "Completed",
-    value: 36,
-    color: "text-green-400",
-  },
-  {
-    icon: <FaClock className="text-3xl text-yellow-400" />,
-    title: "Pending",
-    value: 6,
-    color: "text-yellow-400",
-  },
-  {
-    icon: <FaBolt className="text-3xl text-blue-400" />,
-    title: "Productivity",
-    value: "92%",
-    color: "text-blue-400",
-  },
-];
+function SummaryCards({ taskStats, productivity, loading }) {
+  const { t } = useLanguage();
 
-function SummaryCards() {
+  const cards = [
+    {
+      icon: <FaTasks className="text-3xl text-green-400" />,
+      title: t("stats.totalTasks"),
+      value: loading ? "-" : taskStats.total,
+      color: "text-white",
+    },
+    {
+      icon: <FaCheckCircle className="text-3xl text-green-400" />,
+      title: t("stats.completed"),
+      value: loading ? "-" : taskStats.completed,
+      color: "text-green-400",
+    },
+    {
+      icon: <FaClock className="text-3xl text-yellow-400" />,
+      title: t("stats.pending"),
+      value: loading ? "-" : taskStats.pending,
+      color: "text-yellow-400",
+    },
+    {
+      icon: <FaBolt className="text-3xl text-blue-400" />,
+      title: t("stats.productivity"),
+      value: loading ? "-" : `${productivity.productivityScore}%`,
+      color: "text-blue-400",
+    },
+  ];
+
   return (
     <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
 

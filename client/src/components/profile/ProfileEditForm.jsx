@@ -1,15 +1,43 @@
-import { useState } from "react";
-import { FaTimes } from "react-icons/fa";
+import { useState, useRef } from "react";
+import { FaTimes, FaCamera } from "react-icons/fa";
+import { uploadAvatar, resolveAssetUrl } from "../../services/api";
 
 // Modal form for editing the logged-in user's profile fields.
-function ProfileEditForm({ user, onSubmit, onClose, submitting }) {
+function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }) {
   const [name, setName] = useState(user?.name || "");
   const [title, setTitle] = useState(user?.title || "");
   const [bio, setBio] = useState(user?.bio || "");
   const [phone, setPhone] = useState(user?.phone || "");
   const [location, setLocation] = useState(user?.location || "");
-  const [avatar, setAvatar] = useState(user?.avatar || "");
   const [error, setError] = useState("");
+
+  const [avatarPreview, setAvatarPreview] = useState(resolveAssetUrl(user?.avatar));
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const handleAvatarClick = () => fileInputRef.current?.click();
+
+  const handleAvatarFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Instant local preview while the upload is in flight
+    setAvatarPreview(URL.createObjectURL(file));
+
+    try {
+      setUploadingAvatar(true);
+      setError("");
+      const res = await uploadAvatar(file);
+      onAvatarChange(res.data.avatar); // updates the user in AuthContext
+      setAvatarPreview(resolveAssetUrl(res.data.avatar));
+    } catch (err) {
+      console.error("Avatar upload failed:", err);
+      setError(err.response?.data?.message || "Failed to upload image.");
+      setAvatarPreview(resolveAssetUrl(user?.avatar)); // revert preview
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +48,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting }) {
     }
 
     setError("");
-    onSubmit({ name, title, bio, phone, location, avatar });
+    onSubmit({ name, title, bio, phone, location });
   };
 
   return (
@@ -44,6 +72,40 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting }) {
             {error}
           </p>
         )}
+
+        {/* Avatar picker */}
+        <div className="flex flex-col items-center mb-6">
+
+          <button
+            type="button"
+            onClick={handleAvatarClick}
+            className="relative group"
+            disabled={uploadingAvatar}
+          >
+            <img
+              src={avatarPreview || "https://i.pravatar.cc/300"}
+              alt="Avatar preview"
+              className="w-24 h-24 rounded-full object-cover border-4 border-green-700"
+            />
+
+            <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition">
+              <FaCamera className="text-white text-xl" />
+            </span>
+          </button>
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png, image/jpeg, image/webp, image/gif"
+            onChange={handleAvatarFileChange}
+            className="hidden"
+          />
+
+          <p className="mt-2 text-xs text-gray-400">
+            {uploadingAvatar ? "Uploading..." : "Click photo to change"}
+          </p>
+
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -100,17 +162,6 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting }) {
                 className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
               />
             </div>
-          </div>
-
-          <div>
-            <label className="block mb-1 text-xs sm:text-sm text-gray-300">Avatar URL</label>
-            <input
-              type="text"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-              placeholder="https://..."
-              className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
-            />
           </div>
 
           <div className="flex gap-3 pt-2">

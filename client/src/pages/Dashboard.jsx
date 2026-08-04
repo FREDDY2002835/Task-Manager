@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import PageTransition from "../components/PageTransition";
 import { getTaskStats } from "../services/api";
+import { useLanguage } from "../context/LanguageContext";
 import {
   FaTasks,
   FaCheckCircle,
@@ -12,6 +13,7 @@ import {
 
 function Dashboard() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [stats, setStats] = useState({ total: 0, completed: 0, pending: 0 });
   const [loading, setLoading] = useState(true);
 
@@ -46,17 +48,17 @@ function Dashboard() {
             <div className="w-16 sm:w-20 h-1 rounded mb-6 bg-[var(--primary)]"></div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
-              Organize.
+              {t("dashboard.title1")}
               <br />
-              Focus.
+              {t("dashboard.title2")}
               <br />
-              Deliver.
+              {t("dashboard.title3")}
             </h1>
 
             <p className="mt-6 text-sm sm:text-base lg:text-lg text-gray-300 leading-6 lg:leading-8">
-              Welcome back !
+              {t("dashboard.welcome")}
               <br />
-              Stay productive and keep track of everything in one place.
+              {t("dashboard.subtitle")}
             </p>
 
             <button
@@ -66,7 +68,7 @@ function Dashboard() {
 
               <FaPlus />
 
-              Create Task
+              {t("dashboard.createTask")}
 
             </button>
 
@@ -83,7 +85,7 @@ function Dashboard() {
             <FaTasks className="text-4xl text-[var(--primary-light)] mb-5" />
 
             <p className="text-gray-400 text-sm">
-              Total Tasks
+              {t("dashboard.totalTasks")}
             </p>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-2">
@@ -97,7 +99,7 @@ function Dashboard() {
             <FaCheckCircle className="text-4xl text-[var(--primary-light)] mb-5" />
 
             <p className="text-gray-400 text-sm">
-              Completed
+              {t("dashboard.completed")}
             </p>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary-light)] mt-2">
@@ -111,7 +113,7 @@ function Dashboard() {
             <FaClock className="text-4xl text-yellow-400 mb-5" />
 
             <p className="text-gray-400 text-sm">
-              Pending
+              {t("dashboard.pending")}
             </p>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mt-2">

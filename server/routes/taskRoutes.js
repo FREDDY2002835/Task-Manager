@@ -7,6 +7,7 @@ import {
   deleteTask,
   getTaskStats,
   getProductivityStats,
+  getAnalyticsStats,
 } from "../controllers/taskController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -15,8 +16,11 @@ const router = express.Router();
 // All task routes require a logged-in user
 router.use(protect);
 
-router.get("/stats", getTaskStats); // must come before "/:id"
-router.get("/stats/productivity", getProductivityStats); // must come before "/:id"
+// Specific "/stats/*" routes must come before the generic "/:id" route
+router.get("/stats", getTaskStats);
+router.get("/stats/productivity", getProductivityStats);
+router.get("/stats/analytics", getAnalyticsStats);
+
 router.post("/", createTask);
 router.get("/", getTasks);
 router.get("/:id", getTaskById);

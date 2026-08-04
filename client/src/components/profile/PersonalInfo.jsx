@@ -7,6 +7,7 @@ import {
   FaMapMarkerAlt,
   FaCalendarAlt,
 } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 function formatMemberSince(dateStr) {
   if (!dateStr) return "-";
@@ -18,6 +19,8 @@ function formatMemberSince(dateStr) {
 }
 
 function PersonalInfo({ user }) {
+  const { t } = useLanguage();
+
   return (
     <div
       className="rounded-2xl p-5 sm:p-8 border"
@@ -28,7 +31,7 @@ function PersonalInfo({ user }) {
     >
 
       <h2 className="text-xl lg:text-2xl font-bold text-white mb-8">
-        Personal Information
+        {t("profile.personalInformation")}
       </h2>
 
 
@@ -44,7 +47,7 @@ function PersonalInfo({ user }) {
 
           <div>
             <p className="text-xs lg:text-sm text-gray-400">
-              Full Name
+              {t("profile.fullName")}
             </p>
 
             <h3 className="text-sm lg:text-base text-white font-semibold">
@@ -65,7 +68,7 @@ function PersonalInfo({ user }) {
 
           <div>
             <p className="text-xs lg:text-sm text-gray-400">
-              Email
+              {t("profile.email")}
             </p>
 
             <h3 className="text-sm lg:text-base text-white break-all">
@@ -87,11 +90,11 @@ function PersonalInfo({ user }) {
 
           <div>
             <p className="text-xs lg:text-sm text-gray-400">
-              Phone
+              {t("profile.phone")}
             </p>
 
             <h3 className="text-sm lg:text-base text-white">
-              {user?.phone || "Not set"}
+              {user?.phone || t("profile.notSet")}
             </h3>
           </div>
 
@@ -109,11 +112,11 @@ function PersonalInfo({ user }) {
 
           <div>
             <p className="text-xs lg:text-sm text-gray-400">
-              Location
+              {t("profile.location")}
             </p>
 
             <h3 className="text-sm lg:text-base text-white">
-              {user?.location || "Not set"}
+              {user?.location || t("profile.notSet")}
             </h3>
           </div>
 
@@ -131,7 +134,7 @@ function PersonalInfo({ user }) {
 
           <div>
             <p className="text-xs lg:text-sm text-gray-400">
-              Member Since
+              {t("profile.memberSince")}
             </p>
 
             <h3 className="text-sm lg:text-base text-white">

@@ -6,8 +6,10 @@ import {
   FaChartBar,
   FaUser,
 } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 function BottomNav() {
+  const { t } = useLanguage();
 
   const linkClass = ({ isActive }) =>
     `flex flex-col items-center text-xs ${
@@ -35,7 +37,7 @@ function BottomNav() {
         })}
       >
         <FaHome size={20} />
-        <span>Home</span>
+        <span>{t("nav.home")}</span>
       </NavLink>
 
 
@@ -49,7 +51,7 @@ function BottomNav() {
         })}
       >
         <FaTasks size={20} />
-        <span>Tasks</span>
+        <span>{t("nav.tasks")}</span>
       </NavLink>
 
 
@@ -84,7 +86,7 @@ function BottomNav() {
         })}
       >
         <FaChartBar size={20} />
-        <span>Stats</span>
+        <span>{t("nav.stats")}</span>
       </NavLink>
 
 
@@ -100,7 +102,7 @@ function BottomNav() {
         })}
       >
         <FaUser size={20} />
-        <span>Profile</span>
+        <span>{t("nav.profile")}</span>
       </NavLink>
 
 

@@ -9,6 +9,7 @@ import "./styles/theme.css";
 
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
+import { LanguageProvider } from "./context/LanguageContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 
@@ -18,11 +19,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
       <AuthProvider>
 
-        <ThemeProvider>
+        <LanguageProvider>
 
-          <App />
+          <ThemeProvider>
 
-        </ThemeProvider>
+            <App />
+
+          </ThemeProvider>
+
+        </LanguageProvider>
 
       </AuthProvider>
 

@@ -5,6 +5,7 @@ import {
   FaTrash,
   FaEdit,
 } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 const PRIORITY_STYLES = {
   Low: "bg-red-500 text-white",
@@ -22,6 +23,8 @@ function formatDate(dateStr) {
 }
 
 function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
+  const { t } = useLanguage();
+
   return (
     <div className="rounded-2xl border border-green-900 bg-[#162117] p-5 hover:border-green-500 transition">
 
@@ -79,14 +82,14 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
           onClick={() => onEdit(task)}
           className="flex items-center gap-2 text-xs text-gray-400 hover:text-white transition"
         >
-          <FaEdit /> Edit
+          <FaEdit /> {t("tasks.edit")}
         </button>
 
         <button
           onClick={() => onDelete(task._id)}
           className="flex items-center gap-2 text-xs text-red-400 hover:text-red-300 transition"
         >
-          <FaTrash /> Delete
+          <FaTrash /> {t("tasks.delete")}
         </button>
 
       </div>

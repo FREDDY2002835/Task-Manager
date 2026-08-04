@@ -1,6 +1,10 @@
 // src/components/profile/ProductivityCard.jsx
 
+import { useLanguage } from "../../context/LanguageContext";
+
 function ProductivityCard({ stats, loading }) {
+  const { t } = useLanguage();
+
   const weeklyGoalPercent = loading ? 0 : stats.weeklyGoalPercent;
   const monthlyProgressPercent = loading ? 0 : stats.monthlyProgressPercent;
   const completedThisWeek = loading ? "-" : stats.completedThisWeek;
@@ -16,7 +20,7 @@ function ProductivityCard({ stats, loading }) {
     >
 
       <h2 className="text-xl lg:text-2xl font-bold text-white mb-8">
-        Productivity
+        {t("profile.productivity")}
       </h2>
 
 
@@ -30,7 +34,7 @@ function ProductivityCard({ stats, loading }) {
           <div className="flex justify-between text-sm">
 
             <span className="text-gray-300">
-              Weekly Goal
+              {t("profile.weeklyGoal")}
             </span>
 
             <span style={{ color: "var(--primary-light)" }}>
@@ -63,7 +67,7 @@ function ProductivityCard({ stats, loading }) {
           <div className="flex justify-between text-sm">
 
             <span className="text-gray-300">
-              Monthly Progress
+              {t("profile.monthlyProgress")}
             </span>
 
             <span style={{ color: "var(--primary-light)" }}>
@@ -100,7 +104,7 @@ function ProductivityCard({ stats, loading }) {
         >
 
           <h3 className="text-lg font-semibold text-white">
-            🏆 Achievement
+            🏆 {t("profile.achievement")}
           </h3>
 
 
@@ -135,7 +139,7 @@ function ProductivityCard({ stats, loading }) {
         >
 
           <p className="text-xs uppercase tracking-wider text-gray-400">
-            Productivity Score
+            {t("profile.productivityScore")}
           </p>
 
 
@@ -150,7 +154,7 @@ function ProductivityCard({ stats, loading }) {
 
 
           <p className="mt-2 text-sm text-gray-400">
-            Based on your all-time task completion rate.
+            {t("profile.scoreDescription")}
           </p>
 
 

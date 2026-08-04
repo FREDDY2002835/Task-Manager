@@ -5,8 +5,11 @@ import {
   FaCheckCircle,
   FaClock,
 } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 function StatsCards({ stats, loading }) {
+  const { t } = useLanguage();
+
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -26,7 +29,7 @@ function StatsCards({ stats, loading }) {
         />
 
         <p className="text-xs lg:text-sm text-gray-400">
-          Total Tasks
+          {t("profile.totalTasks")}
         </p>
 
         <h2 className="text-2xl lg:text-5xl font-bold text-white mt-2">
@@ -52,7 +55,7 @@ function StatsCards({ stats, loading }) {
         />
 
         <p className="text-xs lg:text-sm text-gray-400">
-          Completed
+          {t("profile.completed")}
         </p>
 
         <h2
@@ -83,7 +86,7 @@ function StatsCards({ stats, loading }) {
         />
 
         <p className="text-xs lg:text-sm text-gray-400">
-          Pending
+          {t("profile.pending")}
         </p>
 
         <h2

@@ -86,6 +86,9 @@ function Profile() {
             submitting={submitting}
             onSubmit={handleSaveProfile}
             onClose={() => setShowEditForm(false)}
+            onAvatarChange={(avatarPath) =>
+              setUser((prev) => ({ ...prev, avatar: avatarPath }))
+            }
           />
         )}
 

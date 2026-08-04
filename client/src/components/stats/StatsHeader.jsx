@@ -1,8 +1,12 @@
 // src/components/stats/StatsHeader.jsx
 
 import { FaChartLine } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 function StatsHeader() {
+  const { t } = useLanguage();
+  const monthName = new Date().toLocaleDateString(undefined, { month: "long" });
+
   return (
     <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] border border-green-900 p-5 sm:p-8 lg:p-10">
 
@@ -17,13 +21,13 @@ function StatsHeader() {
             <FaChartLine className="text-2xl lg:text-4xl text-green-400" />
 
             <h1 className="text-2xl lg:text-5xl font-bold text-white">
-              Statistics
+              {t("stats.title")}
             </h1>
 
           </div>
 
           <p className="mt-3 text-sm lg:text-base text-gray-300">
-            Track your productivity and monitor your task performance.
+            {t("stats.subtitle")}
           </p>
 
         </div>
@@ -31,11 +35,11 @@ function StatsHeader() {
         <div className="rounded-xl bg-[#162117] border border-green-900 px-6 py-4 text-center">
 
           <p className="text-xs uppercase tracking-wider text-gray-400">
-            This Month
+            {t("stats.thisMonth")}
           </p>
 
           <h2 className="mt-2 text-2xl lg:text-4xl font-bold text-green-400">
-            July
+            {monthName}
           </h2>
 
         </div>
