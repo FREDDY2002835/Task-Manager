@@ -4,10 +4,11 @@ import { useLanguage } from "../../context/LanguageContext";
 
 function AboutModal({ onClose }) {
   const { t } = useLanguage();
+  const steps = t("about.steps"); // array, pulled straight from the dictionary
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 px-4">
-      <div className="w-full max-w-md bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-6 sm:p-8">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 px-4 py-8">
+      <div className="w-full max-w-lg bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
 
         <div className="flex items-center justify-between mb-4">
 
@@ -40,7 +41,7 @@ function AboutModal({ onClose }) {
           <span className="text-white font-medium">1.0.0</span>
         </div>
 
-        <div>
+        <div className="mb-6">
           <p className="text-xs uppercase tracking-wider text-gray-400 mb-3">
             {t("about.builtWith")}
           </p>
@@ -52,6 +53,27 @@ function AboutModal({ onClose }) {
             <SiMongodb title="MongoDB" className="hover:text-green-400 transition" />
             <SiTailwindcss title="Tailwind CSS" className="hover:text-green-400 transition" />
           </div>
+        </div>
+
+        <div className="border-t border-green-900 pt-6">
+
+          <h3 className="text-lg font-bold text-white mb-4">
+            {t("about.guideTitle")}
+          </h3>
+
+          <div className="space-y-4">
+            {steps.map((step, idx) => (
+              <div key={idx}>
+                <h4 className="text-sm font-semibold text-green-400">
+                  {step.title}
+                </h4>
+                <p className="mt-1 text-sm text-gray-300 leading-6">
+                  {step.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
         </div>
 
         <button

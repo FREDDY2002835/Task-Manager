@@ -92,6 +92,33 @@ const translations = {
       versionLabel: "Version",
       builtWith: "Built with",
       close: "Close",
+      guideTitle: "How to Use TaskFlow",
+      steps: [
+        {
+          title: "1. Create an account",
+          text: "Register with your name, email, and password, or log in if you already have an account.",
+        },
+        {
+          title: "2. Check your Dashboard",
+          text: "See your total, completed, and pending tasks at a glance, and jump straight into creating a new task.",
+        },
+        {
+          title: "3. Manage your Tasks",
+          text: "Create tasks with a title, description, category, priority, and due date. Search or filter by All / Pending / Done. Click a task's status to cycle it from Pending to In Progress to Done. Edit or delete any task from its card.",
+        },
+        {
+          title: "4. Update your Profile",
+          text: "Edit your name, job title, bio, phone, and location. Click your photo in Edit Profile to upload a new one from your device.",
+        },
+        {
+          title: "5. Review your Stats",
+          text: "See your weekly progress, task breakdown by priority and category, and a feed of your recent activity - all calculated from your real tasks.",
+        },
+        {
+          title: "6. Adjust your Settings",
+          text: "Change your password, toggle notification preferences, switch the app's color theme, switch between English and Français, and log out when you're done.",
+        },
+      ],
     },
     common: {
       save: "Save",
@@ -195,6 +222,33 @@ const translations = {
       versionLabel: "Version",
       builtWith: "Construit avec",
       close: "Fermer",
+      guideTitle: "Comment utiliser TaskFlow",
+      steps: [
+        {
+          title: "1. Créez un compte",
+          text: "Inscrivez-vous avec votre nom, e-mail et mot de passe, ou connectez-vous si vous avez déjà un compte.",
+        },
+        {
+          title: "2. Consultez votre tableau de bord",
+          text: "Visualisez en un coup d'œil vos tâches totales, terminées et en attente, et créez rapidement une nouvelle tâche.",
+        },
+        {
+          title: "3. Gérez vos tâches",
+          text: "Créez des tâches avec un titre, une description, une catégorie, une priorité et une date d'échéance. Recherchez ou filtrez par Toutes / En attente / Terminées. Cliquez sur le statut d'une tâche pour le faire passer de En attente à En cours puis à Terminée. Modifiez ou supprimez une tâche depuis sa carte.",
+        },
+        {
+          title: "4. Mettez à jour votre profil",
+          text: "Modifiez votre nom, titre, biographie, téléphone et localisation. Cliquez sur votre photo dans Modifier le profil pour en téléverser une nouvelle depuis votre appareil.",
+        },
+        {
+          title: "5. Consultez vos statistiques",
+          text: "Visualisez votre progrès hebdomadaire, la répartition de vos tâches par priorité et catégorie, ainsi qu'un flux de votre activité récente - le tout calculé à partir de vos tâches réelles.",
+        },
+        {
+          title: "6. Ajustez vos paramètres",
+          text: "Changez votre mot de passe, activez ou désactivez les notifications, changez le thème de couleur de l'application, passez de l'anglais au français, et déconnectez-vous une fois terminé.",
+        },
+      ],
     },
     common: {
       save: "Enregistrer",

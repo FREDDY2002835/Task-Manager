@@ -55,6 +55,9 @@ export const uploadAvatar = (file) => {
 };
 
 export const changePassword = (data) => api.put("/auth/change-password", data);
+export const forgotPassword = (email) => api.post("/auth/forgot-password", { email });
+export const resetPassword = (token, newPassword) =>
+  api.put(`/auth/reset-password/${token}`, { newPassword });
 
 // ================= Tasks =================
 export const getTasks = (params) => api.get("/tasks", { params });
