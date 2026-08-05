@@ -13,6 +13,7 @@ import {
 
 import { Line } from "react-chartjs-2";
 import { useLanguage } from "../../context/LanguageContext";
+import { useTheme, themes } from "../../context/ThemeContext";
 
 ChartJS.register(
   CategoryScale,
@@ -26,6 +27,18 @@ ChartJS.register(
 
 function WeeklyChart({ weekly, loading }) {
   const { t } = useLanguage();
+  const { theme } = useTheme();
+  const primaryColor = themes[theme]?.primary || themes.emerald.primary;
+
+  // Convert the theme's hex color to an rgba string for the fill,
+  // since Chart.js renders to canvas and can't resolve CSS variables.
+  const hexToRgba = (hex, alpha) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r},${g},${b},${alpha})`;
+  };
+
   const data = {
     labels: loading ? [] : weekly.map((d) => d.day),
 
@@ -33,8 +46,8 @@ function WeeklyChart({ weekly, loading }) {
       {
         label: "Completed Tasks",
         data: loading ? [] : weekly.map((d) => d.completed),
-        borderColor: "#22c55e",
-        backgroundColor: "rgba(34,197,94,.2)",
+        borderColor: primaryColor,
+        backgroundColor: hexToRgba(primaryColor, 0.2),
         tension: 0.4,
         fill: true,
       },
@@ -77,7 +90,7 @@ function WeeklyChart({ weekly, loading }) {
   };
 
   return (
-    <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 lg:p-8">
+    <div className="bg-[#162117] rounded-2xl p-5 lg:p-8" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
       <h2 className="text-xl lg:text-2xl font-bold text-white mb-6">
         {t("stats.weeklyProgress")}

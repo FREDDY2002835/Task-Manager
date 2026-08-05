@@ -94,7 +94,7 @@ function Dashboard() {
 
           </div>
 
-          <div className="bg-[#162117] border border-green-900 rounded-2xl p-6 hover:-translate-y-1 transition duration-300">
+          <div className="bg-[#162117] rounded-2xl p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
             <FaCheckCircle className="text-4xl text-[var(--primary-light)] mb-5" />
 
@@ -108,7 +108,7 @@ function Dashboard() {
 
           </div>
 
-          <div className="bg-[#162117] border border-green-900 rounded-2xl p-6 hover:-translate-y-1 transition duration-300">
+          <div className="bg-[#162117] rounded-2xl p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
             <FaClock className="text-4xl text-yellow-400 mb-5" />
 

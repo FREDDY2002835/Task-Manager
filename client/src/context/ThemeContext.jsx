@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
-const themes = {
+export const themes = {
   emerald: {
     primary: "#22c55e",
     primaryDark: "#14532d",

@@ -27,7 +27,7 @@ function RecentActivity({ activity, loading }) {
   };
 
   return (
-    <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 lg:p-8">
+    <div className="bg-[#162117] rounded-2xl p-5 lg:p-8" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
       <h2 className="text-xl lg:text-2xl font-bold text-white mb-6">
         {t("stats.recentActivity")}
@@ -47,7 +47,8 @@ function RecentActivity({ activity, loading }) {
           activity.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-4 border-b border-green-900 pb-4 last:border-none"
+              className="flex items-center gap-4 border-b pb-4 last:border-none"
+              style={{ borderColor: "var(--primary-dark)" }}
             >
               <div className="text-2xl">
                 {ICONS[item.type]}

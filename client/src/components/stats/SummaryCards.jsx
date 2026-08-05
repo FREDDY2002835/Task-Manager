@@ -13,16 +13,17 @@ function SummaryCards({ taskStats, productivity, loading }) {
 
   const cards = [
     {
-      icon: <FaTasks className="text-3xl text-green-400" />,
+      icon: <FaTasks className="text-3xl" style={{ color: "var(--primary-light)" }} />,
       title: t("stats.totalTasks"),
       value: loading ? "-" : taskStats.total,
       color: "text-white",
     },
     {
-      icon: <FaCheckCircle className="text-3xl text-green-400" />,
+      icon: <FaCheckCircle className="text-3xl" style={{ color: "var(--primary-light)" }} />,
       title: t("stats.completed"),
       value: loading ? "-" : taskStats.completed,
-      color: "text-green-400",
+      color: "",
+      style: { color: "var(--primary-light)" },
     },
     {
       icon: <FaClock className="text-3xl text-yellow-400" />,
@@ -45,7 +46,10 @@ function SummaryCards({ taskStats, productivity, loading }) {
 
         <div
           key={card.title}
-          className="bg-[#162117] border border-green-900 rounded-2xl p-5 hover:border-green-500 transition"
+          className="bg-[#162117] rounded-2xl p-5 transition"
+          style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--primary)")}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--primary-dark)")}
         >
 
           {card.icon}
@@ -54,7 +58,7 @@ function SummaryCards({ taskStats, productivity, loading }) {
             {card.title}
           </p>
 
-          <h2 className={`mt-2 text-2xl lg:text-5xl font-bold ${card.color}`}>
+          <h2 className={`mt-2 text-2xl lg:text-5xl font-bold ${card.color}`} style={card.style}>
             {card.value}
           </h2>
 

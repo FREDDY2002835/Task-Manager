@@ -54,19 +54,19 @@ function Register() {
         {/* LEFT SIDE (Desktop Only) */}
         <div className="relative hidden lg:flex items-center justify-center overflow-hidden">
 
-          <div className="absolute w-[700px] h-[700px] rounded-full bg-green-500 opacity-20 blur-[150px]"></div>
+          <div className="absolute w-[700px] h-[700px] rounded-full opacity-20 blur-[150px]" style={{ background: "var(--primary)" }}></div>
 
           <div className="absolute inset-0 bg-gradient-to-br from-[#08110A] via-[#102417] to-[#18452A]"></div>
 
           <div className="relative z-10 max-w-xl px-10">
 
-            <div className="w-20 h-1 bg-green-500 rounded mb-8"></div>
+            <div className="w-20 h-1 rounded mb-8" style={{ background: "var(--primary)" }}></div>
 
             <h1 className="text-6xl font-extrabold text-white">
               TaskFlow
             </h1>
 
-            <h2 className="text-5xl font-bold text-green-400 mt-8 leading-tight">
+            <h2 className="text-5xl font-bold mt-8 leading-tight" style={{ color: "var(--primary-light)" }}>
               Plan.
               <br />
               Track.
@@ -82,7 +82,7 @@ function Register() {
             <div className="mt-12 flex gap-10">
 
               <div>
-                <h3 className="text-4xl font-bold text-green-400">
+                <h3 className="text-4xl font-bold" style={{ color: "var(--primary-light)" }}>
                   10K+
                 </h3>
 
@@ -92,7 +92,7 @@ function Register() {
               </div>
 
               <div>
-                <h3 className="text-4xl font-bold text-green-400">
+                <h3 className="text-4xl font-bold" style={{ color: "var(--primary-light)" }}>
                   99%
                 </h3>
 
@@ -115,9 +115,9 @@ function Register() {
             {/* Mobile Logo */}
             <div className="lg:hidden text-center mb-6">
 
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-green-500/10 border border-green-700">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl" style={{ background: "var(--primary)" }}>
 
-                <span className="text-2xl font-bold text-green-400">
+                <span className="text-2xl font-bold" style={{ color: "var(--primary-light)" }}>
                   T
                 </span>
 
@@ -136,7 +136,7 @@ function Register() {
             {/* Register Card */}
             <form
               onSubmit={handleSubmit}
-              className="w-full bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-10"
+              className="w-full bg-[#162117] rounded-2xl shadow-2xl p-5 sm:p-10" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             >
 
               <h2 className="text-2xl sm:text-4xl font-bold text-white">
@@ -160,7 +160,7 @@ function Register() {
                   Full Name
                 </label>
 
-                <div className="flex items-center bg-[#1D2C20] rounded-xl border border-green-900 px-4">
+                <div className="flex items-center bg-[#1D2C20] rounded-xl px-4" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
                   <FaUser className="text-gray-500 text-sm" />
 
@@ -183,7 +183,7 @@ function Register() {
                   Email Address
                 </label>
 
-                <div className="flex items-center bg-[#1D2C20] rounded-xl border border-green-900 px-4">
+                <div className="flex items-center bg-[#1D2C20] rounded-xl px-4" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
                   <FaEnvelope className="text-gray-500 text-sm" />
 
@@ -206,7 +206,7 @@ function Register() {
                   Password
                 </label>
 
-                <div className="flex items-center bg-[#1D2C20] rounded-xl border border-green-900 px-4">
+                <div className="flex items-center bg-[#1D2C20] rounded-xl px-4" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
                   <FaLock className="text-gray-500 text-sm" />
 
@@ -229,7 +229,7 @@ function Register() {
                   Confirm Password
                 </label>
 
-                <div className="flex items-center bg-[#1D2C20] rounded-xl border border-green-900 px-4">
+                <div className="flex items-center bg-[#1D2C20] rounded-xl px-4" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
                   <FaLock className="text-gray-500 text-sm" />
 
@@ -253,7 +253,7 @@ function Register() {
                   <input
                     type="checkbox"
                     required
-                    className="accent-green-500"
+                    style={{ accentColor: "var(--primary)" }}
                   />
 
                   I agree to the Terms & Conditions
@@ -266,7 +266,7 @@ function Register() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full mt-6 bg-green-500 hover:bg-green-600 transition py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold text-white flex justify-center items-center gap-2 disabled:opacity-60"
+                className="w-full mt-6 transition py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold text-white flex justify-center items-center gap-2 disabled:opacity-60" style={{ background: "var(--primary)" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
               >
 
                 <FaUserPlus />
@@ -282,7 +282,7 @@ function Register() {
 
                 <Link
                   to="/login"
-                  className="ml-2 font-semibold text-green-400 hover:text-green-300"
+                  className="ml-2 font-semibold" style={{ color: "var(--primary-light)" }} onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")} onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
                 >
                   Login
                 </Link>

@@ -26,7 +26,12 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
   const { t } = useLanguage();
 
   return (
-    <div className="rounded-2xl border border-green-900 bg-[#162117] p-5 hover:border-green-500 transition">
+    <div
+      className="rounded-2xl bg-[#162117] p-5 transition"
+      style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
+      onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--primary)")}
+      onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--primary-dark)")}
+    >
 
       <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
 
@@ -68,7 +73,8 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
 
         <button
           onClick={() => onToggleStatus(task)}
-          className="flex items-center gap-2 text-green-400 hover:text-green-300 text-left"
+          className="flex items-center gap-2 text-left"
+          style={{ color: "var(--primary-light)" }}
         >
           <FaCheckCircle />
           {task.status}

@@ -48,13 +48,13 @@ function History() {
         <div className="max-w-4xl mx-auto space-y-6">
 
           {/* Header */}
-          <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] border border-green-900 p-5 sm:p-8 lg:p-10">
+          <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] p-5 sm:p-8 lg:p-10" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
-            <div className="absolute -top-10 -right-10 h-48 w-48 lg:h-72 lg:w-72 rounded-full bg-green-500 opacity-20 blur-3xl"></div>
+            <div className="absolute -top-10 -right-10 h-48 w-48 lg:h-72 lg:w-72 rounded-full opacity-20 blur-3xl" style={{ background: "var(--primary)" }}></div>
 
             <div className="relative z-10 flex items-center gap-3">
 
-              <FaHistory className="text-2xl lg:text-4xl text-green-400" />
+              <FaHistory className="text-2xl lg:text-4xl" style={{ color: "var(--primary-light)" }} />
 
               <div>
                 <h1 className="text-2xl lg:text-5xl font-bold text-white">
@@ -71,7 +71,7 @@ function History() {
           </section>
 
           {/* List */}
-          <section className="bg-[#162117] border border-green-900 rounded-2xl p-5 lg:p-8">
+          <section className="bg-[#162117] rounded-2xl p-5 lg:p-8" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
             {loading && (
               <p className="text-center text-gray-400 py-10">{t("history.loading")}</p>
@@ -86,7 +86,8 @@ function History() {
                 {activity.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-start gap-4 border-b border-green-900 pb-4 last:border-none"
+                    className="flex items-start gap-4 border-b pb-4 last:border-none"
+                    style={{ borderColor: "var(--primary-dark)" }}
                   >
                     <div className="text-2xl mt-0.5">
                       {getIcon(item)}
@@ -108,13 +109,14 @@ function History() {
 
             {/* Pagination */}
             {!loading && totalPages > 1 && (
-              <div className="flex items-center justify-between mt-8 pt-5 border-t border-green-900">
+              <div className="flex items-center justify-between mt-8 pt-5 border-t" style={{ borderColor: "var(--primary-dark)" }}>
 
                 <button
                   type="button"
                   disabled={page <= 1}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl border border-green-900 text-sm text-gray-300 hover:bg-[#1D2C20] transition disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-gray-300 hover:bg-[#1D2C20] transition disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
                 >
                   <FaChevronLeft className="text-xs" />
                   {t("history.previous")}
@@ -128,7 +130,8 @@ function History() {
                   type="button"
                   disabled={page >= totalPages}
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl border border-green-900 text-sm text-gray-300 hover:bg-[#1D2C20] transition disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-gray-300 hover:bg-[#1D2C20] transition disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
                 >
                   {t("history.next")}
                   <FaChevronRight className="text-xs" />

@@ -101,7 +101,7 @@ function PriorityChart({ priority, loading }) {
   };
 
   return (
-    <div className="bg-[#162117] border border-green-900 rounded-2xl p-5 lg:p-8">
+    <div className="bg-[#162117] rounded-2xl p-5 lg:p-8" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
       <h2 className="text-xl lg:text-2xl font-bold text-white mb-6">
         {t("stats.tasksByPriority")}

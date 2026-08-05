@@ -16,15 +16,15 @@ function NotFound() {
     <div className="min-h-screen bg-[#08110A] flex items-center justify-center px-4 py-8">
 
       {/* Background Glow */}
-      <div className="absolute w-64 h-64 sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] rounded-full bg-green-500 opacity-10 blur-[150px]"></div>
+      <div className="absolute w-64 h-64 sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] rounded-full opacity-10 blur-[150px]" style={{ background: "var(--primary)" }}></div>
 
       <div className="relative z-10 w-full max-w-2xl text-center">
 
         {/* Error Icon */}
 
-        <div className="mx-auto flex h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 items-center justify-center rounded-full border border-green-900 bg-[#162117] shadow-xl">
+        <div className="mx-auto flex h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 items-center justify-center rounded-full bg-[#162117] shadow-xl" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
-          <FaExclamationTriangle className="text-3xl sm:text-4xl lg:text-5xl text-green-400" />
+          <FaExclamationTriangle className="text-3xl sm:text-4xl lg:text-5xl" style={{ color: "var(--primary-light)" }} />
 
         </div>
 
@@ -38,7 +38,7 @@ function NotFound() {
 
         {/* Title */}
 
-        <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold text-green-400">
+        <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold" style={{ color: "var(--primary-light)" }}>
 
           Page Not Found
 
@@ -59,7 +59,7 @@ function NotFound() {
 
           <Link
             to="/"
-            className="flex items-center justify-center gap-2 rounded-xl bg-green-500 px-6 py-3 text-sm lg:text-base font-semibold text-white transition hover:bg-green-600"
+            className="flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm lg:text-base font-semibold text-white transition" style={{ background: "var(--primary)" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
           >
 
             <FaHome />
@@ -70,7 +70,7 @@ function NotFound() {
 
           <button
             onClick={() => window.history.back()}
-            className="flex items-center justify-center gap-2 rounded-xl border border-green-500 px-6 py-3 text-sm lg:text-base font-semibold text-white transition hover:bg-green-500"
+            className="flex items-center justify-center gap-2 rounded-xl border px-6 py-3 text-sm lg:text-base font-semibold text-white transition" style={{ borderWidth: 1, borderColor: "var(--primary)" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary)")} onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
 
             <FaArrowLeft />
@@ -83,7 +83,7 @@ function NotFound() {
 
         {/* Divider */}
 
-        <div className="mt-12 border-t border-green-900 pt-8">
+        <div className="mt-12 border-t pt-8">
 
           <h3 className="text-xl lg:text-2xl font-bold text-white">
             TaskFlow

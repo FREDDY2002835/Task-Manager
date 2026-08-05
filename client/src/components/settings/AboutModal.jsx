@@ -8,13 +8,13 @@ function AboutModal({ onClose }) {
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 px-4 py-8">
-      <div className="w-full max-w-lg bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+      <div className="w-full max-w-lg bg-[#162117] rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
         <div className="flex items-center justify-between mb-4">
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-green-500/10 border border-green-700 flex items-center justify-center">
-              <span className="text-lg font-bold text-green-400">T</span>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "var(--primary)" }}>
+              <span className="text-lg font-bold" style={{ color: "var(--primary-light)" }}>T</span>
             </div>
             <h2 className="text-xl font-bold text-white">{t("about.heading")}</h2>
           </div>
@@ -28,7 +28,7 @@ function AboutModal({ onClose }) {
           </button>
         </div>
 
-        <p className="text-green-400 font-semibold text-sm mb-4">
+        <p className="font-semibold text-sm mb-4" style={{ color: "var(--primary-light)" }}>
           {t("about.tagline")}
         </p>
 
@@ -47,15 +47,15 @@ function AboutModal({ onClose }) {
           </p>
 
           <div className="flex flex-wrap gap-4 text-2xl text-gray-400">
-            <FaReact title="React" className="hover:text-green-400 transition" />
-            <FaNodeJs title="Node.js" className="hover:text-green-400 transition" />
-            <SiExpress title="Express" className="hover:text-green-400 transition" />
-            <SiMongodb title="MongoDB" className="hover:text-green-400 transition" />
-            <SiTailwindcss title="Tailwind CSS" className="hover:text-green-400 transition" />
+            <FaReact title="React" className="transition" style={{ color: "var(--primary-light)" }} />
+            <FaNodeJs title="Node.js" className="transition" style={{ color: "var(--primary-light)" }} />
+            <SiExpress title="Express" className="transition" style={{ color: "var(--primary-light)" }} />
+            <SiMongodb title="MongoDB" className="transition" style={{ color: "var(--primary-light)" }} />
+            <SiTailwindcss title="Tailwind CSS" className="transition" style={{ color: "var(--primary-light)" }} />
           </div>
         </div>
 
-        <div className="border-t border-green-900 pt-6">
+        <div className="border-t pt-6">
 
           <h3 className="text-lg font-bold text-white mb-4">
             {t("about.guideTitle")}
@@ -64,7 +64,7 @@ function AboutModal({ onClose }) {
           <div className="space-y-4">
             {steps.map((step, idx) => (
               <div key={idx}>
-                <h4 className="text-sm font-semibold text-green-400">
+                <h4 className="text-sm font-semibold" style={{ color: "var(--primary-light)" }}>
                   {step.title}
                 </h4>
                 <p className="mt-1 text-sm text-gray-300 leading-6">
@@ -79,7 +79,7 @@ function AboutModal({ onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className="w-full mt-8 rounded-xl bg-green-500 hover:bg-green-600 transition py-3 text-sm font-semibold text-white"
+          className="w-full mt-8 rounded-xl transition py-3 text-sm font-semibold text-white" style={{ background: "var(--primary)" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
         >
           {t("about.close")}
         </button>

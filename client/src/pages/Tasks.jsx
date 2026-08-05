@@ -103,9 +103,9 @@ function Tasks() {
 
         {/* ================= HEADER ================= */}
 
-        <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] border border-green-900 p-5 sm:p-8 lg:p-10">
+        <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] p-5 sm:p-8 lg:p-10" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
-          <div className="absolute -top-10 -right-10 w-48 h-48 lg:w-72 lg:h-72 rounded-full bg-green-500 opacity-20 blur-3xl"></div>
+          <div className="absolute -top-10 -right-10 w-48 h-48 lg:w-72 lg:h-72 rounded-full opacity-20 blur-3xl" style={{ background: "var(--primary)" }}></div>
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
@@ -126,7 +126,10 @@ function Tasks() {
                 setEditingTask(null);
                 setShowForm(true);
               }}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 transition px-5 py-3 rounded-xl font-semibold text-sm lg:text-base"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 transition px-5 py-3 rounded-xl font-semibold text-sm lg:text-base"
+              style={{ background: "var(--primary)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
             >
 
               <FaPlus />
@@ -143,7 +146,7 @@ function Tasks() {
 
         <section className="flex flex-col lg:flex-row gap-4">
 
-          <div className="flex items-center flex-1 bg-[#162117] border border-green-900 rounded-xl px-4 py-3">
+          <div className="flex items-center flex-1 bg-[#162117] rounded-xl px-4 py-3" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
             <FaSearch className="text-gray-400" />
 
@@ -165,9 +168,14 @@ function Tasks() {
                 onClick={() => setStatusFilter(f.value)}
                 className={`rounded-xl px-4 py-3 text-sm transition ${
                   statusFilter === f.value
-                    ? "bg-green-500 text-white"
-                    : "border border-green-900 bg-[#162117] text-gray-300 hover:bg-[#1D2C20]"
+                    ? "text-white"
+                    : "bg-[#162117] text-gray-300 hover:bg-[#1D2C20]"
                 }`}
+                style={
+                  statusFilter === f.value
+                    ? { background: "var(--primary)" }
+                    : { borderWidth: 1, borderColor: "var(--primary-dark)" }
+                }
               >
                 {f.label}
               </button>

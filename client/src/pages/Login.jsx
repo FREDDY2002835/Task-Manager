@@ -48,9 +48,9 @@ function Login() {
 
         <div className="text-center mb-6 sm:mb-10">
 
-         <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-green-500/10 border border-green-700 shadow-lg">
+         <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl shadow-lg" style={{ background: "var(--primary)" }}>
 
-           <span className="text-2xl sm:text-4xl font-bold text-green-400">
+           <span className="text-2xl sm:text-4xl font-bold" style={{ color: "var(--primary-light)" }}>
               T
             </span>
 
@@ -70,7 +70,7 @@ function Login() {
 
        <form
         onSubmit={handleSubmit}
-        className="bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-8"
+        className="bg-[#162117] rounded-2xl shadow-2xl p-5 sm:p-8" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
        >
 
         <h2 className="text-xl sm:text-3xl font-bold text-white">
@@ -95,7 +95,7 @@ function Login() {
               Email Address
             </label>
 
-            <div className="flex items-center rounded-xl border border-green-900 bg-[#1D2C20] px-4">
+            <div className="flex items-center rounded-xl bg-[#1D2C20] px-4" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
               <FaEnvelope className="text-gray-500" />
 
@@ -119,7 +119,7 @@ function Login() {
               Password
             </label>
 
-            <div className="flex items-center rounded-xl border border-green-900 bg-[#1D2C20] px-4">
+            <div className="flex items-center rounded-xl bg-[#1D2C20] px-4" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
               <FaLock className="text-gray-500" />
 
@@ -143,14 +143,14 @@ function Login() {
 
               <input
                 type="checkbox"
-                className="accent-green-500"
+                style={{ accentColor: "var(--primary)" }}
               />
 
               Remember me
 
             </label>
 
-            <Link to="/forgot-password" className="text-xs sm:text-sm text-green-400 hover:text-green-300">
+            <Link to="/forgot-password" className="text-xs sm:text-sm" style={{ color: "var(--primary-light)" }} onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")} onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary-light)")}>
 
               Forgot Password?
 
@@ -163,7 +163,7 @@ function Login() {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-green-500 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:bg-green-600 disabled:opacity-60"
+            className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition disabled:opacity-60" style={{ background: "var(--primary)" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
           >
             {submitting ? "Logging in..." : "Login"}
             {!submitting && <FaArrowRight />}
@@ -173,13 +173,13 @@ function Login() {
 
          <div className="flex items-center gap-3 my-6">
 
-            <div className="flex-1 h-px bg-green-900"></div>
+            <div className="flex-1 h-px" style={{ background: "var(--primary-dark)" }}></div>
 
            <span className="text-gray-500 text-xs sm:text-sm">
               OR
             </span>
 
-            <div className="flex-1 h-px bg-green-900"></div>
+            <div className="flex-1 h-px" style={{ background: "var(--primary-dark)" }}></div>
 
           </div>
 
@@ -191,7 +191,7 @@ function Login() {
 
             <Link
               to="/register"
-              className="ml-2 font-semibold text-green-400 hover:text-green-300"
+              className="ml-2 font-semibold" style={{ color: "var(--primary-light)" }} onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")} onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
             >
               Create One
             </Link>

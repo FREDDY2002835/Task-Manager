@@ -8,9 +8,9 @@ function StatsHeader() {
   const monthName = new Date().toLocaleDateString(undefined, { month: "long" });
 
   return (
-    <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] border border-green-900 p-5 sm:p-8 lg:p-10">
+    <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] p-5 sm:p-8 lg:p-10" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
-      <div className="absolute -top-10 -right-10 h-48 w-48 lg:h-72 lg:w-72 rounded-full bg-green-500 opacity-20 blur-3xl"></div>
+      <div className="absolute -top-10 -right-10 h-48 w-48 lg:h-72 lg:w-72 rounded-full opacity-20 blur-3xl" style={{ background: "var(--primary)" }}></div>
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
 
@@ -18,7 +18,7 @@ function StatsHeader() {
 
           <div className="flex items-center gap-3">
 
-            <FaChartLine className="text-2xl lg:text-4xl text-green-400" />
+            <FaChartLine className="text-2xl lg:text-4xl" style={{ color: "var(--primary-light)" }} />
 
             <h1 className="text-2xl lg:text-5xl font-bold text-white">
               {t("stats.title")}
@@ -32,13 +32,13 @@ function StatsHeader() {
 
         </div>
 
-        <div className="rounded-xl bg-[#162117] border border-green-900 px-6 py-4 text-center">
+        <div className="rounded-xl bg-[#162117] px-6 py-4 text-center" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
           <p className="text-xs uppercase tracking-wider text-gray-400">
             {t("stats.thisMonth")}
           </p>
 
-          <h2 className="mt-2 text-2xl lg:text-4xl font-bold text-green-400">
+          <h2 className="mt-2 text-2xl lg:text-4xl font-bold" style={{ color: "var(--primary-light)" }}>
             {monthName}
           </h2>
 

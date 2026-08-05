@@ -39,8 +39,8 @@ function ForgotPassword() {
 
           <div className="text-center mb-6 sm:mb-10">
 
-            <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-green-500/10 border border-green-700 shadow-lg">
-              <span className="text-2xl sm:text-4xl font-bold text-green-400">T</span>
+            <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl shadow-lg" style={{ background: "var(--primary)" }}>
+              <span className="text-2xl sm:text-4xl font-bold" style={{ color: "var(--primary-light)" }}>T</span>
             </div>
 
             <h1 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white">TaskFlow</h1>
@@ -49,7 +49,7 @@ function ForgotPassword() {
 
           <form
             onSubmit={handleSubmit}
-            className="bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-8"
+            className="bg-[#162117] rounded-2xl shadow-2xl p-5 sm:p-8" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
           >
 
             <h2 className="text-xl sm:text-3xl font-bold text-white">Forgot Password?</h2>
@@ -65,7 +65,7 @@ function ForgotPassword() {
             )}
 
             {success && (
-              <p className="mt-4 text-sm text-green-400 bg-green-500/10 border border-green-900 rounded-lg px-3 py-2">
+              <p className="mt-4 text-sm rounded-lg px-3 py-2" style={{ color: "var(--primary-light)", borderWidth: 1, borderColor: "var(--primary-dark)" }}>
                 {success}
               </p>
             )}
@@ -74,7 +74,7 @@ function ForgotPassword() {
 
               <label className="block mb-1 text-xs sm:text-sm text-gray-300">Email Address</label>
 
-              <div className="flex items-center rounded-xl border border-green-900 bg-[#1D2C20] px-4">
+              <div className="flex items-center rounded-xl bg-[#1D2C20] px-4" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
                 <FaEnvelope className="text-gray-500" />
 
@@ -93,7 +93,7 @@ function ForgotPassword() {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl bg-green-500 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:bg-green-600 disabled:opacity-60"
+              className="mt-6 w-full flex items-center justify-center gap-2 rounded-xl py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition disabled:opacity-60" style={{ background: "var(--primary)" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
             >
               {submitting ? "Sending..." : "Send Reset Link"}
               {!submitting && <FaArrowRight />}
@@ -101,7 +101,7 @@ function ForgotPassword() {
 
             <p className="text-center text-xs sm:text-sm text-gray-400 mt-6">
               Remembered your password?
-              <Link to="/login" className="ml-2 font-semibold text-green-400 hover:text-green-300">
+              <Link to="/login" className="ml-2 font-semibold" style={{ color: "var(--primary-light)" }} onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")} onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary-light)")}>
                 Back to Login
               </Link>
             </p>

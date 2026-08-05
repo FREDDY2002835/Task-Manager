@@ -54,7 +54,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 px-4">
-      <div className="w-full max-w-lg bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto">
+      <div className="w-full max-w-lg bg-[#162117] rounded-2xl shadow-2xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl sm:text-2xl font-bold text-white">Edit Profile</h2>
@@ -87,7 +87,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
               src={avatarPreview}
               alt="Avatar preview"
               sizeClass="w-24 h-24"
-              className="border-4 border-green-700"
+              className="border-4"
             />
 
             <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition">
@@ -117,7 +117,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white"
+              className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             />
           </div>
 
@@ -128,7 +128,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Full Stack Developer"
-              className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
+              className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             />
           </div>
 
@@ -138,7 +138,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               rows={3}
-              className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white"
+              className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             />
           </div>
 
@@ -150,7 +150,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+256 700 000000"
-                className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
+                className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
               />
             </div>
 
@@ -161,7 +161,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="City, Country"
-                className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
+                className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
               />
             </div>
           </div>
@@ -170,7 +170,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-xl border border-green-900 py-3 text-sm text-gray-300 hover:bg-[#1D2C20] transition"
+              className="flex-1 rounded-xl py-3 text-sm text-gray-300 hover:bg-[#1D2C20] transition" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             >
               Cancel
             </button>
@@ -178,7 +178,7 @@ function ProfileEditForm({ user, onSubmit, onClose, submitting, onAvatarChange }
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 rounded-xl bg-green-500 hover:bg-green-600 transition py-3 text-sm font-semibold text-white disabled:opacity-60"
+              className="flex-1 rounded-xl transition py-3 text-sm font-semibold text-white disabled:opacity-60" style={{ background: "var(--primary)" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
             >
               {submitting ? "Saving..." : "Save Changes"}
             </button>

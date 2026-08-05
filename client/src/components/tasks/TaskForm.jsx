@@ -39,7 +39,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 px-4">
-      <div className="w-full max-w-lg bg-[#162117] border border-green-900 rounded-2xl shadow-2xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto">
+      <div className="w-full max-w-lg bg-[#162117] rounded-2xl shadow-2xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl sm:text-2xl font-bold text-white">
@@ -70,7 +70,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Build Authentication System"
-              className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
+              className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             />
           </div>
 
@@ -81,7 +81,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Optional details..."
               rows={3}
-              className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
+              className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             />
           </div>
 
@@ -93,7 +93,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 placeholder="e.g. Development"
-                className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500"
+                className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white placeholder:text-gray-500" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
               />
             </div>
 
@@ -103,7 +103,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white"
+                className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
               />
             </div>
           </div>
@@ -114,7 +114,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
-                className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white"
+                className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
               >
                 {PRIORITIES.map((p) => (
                   <option key={p} value={p}>{p}</option>
@@ -127,7 +127,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="w-full rounded-xl border border-green-900 bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white"
+                className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
               >
                 {STATUSES.map((s) => (
                   <option key={s} value={s}>{s}</option>
@@ -140,7 +140,8 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-xl border border-green-900 py-3 text-sm text-gray-300 hover:bg-[#1D2C20] transition"
+              className="flex-1 rounded-xl py-3 text-sm text-gray-300 hover:bg-[#1D2C20] transition"
+              style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
             >
               Cancel
             </button>
@@ -148,7 +149,10 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 rounded-xl bg-green-500 hover:bg-green-600 transition py-3 text-sm font-semibold text-white disabled:opacity-60"
+              className="flex-1 rounded-xl transition py-3 text-sm font-semibold text-white disabled:opacity-60"
+              style={{ background: "var(--primary)" }}
+              onMouseEnter={(e) => !submitting && (e.currentTarget.style.background = "var(--primary-dark)")}
+              onMouseLeave={(e) => !submitting && (e.currentTarget.style.background = "var(--primary)")}
             >
               {submitting ? "Saving..." : initialData ? "Save Changes" : "Create Task"}
             </button>
