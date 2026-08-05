@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaEllipsisV, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { FaEllipsisV, FaCog, FaSignOutAlt, FaHistory } from "react-icons/fa";
 import logo from "../../assets/logo.png";
 import { useAuth } from "../../context/AuthContext";
 
@@ -134,6 +134,26 @@ function Navbar() {
               <div className="w-12 h-1 rounded-full bg-gray-600 mx-auto mb-6"></div>
 
               <Link
+                to="/history"
+                onClick={() => setMenuOpen(false)}
+                className="
+                  flex
+                  items-center
+                  gap-4
+                  px-4
+                  py-4
+                  rounded-2xl
+                  hover:bg-white/5
+                  transition
+                "
+              >
+                <FaHistory className="text-xl" />
+
+                <span>History</span>
+
+              </Link>
+
+              <Link
                 to="/settings"
                 onClick={() => setMenuOpen(false)}
                 className="
@@ -216,6 +236,25 @@ function Navbar() {
                 borderColor: "var(--primary-dark)",
               }}
             >
+              <Link
+                to="/history"
+                onClick={() => setMenuOpen(false)}
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  px-4
+                  py-3
+                  hover:bg-[#1d2c20]
+                  transition
+                "
+              >
+                <FaHistory />
+
+                History
+
+              </Link>
+
               <Link
                 to="/settings"
                 onClick={() => setMenuOpen(false)}

@@ -8,6 +8,7 @@ const translations = {
       settings: "Settings",
       home: "Home",
       stats: "Stats",
+      history: "History",
     },
     dashboard: {
       title1: "Organize.",
@@ -69,6 +70,7 @@ const translations = {
       activityCompleted: "Completed",
       activityCreated: "Created",
       activityUpdated: "Updated",
+      activityDeleted: "Deleted",
     },
     settings: {
       title: "Settings",
@@ -127,6 +129,15 @@ const translations = {
       close: "Close",
       logout: "Logout",
     },
+    history: {
+      title: "History",
+      subtitle: "A complete record of everything that's happened to your tasks.",
+      loading: "Loading history...",
+      noHistory: "No activity yet.",
+      previous: "Previous",
+      next: "Next",
+      pageOf: "Page {current} of {total}",
+    },
   },
 
   fr: {
@@ -138,6 +149,7 @@ const translations = {
       settings: "Paramètres",
       home: "Accueil",
       stats: "Stats",
+      history: "Historique",
     },
     dashboard: {
       title1: "Organisez.",
@@ -199,6 +211,7 @@ const translations = {
       activityCompleted: "Terminée",
       activityCreated: "Créée",
       activityUpdated: "Mise à jour de",
+      activityDeleted: "Supprimée",
     },
     settings: {
       title: "Paramètres",
@@ -256,6 +269,15 @@ const translations = {
       saving: "Enregistrement...",
       close: "Fermer",
       logout: "Déconnexion",
+    },
+    history: {
+      title: "Historique",
+      subtitle: "Un enregistrement complet de tout ce qui est arrivé à vos tâches.",
+      loading: "Chargement de l'historique...",
+      noHistory: "Aucune activité pour l'instant.",
+      previous: "Précédent",
+      next: "Suivant",
+      pageOf: "Page {current} sur {total}",
     },
   },
 };

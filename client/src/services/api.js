@@ -64,6 +64,7 @@ export const getTasks = (params) => api.get("/tasks", { params });
 export const getTaskStats = () => api.get("/tasks/stats");
 export const getProductivityStats = () => api.get("/tasks/stats/productivity");
 export const getAnalyticsStats = () => api.get("/tasks/stats/analytics");
+export const getActivityHistory = (params) => api.get("/tasks/history", { params });
 export const getTaskById = (id) => api.get(`/tasks/${id}`);
 export const createTask = (data) => api.post("/tasks", data);
 export const updateTask = (id, data) => api.put(`/tasks/${id}`, data);

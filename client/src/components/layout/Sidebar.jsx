@@ -96,6 +96,21 @@ function Sidebar() {
           {t("nav.analytics")}
         </Link>
 
+        <Link
+          to="/history"
+          className="p-3 rounded-lg transition"
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.background =
+              "var(--primary)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background =
+              "transparent")
+          }
+        >
+          {t("nav.history")}
+        </Link>
+
               <Link
         to="/settings"
         className="hover:bg-emerald-800 p-3 rounded-lg transition"

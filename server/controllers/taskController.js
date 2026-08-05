@@ -1,4 +1,5 @@
 import Task from "../models/Task.js";
+import ActivityLog from "../models/ActivityLog.js";
 import mongoose from "mongoose";
 
 // =======================
@@ -20,6 +21,14 @@ export const createTask = async (req, res) => {
       priority,
       status,
       dueDate,
+    });
+
+    await ActivityLog.create({
+      user: req.user.id,
+      task: task._id,
+      taskTitle: task.title,
+      action: "created",
+      details: `Created task "${task.title}"`,
     });
 
     res.status(201).json(task);
@@ -90,6 +99,8 @@ export const updateTask = async (req, res) => {
 
     const { title, description, category, priority, status, dueDate } = req.body;
 
+    const previousStatus = task.status;
+
     if (title !== undefined) task.title = title;
     if (description !== undefined) task.description = description;
     if (category !== undefined) task.category = category;
@@ -98,6 +109,24 @@ export const updateTask = async (req, res) => {
     if (dueDate !== undefined) task.dueDate = dueDate;
 
     await task.save();
+
+    if (status !== undefined && status !== previousStatus) {
+      await ActivityLog.create({
+        user: req.user.id,
+        task: task._id,
+        taskTitle: task.title,
+        action: "statusChanged",
+        details: `Changed status of "${task.title}" from ${previousStatus} to ${status}`,
+      });
+    } else {
+      await ActivityLog.create({
+        user: req.user.id,
+        task: task._id,
+        taskTitle: task.title,
+        action: "updated",
+        details: `Updated task "${task.title}"`,
+      });
+    }
 
     res.status(200).json(task);
   } catch (error) {
@@ -117,6 +146,14 @@ export const deleteTask = async (req, res) => {
     if (!task) {
       return res.status(404).json({ message: "Task not found." });
     }
+
+    await ActivityLog.create({
+      user: req.user.id,
+      task: null, // the task no longer exists
+      taskTitle: task.title,
+      action: "deleted",
+      details: `Deleted task "${task.title}"`,
+    });
 
     res.status(200).json({ message: "Task deleted." });
   } catch (error) {
@@ -267,18 +304,18 @@ export const getAnalyticsStats = async (req, res) => {
       { $limit: 6 },
     ]);
 
-    // ---- Recent activity (last 6 tasks touched, most recent first) ----
-    const recentTasksPromise = Task.find({ user: userId })
-      .sort({ updatedAt: -1 })
+    // ---- Recent activity (last 6 real logged events) ----
+    const recentActivityPromise = ActivityLog.find({ user: userId })
+      .sort({ createdAt: -1 })
       .limit(6)
-      .select("title status createdAt updatedAt");
+      .select("taskTitle action details createdAt");
 
-    const [weeklyCounts, priorityCounts, categoryAgg, recentTasks] =
+    const [weeklyCounts, priorityCounts, categoryAgg, recentLogs] =
       await Promise.all([
         Promise.all(weeklyPromises),
         Promise.all(priorityPromises),
         categoryAggPromise,
-        recentTasksPromise,
+        recentActivityPromise,
       ]);
 
     const weekly = weeklyMeta.map((day, idx) => ({
@@ -297,19 +334,17 @@ export const getAnalyticsStats = async (req, res) => {
       count: c.count,
     }));
 
-    const recentActivity = recentTasks.map((task) => {
-      let type = "updated";
-      if (task.status === "Done") {
-        type = "completed";
-      } else if (task.createdAt.getTime() === task.updatedAt.getTime()) {
-        type = "created";
+    const recentActivity = recentLogs.map((log) => {
+      let type = log.action;
+      if (log.action === "statusChanged") {
+        type = log.details.endsWith("to Done") ? "completed" : "updated";
       }
 
       return {
-        id: task._id,
-        title: task.title,
+        id: log._id,
+        title: log.taskTitle,
         type,
-        timestamp: task.updatedAt,
+        timestamp: log.createdAt,
       };
     });
 
@@ -321,6 +356,49 @@ export const getAnalyticsStats = async (req, res) => {
     });
   } catch (error) {
     console.error("GET ANALYTICS STATS ERROR:");
+    console.error(error);
+    res.status(500).json({ message: error.message, error });
+  }
+};
+
+// =======================
+// Activity History (for History page)
+// Full, paginated list of every real logged task event
+// (created, updated, status changes, deleted).
+// Supports ?page=1&limit=20
+// =======================
+export const getActivityHistory = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(parseInt(req.query.limit) || 20, 100);
+    const skip = (page - 1) * limit;
+
+    const [logs, total] = await Promise.all([
+      ActivityLog.find({ user: userId })
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit),
+      ActivityLog.countDocuments({ user: userId }),
+    ]);
+
+    const activity = logs.map((log) => ({
+      id: log._id,
+      title: log.taskTitle,
+      action: log.action,
+      details: log.details,
+      timestamp: log.createdAt,
+    }));
+
+    res.status(200).json({
+      activity,
+      page,
+      totalPages: Math.ceil(total / limit) || 1,
+      total,
+    });
+  } catch (error) {
+    console.error("GET ACTIVITY HISTORY ERROR:");
     console.error(error);
     res.status(500).json({ message: error.message, error });
   }
