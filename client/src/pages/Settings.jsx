@@ -8,6 +8,7 @@ import AboutModal from "../components/settings/AboutModal";
 import { useAuth } from "../context/AuthContext";
 import { useLanguage } from "../context/LanguageContext";
 import { updateMe } from "../services/api";
+import { enablePushNotifications, disablePushNotifications, isPushSupported } from "../utils/pushNotifications";
 
 import {
   FaCog,
@@ -26,6 +27,7 @@ function Settings() {
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [savingNotif, setSavingNotif] = useState(false);
+  const [pushError, setPushError] = useState("");
 
   const notifications = user?.notifications || {
     taskReminders: true,
@@ -34,6 +36,31 @@ function Settings() {
 
   const handleToggleNotification = async (key) => {
     const updated = { ...notifications, [key]: !notifications[key] };
+
+    setPushError("");
+
+    // Task reminders need a real browser push subscription on top of
+    // the saved preference - the preference alone doesn't deliver
+    // anything without this.
+    if (key === "taskReminders") {
+      try {
+        if (updated.taskReminders) {
+          if (!isPushSupported()) {
+            setPushError("Push notifications aren't supported in this browser.");
+            return;
+          }
+          await enablePushNotifications();
+        } else {
+          await disablePushNotifications();
+        }
+      } catch (err) {
+        console.error("Push notification setup failed:", err);
+        setPushError(
+          err.message || "Couldn't enable notifications. Check your browser's notification permission for this site."
+        );
+        return; // don't flip the toggle if permission was denied
+      }
+    }
 
     // Optimistic update
     setUser((prev) => ({ ...prev, notifications: updated }));
@@ -134,6 +161,13 @@ function Settings() {
             }}
           >
             <SettingItem icon={<FaBell />} title={t("settings.notifications")} />
+
+            {pushError && (
+              <p className="mx-4 mt-3 mb-1 text-xs text-red-400 bg-red-500/10 border border-red-900 rounded-lg px-3 py-2">
+                {pushError}
+              </p>
+            )}
+
             <SettingItem
               title={t("settings.taskReminders")}
               toggle

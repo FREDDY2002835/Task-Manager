@@ -4,6 +4,16 @@ import { FaTimes } from "react-icons/fa";
 const PRIORITIES = ["Low", "Medium", "High"];
 const STATUSES = ["Pending", "In Progress", "Done"];
 
+// datetime-local inputs need "YYYY-MM-DDTHH:mm" in the *local* timezone,
+// not the raw ISO string (which is UTC) - this converts correctly so
+// the displayed time matches what the user actually picked.
+function toDateTimeLocalValue(isoString) {
+  const date = new Date(isoString);
+  const offset = date.getTimezoneOffset();
+  const local = new Date(date.getTime() - offset * 60000);
+  return local.toISOString().slice(0, 16);
+}
+
 // Modal form used to create (or edit) a task.
 // onSubmit receives the plain task data object.
 function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
@@ -13,7 +23,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
   const [priority, setPriority] = useState(initialData?.priority || "Medium");
   const [status, setStatus] = useState(initialData?.status || "Pending");
   const [dueDate, setDueDate] = useState(
-    initialData?.dueDate ? initialData.dueDate.slice(0, 10) : ""
+    initialData?.dueDate ? toDateTimeLocalValue(initialData.dueDate) : ""
   );
   const [error, setError] = useState("");
 
@@ -98,9 +108,9 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
             </div>
 
             <div>
-              <label className="block mb-1 text-xs sm:text-sm text-gray-300">Due Date</label>
+              <label className="block mb-1 text-xs sm:text-sm text-gray-300">Due Date &amp; Time</label>
               <input
-                type="date"
+                type="datetime-local"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
                 className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}

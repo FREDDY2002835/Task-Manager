@@ -40,13 +40,21 @@ export const themes = {
   },
 };
 
+const DEFAULT_THEME = "emerald";
+
 export function ThemeProvider({ children }) {
+  const stored = localStorage.getItem("theme");
+
+  // Guard against a stale/invalid value in localStorage (e.g. from
+  // an older version of this app) that doesn't match any real theme
+  // key - that was crashing the app on load with
+  // "Cannot read properties of undefined (reading 'primary')".
   const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "emerald"
+    stored && themes[stored] ? stored : DEFAULT_THEME
   );
 
   useEffect(() => {
-    const current = themes[theme];
+    const current = themes[theme] || themes[DEFAULT_THEME];
 
     document.documentElement.style.setProperty(
       "--primary",

@@ -10,6 +10,12 @@ import "./styles/theme.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import { LanguageProvider } from "./context/LanguageContext";
+import { registerSW } from "virtual:pwa-register";
+
+// Registers the service worker that makes the app installable and
+// lets it receive push notifications even when the tab is closed.
+// autoUpdate: silently activates new versions on next load.
+registerSW({ immediate: true });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 

@@ -100,6 +100,7 @@ export const updateTask = async (req, res) => {
     const { title, description, category, priority, status, dueDate } = req.body;
 
     const previousStatus = task.status;
+    const previousDueDate = task.dueDate ? task.dueDate.getTime() : null;
 
     if (title !== undefined) task.title = title;
     if (description !== undefined) task.description = description;
@@ -107,6 +108,13 @@ export const updateTask = async (req, res) => {
     if (priority !== undefined) task.priority = priority;
     if (status !== undefined) task.status = status;
     if (dueDate !== undefined) task.dueDate = dueDate;
+
+    // If the due date actually changed, the old reminder (sent or not)
+    // no longer applies - allow a fresh one to fire for the new time.
+    const newDueDate = task.dueDate ? task.dueDate.getTime() : null;
+    if (newDueDate !== previousDueDate) {
+      task.reminderSent = false;
+    }
 
     await task.save();
 

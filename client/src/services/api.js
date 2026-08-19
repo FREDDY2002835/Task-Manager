@@ -65,6 +65,11 @@ export const getTaskStats = () => api.get("/tasks/stats");
 export const getProductivityStats = () => api.get("/tasks/stats/productivity");
 export const getAnalyticsStats = () => api.get("/tasks/stats/analytics");
 export const getActivityHistory = (params) => api.get("/tasks/history", { params });
+
+// ================= Push Notifications =================
+export const getVapidPublicKey = () => api.get("/push/vapid-public-key");
+export const subscribeToPush = (subscription) => api.post("/push/subscribe", subscription);
+export const unsubscribeFromPush = (endpoint) => api.post("/push/unsubscribe", { endpoint });
 export const getTaskById = (id) => api.get(`/tasks/${id}`);
 export const createTask = (data) => api.post("/tasks", data);
 export const updateTask = (id, data) => api.put(`/tasks/${id}`, data);

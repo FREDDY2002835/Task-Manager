@@ -19,7 +19,14 @@ function formatDate(dateStr) {
   return date.toLocaleDateString(undefined, {
     month: "short",
     day: "numeric",
+  }) + " · " + date.toLocaleTimeString(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
   });
+}
+
+function isOverdue(task) {
+  return task.dueDate && task.status !== "Done" && new Date(task.dueDate) < new Date();
 }
 
 function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
@@ -61,9 +68,10 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
 
       <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs lg:text-sm text-gray-400">
 
-        <div className="flex items-center gap-2">
+        <div className={`flex items-center gap-2 ${isOverdue(task) ? "text-red-400 font-medium" : ""}`}>
           <FaCalendarAlt />
           {formatDate(task.dueDate)}
+          {isOverdue(task) && <span className="text-[10px] uppercase tracking-wide">Overdue</span>}
         </div>
 
         <div className="flex items-center gap-2">

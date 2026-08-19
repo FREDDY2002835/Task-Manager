@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import PageTransition from "../components/PageTransition";
 import TaskCard from "../components/tasks/TaskCard";
@@ -30,6 +31,19 @@ function Tasks() {
   const [editingTask, setEditingTask] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Opens the New Task form automatically when navigated here with
+  // ?new=1 (used by the mobile bottom-nav plus button), then removes
+  // the param so refreshing the page doesn't keep reopening it.
+  useEffect(() => {
+    if (searchParams.get("new") === "1") {
+      setEditingTask(null);
+      setShowForm(true);
+      setSearchParams({}, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const fetchTasks = useCallback(() => {
     setLoading(true);

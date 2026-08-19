@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaTasks,
@@ -10,6 +10,7 @@ import { useLanguage } from "../../context/LanguageContext";
 
 function BottomNav() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const linkClass = ({ isActive }) =>
     `flex flex-col items-center text-xs ${
@@ -57,6 +58,7 @@ function BottomNav() {
 
 
       <button
+        onClick={() => navigate("/tasks?new=1")}
         className="rounded-full p-4 -mt-8 shadow-lg transition"
         style={{
           background: "var(--primary)",
