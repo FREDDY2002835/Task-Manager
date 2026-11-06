@@ -15,12 +15,17 @@ async function checkDueTasks() {
       dueDate: { $lte: now },
       status: { $ne: "Done" },
       reminderSent: false,
-    }).populate("user", "notifications");
+    })
+      .populate("user", "notifications")
+      .populate("assignedTo", "notifications");
 
     if (dueTasks.length === 0) return;
 
     for (const task of dueTasks) {
-      const user = task.user;
+      // Group tasks remind the person they're assigned to (falling back
+      // to the creator if nobody is assigned). Personal tasks have no
+      // assignee, so they still remind their owner exactly as before.
+      const user = task.assignedTo || task.user;
 
       // Always mark as sent even if we skip sending, so we don't
       // keep re-checking a task the user has reminders turned off for.
@@ -40,7 +45,7 @@ async function checkDueTasks() {
         body: task.description
           ? task.description.slice(0, 120)
           : "This task is due now.",
-        url: "/tasks",
+        url: task.group ? `/groups/${task.group}` : "/tasks",
       };
 
       for (const sub of subscriptions) {

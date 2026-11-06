@@ -47,7 +47,7 @@ export const getTasks = async (req, res) => {
   try {
     const { search, status } = req.query;
 
-    const filter = { user: req.user.id };
+    const filter = { user: req.user.id, group: null };
 
     if (status) {
       filter.status = status;
@@ -72,7 +72,7 @@ export const getTasks = async (req, res) => {
 // =======================
 export const getTaskById = async (req, res) => {
   try {
-    const task = await Task.findOne({ _id: req.params.id, user: req.user.id });
+    const task = await Task.findOne({ _id: req.params.id, user: req.user.id, group: null });
 
     if (!task) {
       return res.status(404).json({ message: "Task not found." });
@@ -91,7 +91,7 @@ export const getTaskById = async (req, res) => {
 // =======================
 export const updateTask = async (req, res) => {
   try {
-    const task = await Task.findOne({ _id: req.params.id, user: req.user.id });
+    const task = await Task.findOne({ _id: req.params.id, user: req.user.id, group: null });
 
     if (!task) {
       return res.status(404).json({ message: "Task not found." });
@@ -149,7 +149,7 @@ export const updateTask = async (req, res) => {
 // =======================
 export const deleteTask = async (req, res) => {
   try {
-    const task = await Task.findOneAndDelete({ _id: req.params.id, user: req.user.id });
+    const task = await Task.findOneAndDelete({ _id: req.params.id, user: req.user.id, group: null });
 
     if (!task) {
       return res.status(404).json({ message: "Task not found." });
@@ -181,10 +181,10 @@ export const getTaskStats = async (req, res) => {
     const userId = req.user.id;
 
     const [total, completed, pending, inProgress] = await Promise.all([
-      Task.countDocuments({ user: userId }),
-      Task.countDocuments({ user: userId, status: "Done" }),
-      Task.countDocuments({ user: userId, status: "Pending" }),
-      Task.countDocuments({ user: userId, status: "In Progress" }),
+      Task.countDocuments({ user: userId, group: null }),
+      Task.countDocuments({ user: userId, group: null, status: "Done" }),
+      Task.countDocuments({ user: userId, group: null, status: "Pending" }),
+      Task.countDocuments({ user: userId, group: null, status: "In Progress" }),
     ]);
 
     res.status(200).json({
@@ -224,17 +224,19 @@ export const getProductivityStats = async (req, res) => {
       tasksThisMonth,
       completedThisMonth,
     ] = await Promise.all([
-      Task.countDocuments({ user: userId }),
-      Task.countDocuments({ user: userId, status: "Done" }),
-      Task.countDocuments({ user: userId, createdAt: { $gte: sevenDaysAgo } }),
+      Task.countDocuments({ user: userId, group: null }),
+      Task.countDocuments({ user: userId, group: null, status: "Done" }),
+      Task.countDocuments({ user: userId, group: null, createdAt: { $gte: sevenDaysAgo } }),
       Task.countDocuments({
         user: userId,
+        group: null,
         status: "Done",
         updatedAt: { $gte: sevenDaysAgo },
       }),
-      Task.countDocuments({ user: userId, createdAt: { $gte: thirtyDaysAgo } }),
+      Task.countDocuments({ user: userId, group: null, createdAt: { $gte: thirtyDaysAgo } }),
       Task.countDocuments({
         user: userId,
+        group: null,
         status: "Done",
         updatedAt: { $gte: thirtyDaysAgo },
       }),
@@ -293,6 +295,7 @@ export const getAnalyticsStats = async (req, res) => {
       weeklyPromises.push(
         Task.countDocuments({
           user: userId,
+          group: null,
           status: "Done",
           updatedAt: { $gte: dayStart, $lt: dayEnd },
         })
@@ -301,12 +304,12 @@ export const getAnalyticsStats = async (req, res) => {
 
     // ---- Priority breakdown ----
     const priorityPromises = ["High", "Medium", "Low"].map((p) =>
-      Task.countDocuments({ user: userId, priority: p })
+      Task.countDocuments({ user: userId, group: null, priority: p })
     );
 
     // ---- Category breakdown (top 6 by count) ----
     const categoryAggPromise = Task.aggregate([
-      { $match: { user: new mongoose.Types.ObjectId(userId) } },
+      { $match: { user: new mongoose.Types.ObjectId(userId), group: null } },
       { $group: { _id: "$category", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
       { $limit: 6 },

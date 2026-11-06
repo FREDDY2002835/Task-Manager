@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 const PRIORITIES = ["Low", "Medium", "High"];
 const STATUSES = ["Pending", "In Progress", "Done"];
@@ -16,7 +17,12 @@ function toDateTimeLocalValue(isoString) {
 
 // Modal form used to create (or edit) a task.
 // onSubmit receives the plain task data object.
-function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
+//
+// Pass `members` (array of user objects with _id and name) to turn this
+// into a GROUP task form - it adds an "Assign to" dropdown. Without
+// `members` it behaves exactly like the personal task form.
+function TaskForm({ initialData = null, onSubmit, onClose, submitting, members = null }) {
+  const { t } = useLanguage();
   const [title, setTitle] = useState(initialData?.title || "");
   const [description, setDescription] = useState(initialData?.description || "");
   const [category, setCategory] = useState(initialData?.category || "");
@@ -24,6 +30,9 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
   const [status, setStatus] = useState(initialData?.status || "Pending");
   const [dueDate, setDueDate] = useState(
     initialData?.dueDate ? toDateTimeLocalValue(initialData.dueDate) : ""
+  );
+  const [assignedTo, setAssignedTo] = useState(
+    initialData?.assignedTo?._id || initialData?.assignedTo || ""
   );
   const [error, setError] = useState("");
 
@@ -44,6 +53,7 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
       priority,
       status,
       dueDate: dueDate || undefined,
+      ...(members ? { assignedTo: assignedTo || null } : {}),
     });
   };
 
@@ -145,6 +155,24 @@ function TaskForm({ initialData = null, onSubmit, onClose, submitting }) {
               </select>
             </div>
           </div>
+
+          {members && (
+            <div>
+              <label className="block mb-1 text-xs sm:text-sm text-gray-300">
+                {t("groups.assignTo")}
+              </label>
+              <select
+                value={assignedTo}
+                onChange={(e) => setAssignedTo(e.target.value)}
+                className="w-full rounded-xl bg-[#1D2C20] px-4 py-3 outline-none text-sm text-white" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
+              >
+                <option value="">{t("groups.unassigned")}</option>
+                {members.map((m) => (
+                  <option key={m._id} value={m._id}>{m.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <div className="flex gap-3 pt-2">
             <button

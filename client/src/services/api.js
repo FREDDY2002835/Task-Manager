@@ -5,7 +5,7 @@ const API_BASE_URL =
 
 // The server root (without /api) - used to resolve uploaded file paths
 // like "/uploads/avatars/xyz.png" into a full, loadable URL.
-const SERVER_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, "");
+export const SERVER_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, "");
 
 // Turns a relative path returned by the backend (e.g. "/uploads/avatars/x.png")
 // into a full URL. Leaves already-absolute URLs (http://...) untouched.
@@ -74,5 +74,47 @@ export const getTaskById = (id) => api.get(`/tasks/${id}`);
 export const createTask = (data) => api.post("/tasks", data);
 export const updateTask = (id, data) => api.put(`/tasks/${id}`, data);
 export const deleteTask = (id) => api.delete(`/tasks/${id}`);
+
+// ================= Groups =================
+export const getGroups = () => api.get("/groups");
+export const createGroup = (data) => api.post("/groups", data);
+export const getGroup = (id) => api.get(`/groups/${id}`);
+export const updateGroup = (id, data) => api.put(`/groups/${id}`, data);
+export const deleteGroup = (id) => api.delete(`/groups/${id}`);
+
+export const addGroupMember = (id, email) =>
+  api.post(`/groups/${id}/members`, { email });
+export const removeGroupMember = (id, userId) =>
+  api.delete(`/groups/${id}/members/${userId}`);
+export const updateGroupMemberRole = (id, userId, role) =>
+  api.put(`/groups/${id}/members/${userId}`, { role });
+
+export const getGroupTasks = (id, params) =>
+  api.get(`/groups/${id}/tasks`, { params });
+export const createGroupTask = (id, data) =>
+  api.post(`/groups/${id}/tasks`, data);
+export const updateGroupTask = (id, taskId, data) =>
+  api.put(`/groups/${id}/tasks/${taskId}`, data);
+export const deleteGroupTask = (id, taskId) =>
+  api.delete(`/groups/${id}/tasks/${taskId}`);
+
+// ================= Group chat =================
+export const getGroupMessages = (id, params) =>
+  api.get(`/groups/${id}/messages`, { params });
+// `formData` holds: text, task (optional), duration (voice notes), media (file)
+export const sendGroupMessage = (id, formData, onUploadProgress) =>
+  api.post(`/groups/${id}/messages`, formData, { onUploadProgress });
+export const deleteGroupMessage = (id, messageId) =>
+  api.delete(`/groups/${id}/messages/${messageId}`);
+
+// ================= Private (1-to-1) chat =================
+export const getDmMessages = (userId, params) =>
+  api.get(`/dm/${userId}/messages`, { params });
+export const sendDmMessage = (userId, formData, onUploadProgress) =>
+  api.post(`/dm/${userId}/messages`, formData, { onUploadProgress });
+export const deleteDmMessage = (userId, messageId) =>
+  api.delete(`/dm/${userId}/messages/${messageId}`);
+export const markDmRead = (userId) => api.post(`/dm/${userId}/read`);
+export const getDmUnread = () => api.get("/dm/unread");
 
 export default api;

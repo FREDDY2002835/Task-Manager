@@ -6,6 +6,8 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Tasks from "./pages/Tasks";
+import Groups from "./pages/Groups";
+import GroupDetail from "./pages/GroupDetail";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
@@ -38,6 +40,22 @@ function App() {
           element={
             <ProtectedRoute>
               <Tasks />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/groups"
+          element={
+            <ProtectedRoute>
+              <Groups />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/groups/:id"
+          element={
+            <ProtectedRoute>
+              <GroupDetail />
             </ProtectedRoute>
           }
         />

@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaTasks,
+  FaUsers,
   FaPlusCircle,
   FaChartBar,
   FaUser,
@@ -53,6 +54,20 @@ function BottomNav() {
       >
         <FaTasks size={20} />
         <span>{t("nav.tasks")}</span>
+      </NavLink>
+
+
+      <NavLink
+        to="/groups"
+        className={linkClass}
+        style={({ isActive }) => ({
+          color: isActive
+            ? "var(--primary-light)"
+            : "#9ca3af",
+        })}
+      >
+        <FaUsers size={20} />
+        <span>{t("nav.groups")}</span>
       </NavLink>
 
 

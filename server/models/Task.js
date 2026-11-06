@@ -8,6 +8,23 @@ const taskSchema = new mongoose.Schema(
       required: true,
     },
 
+    // Set only for group tasks. Personal tasks leave this null, which
+    // is what keeps them out of group views (and vice versa).
+    // For group tasks, "user" above is the person who created the task.
+    group: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Group",
+      default: null,
+      index: true,
+    },
+
+    // Group tasks only: the member responsible for the task.
+    assignedTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
+
     title: {
       type: String,
       required: true,

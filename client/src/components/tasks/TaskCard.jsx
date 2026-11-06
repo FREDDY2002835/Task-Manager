@@ -4,8 +4,11 @@ import {
   FaCheckCircle,
   FaTrash,
   FaEdit,
+  FaComments,
 } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
+import Avatar from "../common/Avatar";
+import { resolveAssetUrl } from "../../services/api";
 
 const PRIORITY_STYLES = {
   Low: "bg-red-500 text-white",
@@ -29,8 +32,13 @@ function isOverdue(task) {
   return task.dueDate && task.status !== "Done" && new Date(task.dueDate) < new Date();
 }
 
-function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
+// For group tasks, `task.group` is set and `task.assignedTo` / `task.user`
+// arrive populated (name, avatar). `canDelete` lets the group page hide the
+// delete button from people who aren't allowed to use it.
+// `onDiscuss` (group pages only) adds a button that opens the group chat about this task.
+function TaskCard({ task, onEdit, onDelete, onToggleStatus, onDiscuss, canDelete = true }) {
   const { t } = useLanguage();
+  const isGroupTask = Boolean(task.group);
 
   return (
     <div
@@ -90,7 +98,45 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
 
       </div>
 
+      {isGroupTask && (
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400">
+          <div className="flex items-center gap-2">
+            <Avatar
+              src={resolveAssetUrl(task.assignedTo?.avatar)}
+              alt={task.assignedTo?.name || ""}
+              sizeClass="w-6 h-6"
+            />
+            <span>
+              {task.assignedTo ? (
+                <>
+                  {t("groups.assignedTo")}{" "}
+                  <span className="text-white font-medium">{task.assignedTo.name}</span>
+                </>
+              ) : (
+                t("groups.unassigned")
+              )}
+            </span>
+          </div>
+
+          {task.user?.name && (
+            <span>
+              {t("groups.createdBy")} {task.user.name}
+            </span>
+          )}
+        </div>
+      )}
+
       <div className="mt-4 flex gap-3 justify-end">
+
+        {onDiscuss && (
+          <button
+            onClick={() => onDiscuss(task)}
+            className="flex items-center gap-2 text-xs transition hover:text-white"
+            style={{ color: "var(--primary-light)" }}
+          >
+            <FaComments /> {t("chat.discuss")}
+          </button>
+        )}
 
         <button
           onClick={() => onEdit(task)}
@@ -99,12 +145,14 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus }) {
           <FaEdit /> {t("tasks.edit")}
         </button>
 
-        <button
-          onClick={() => onDelete(task._id)}
-          className="flex items-center gap-2 text-xs text-red-400 hover:text-red-300 transition"
-        >
-          <FaTrash /> {t("tasks.delete")}
-        </button>
+        {canDelete && (
+          <button
+            onClick={() => onDelete(task._id)}
+            className="flex items-center gap-2 text-xs text-red-400 hover:text-red-300 transition"
+          >
+            <FaTrash /> {t("tasks.delete")}
+          </button>
+        )}
 
       </div>
 
