@@ -303,7 +303,7 @@ export const getAnalyticsStats = async (req, res) => {
     }
 
     // ---- Priority breakdown ----
-    const priorityPromises = ["High", "Medium", "Low"].map((p) =>
+    const priorityPromises = ["Urgent", "High", "Medium", "Low"].map((p) =>
       Task.countDocuments({ user: userId, group: null, priority: p })
     );
 
@@ -335,9 +335,10 @@ export const getAnalyticsStats = async (req, res) => {
     }));
 
     const priority = {
-      High: priorityCounts[0],
-      Medium: priorityCounts[1],
-      Low: priorityCounts[2],
+      Urgent: priorityCounts[0],
+      High: priorityCounts[1],
+      Medium: priorityCounts[2],
+      Low: priorityCounts[3],
     };
 
     const categories = categoryAgg.map((c) => ({

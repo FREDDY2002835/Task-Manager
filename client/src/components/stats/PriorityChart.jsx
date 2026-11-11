@@ -11,6 +11,7 @@ import {
 
 import { Bar } from "react-chartjs-2";
 import { useLanguage } from "../../context/LanguageContext";
+import { PRIORITY_COLORS } from "../../utils/priority";
 
 ChartJS.register(
   CategoryScale,
@@ -23,26 +24,18 @@ ChartJS.register(
 function PriorityChart({ priority, loading }) {
   const { t } = useLanguage();
   const data = {
-    labels: ["High", "Medium", "Low"],
+    labels: ["Urgent", "High", "Medium", "Low"].map((p) => t(`priority.${p}`)),
 
     datasets: [
       {
         label: "Tasks",
         data: loading
-          ? [0, 0, 0]
-          : [priority.High, priority.Medium, priority.Low],
+          ? [0, 0, 0, 0]
+          : [priority.Urgent, priority.High, priority.Medium, priority.Low],
 
-        backgroundColor: [
-          "#22C55E", // High - Green
-          "#EAB308", // Medium - Yellow
-          "#EF4444", // Low - Red
-        ],
+        backgroundColor: ["Urgent", "High", "Medium", "Low"].map((p) => PRIORITY_COLORS[p]),
 
-        borderColor: [
-          "#22C55E",
-          "#EAB308",
-          "#EF4444",
-        ],
+        borderColor: ["Urgent", "High", "Medium", "Low"].map((p) => PRIORITY_COLORS[p]),
 
         borderWidth: 1,
         borderRadius: 8,

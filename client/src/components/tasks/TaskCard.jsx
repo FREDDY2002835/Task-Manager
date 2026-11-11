@@ -10,11 +10,7 @@ import { useLanguage } from "../../context/LanguageContext";
 import Avatar from "../common/Avatar";
 import { resolveAssetUrl } from "../../services/api";
 
-const PRIORITY_STYLES = {
-  Low: "bg-red-500 text-white",
-  Medium: "bg-yellow-500 text-black",
-  High: "bg-green-500 text-black",
-};
+import { PRIORITY_STYLES } from "../../utils/priority";
 
 function formatDate(dateStr) {
   if (!dateStr) return "No due date";
@@ -69,7 +65,7 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus, onDiscuss, canDelete
             PRIORITY_STYLES[task.priority] || PRIORITY_STYLES.Medium
           }`}
         >
-          {task.priority?.toUpperCase()}
+          {(t(`priority.${task.priority}`) || task.priority)?.toUpperCase()}
         </span>
 
       </div>

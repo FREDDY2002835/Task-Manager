@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Tasks from "./pages/Tasks";
 import Groups from "./pages/Groups";
+import Board from "./pages/Board";
 import GroupDetail from "./pages/GroupDetail";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
@@ -40,6 +41,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Tasks />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/board"
+          element={
+            <ProtectedRoute>
+              <Board />
             </ProtectedRoute>
           }
         />

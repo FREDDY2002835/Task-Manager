@@ -18,6 +18,7 @@ import TaskCard from "../components/tasks/TaskCard";
 import TaskForm from "../components/tasks/TaskForm";
 import GroupForm from "../components/groups/GroupForm";
 import GroupChat from "../components/chat/GroupChat";
+import KanbanBoard from "../components/board/KanbanBoard";
 import ProfileCard from "../components/chat/ProfileCard";
 import UnreadBadge from "../components/chat/UnreadBadge";
 import { useDmSocket } from "../components/chat/useDmSocket";
@@ -53,6 +54,7 @@ function GroupDetail() {
   const [groupError, setGroupError] = useState("");
   const [tab, setTab] = useState("tasks"); // "tasks" | "chat" | "members"
   const [chatTaskId, setChatTaskId] = useState(""); // set by a task's "Discuss" button
+  const [view, setView] = useState("list"); // tasks tab: "list" | "board"
   const [profileId, setProfileId] = useState(null); // whose profile box is open
   const dm = useDmSocket(myId); // private-message unread counts + live events
 
@@ -141,6 +143,21 @@ function GroupDetail() {
       setShowTaskForm(false);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  // Board: the card jumps to its new column at once; if the server says no it jumps back
+  const handleMoveTask = async (task, status) => {
+    const previous = task.status;
+    setError("");
+    setTasks((prev) => prev.map((x) => (x._id === task._id ? { ...x, status } : x)));
+
+    try {
+      await updateGroupTask(id, task._id, { status });
+    } catch (err) {
+      console.error("Failed to move group task:", err);
+      setTasks((prev) => prev.map((x) => (x._id === task._id ? { ...x, status: previous } : x)));
+      setError(err.response?.data?.message || t("groups.saveError"));
     }
   };
 
@@ -312,7 +329,7 @@ function GroupDetail() {
         <div className="max-w-7xl mx-auto space-y-6">
           {/* ================= HEADER ================= */}
           <section
-            className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] p-5 sm:p-8 lg:p-10"
+            className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#102417] to-[#18452A] p-4 sm:p-8 lg:p-10"
             style={cardStyle}
           >
             <div
@@ -325,7 +342,7 @@ function GroupDetail() {
 
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div className="min-w-0">
-                  <h1 className="text-2xl lg:text-5xl font-bold text-white break-words">
+                  <h1 className="text-xl sm:text-2xl lg:text-5xl font-bold text-white break-words">
                     {group.name}
                   </h1>
                   {group.description && (
@@ -353,11 +370,11 @@ function GroupDetail() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex gap-2 sm:gap-3">
                   {isAdmin && (
                     <button
                       onClick={() => setShowEditGroup(true)}
-                      className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm text-gray-200 hover:bg-white/10 transition"
+                      className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-sm text-gray-200 hover:bg-white/10 transition"
                       style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}
                     >
                       <FaEdit /> {t("groups.editGroup")}
@@ -369,7 +386,7 @@ function GroupDetail() {
                       setEditingTask(null);
                       setShowTaskForm(true);
                     }}
-                    className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm lg:text-base text-white transition"
+                    className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl font-semibold text-sm lg:text-base text-white transition"
                     style={{ background: "var(--primary)" }}
                     onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-dark)")}
                     onMouseLeave={(e) => (e.currentTarget.style.background = "var(--primary)")}
@@ -453,6 +470,34 @@ function GroupDetail() {
                 </div>
               </section>
 
+              <div className="flex w-full max-w-[220px] gap-1 rounded-xl bg-[#162117] p-1" style={cardStyle}>
+                {["list", "board"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => setView(v)}
+                    className={`flex-1 rounded-lg px-4 py-2 text-xs sm:text-sm transition ${view === v ? "text-white" : "text-gray-300"}`}
+                    style={view === v ? { background: "var(--primary)" } : undefined}
+                  >
+                    {v === "list" ? t("kanban.viewList") : t("kanban.viewBoard")}
+                  </button>
+                ))}
+              </div>
+
+              {view === "board" ? (
+                loadingTasks ? (
+                  <p className="py-10 text-center text-gray-400">{t("tasks.loading")}</p>
+                ) : (
+                  <KanbanBoard
+                    tasks={tasks}
+                    onMove={handleMoveTask}
+                    onEdit={(tk) => {
+                      setEditingTask(tk);
+                      setShowTaskForm(true);
+                    }}
+                  />
+                )
+              ) : (
               <section className="space-y-5">
                 {loadingTasks && (
                   <p className="text-center text-gray-400 py-10">{t("tasks.loading")}</p>
@@ -483,6 +528,7 @@ function GroupDetail() {
                     />
                   ))}
               </section>
+              )}
             </>
           )}
 

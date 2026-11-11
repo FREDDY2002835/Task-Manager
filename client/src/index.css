@@ -1,6 +1,30 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
+/* ---------- Phones: smaller text and boxes ----------
+   Tailwind sizes text, padding, buttons and cards in rem, so shrinking the
+   base size on phones scales ALL of them together - on every page.
+   Tablets and computers (640px and up) are untouched. */
+@media (max-width: 639px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* iPhones zoom the page when you tap an input whose text is under 16px.
+   Keep inputs at 16px on iOS only, so the page never jumps. */
+@supports (-webkit-touch-callout: none) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 body {
   margin: 0;
   font-family:

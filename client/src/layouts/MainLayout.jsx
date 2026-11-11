@@ -22,8 +22,10 @@ function MainLayout({ children }) {
   <main
     className="
       flex-1
+      min-w-0
       lg:ml-64
-      p-5
+      p-3
+      sm:p-5
       md:p-8
       lg:p-10
       pb-24

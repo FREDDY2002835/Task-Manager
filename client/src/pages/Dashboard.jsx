@@ -47,7 +47,7 @@ function Dashboard() {
 
             <div className="w-16 sm:w-20 h-1 rounded mb-6 bg-[var(--primary)]"></div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
               {t("dashboard.title1")}
               <br />
               {t("dashboard.title2")}
@@ -78,45 +78,45 @@ function Dashboard() {
 
         {/* ================= STATS ================= */}
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
 
-          <div className="bg-[#162117] border border-[var(--primary-dark)] rounded-2xl p-6 hover:-translate-y-1 transition duration-300">
+          <div className="bg-[#162117] border border-[var(--primary-dark)] rounded-2xl p-3 sm:p-6 hover:-translate-y-1 transition duration-300">
 
-            <FaTasks className="text-4xl text-[var(--primary-light)] mb-5" />
+            <FaTasks className="text-2xl sm:text-4xl text-[var(--primary-light)] mb-2 sm:mb-5" />
 
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-[11px] sm:text-sm">
               {t("dashboard.totalTasks")}
             </p>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-2">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-2">
               {loading ? "-" : stats.total}
             </h2>
 
           </div>
 
-          <div className="bg-[#162117] rounded-2xl p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
+          <div className="bg-[#162117] rounded-2xl p-3 sm:p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
-            <FaCheckCircle className="text-4xl text-[var(--primary-light)] mb-5" />
+            <FaCheckCircle className="text-2xl sm:text-4xl text-[var(--primary-light)] mb-2 sm:mb-5" />
 
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-[11px] sm:text-sm">
               {t("dashboard.completed")}
             </p>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary-light)] mt-2">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary-light)] mt-2">
               {loading ? "-" : stats.completed}
             </h2>
 
           </div>
 
-          <div className="bg-[#162117] rounded-2xl p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
+          <div className="bg-[#162117] rounded-2xl p-3 sm:p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
-            <FaClock className="text-4xl text-yellow-400 mb-5" />
+            <FaClock className="text-2xl sm:text-4xl text-yellow-400 mb-2 sm:mb-5" />
 
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-[11px] sm:text-sm">
               {t("dashboard.pending")}
             </p>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mt-2">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mt-2">
               {loading ? "-" : stats.pending}
             </h2>
 

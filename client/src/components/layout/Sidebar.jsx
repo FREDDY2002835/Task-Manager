@@ -66,6 +66,15 @@ function Sidebar() {
 
 
         <Link
+          to="/board"
+          className="p-3 rounded-lg transition"
+          onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary)")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+        >
+          {t("nav.board")}
+        </Link>
+
+        <Link
           to="/groups"
           className="p-3 rounded-lg transition"
           onMouseEnter={(e) =>

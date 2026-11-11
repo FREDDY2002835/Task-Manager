@@ -198,7 +198,7 @@ function ChatComposer({ onSubmit, tasks = null, initialTaskId = "" }) {
         <select
           value={taskId}
           onChange={(e) => setTaskId(e.target.value)}
-          className="w-full rounded-xl bg-[#1D2C20] px-3 py-2 text-xs text-white outline-none"
+          className="w-full min-w-0 max-w-full truncate rounded-xl bg-[#1D2C20] px-3 py-2 text-xs text-white outline-none"
           style={cardStyle}
         >
           <option value="">{t("chat.tagTask")}</option>

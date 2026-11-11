@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 
-const PRIORITIES = ["Low", "Medium", "High"];
+import { PRIORITIES } from "../../utils/priority";
 const STATUSES = ["Pending", "In Progress", "Done"];
 
 // datetime-local inputs need "YYYY-MM-DDTHH:mm" in the *local* timezone,

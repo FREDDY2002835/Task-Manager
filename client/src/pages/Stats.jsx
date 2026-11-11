@@ -16,7 +16,7 @@ function Stats() {
   const [productivity, setProductivity] = useState({ productivityScore: 0 });
   const [analytics, setAnalytics] = useState({
     weekly: [],
-    priority: { High: 0, Medium: 0, Low: 0 },
+    priority: { Urgent: 0, High: 0, Medium: 0, Low: 0 },
     categories: [],
     recentActivity: [],
   });

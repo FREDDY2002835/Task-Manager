@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 import PageTransition from "../components/PageTransition";
 import TaskCard from "../components/tasks/TaskCard";
 import TaskForm from "../components/tasks/TaskForm";
+import ViewToggle from "../components/board/ViewToggle";
 import {
   getTasks,
   createTask,
@@ -155,6 +156,8 @@ function Tasks() {
           </div>
 
         </section>
+
+        <ViewToggle active="list" />
 
         {/* ================= SEARCH ================= */}
 

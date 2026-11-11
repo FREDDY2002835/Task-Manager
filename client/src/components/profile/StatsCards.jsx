@@ -11,10 +11,10 @@ function StatsCards({ stats, loading }) {
   const { t } = useLanguage();
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
 
       <div
-        className="rounded-2xl p-5 border"
+        className="rounded-2xl p-3 sm:p-5 border"
         style={{
           background: "#162117",
           borderColor: "var(--primary-dark)",
@@ -22,7 +22,7 @@ function StatsCards({ stats, loading }) {
       >
 
         <FaTasks
-          className="text-3xl mb-4"
+          className="text-2xl sm:text-3xl mb-2 sm:mb-4"
           style={{
             color: "var(--primary-light)",
           }}
@@ -40,7 +40,7 @@ function StatsCards({ stats, loading }) {
 
 
       <div
-        className="rounded-2xl p-5 border"
+        className="rounded-2xl p-3 sm:p-5 border"
         style={{
           background: "#162117",
           borderColor: "var(--primary-dark)",
@@ -48,7 +48,7 @@ function StatsCards({ stats, loading }) {
       >
 
         <FaCheckCircle
-          className="text-3xl mb-4"
+          className="text-2xl sm:text-3xl mb-2 sm:mb-4"
           style={{
             color: "var(--primary-light)",
           }}
@@ -71,7 +71,7 @@ function StatsCards({ stats, loading }) {
 
 
       <div
-        className="rounded-2xl p-5 border"
+        className="rounded-2xl p-3 sm:p-5 border"
         style={{
           background: "#162117",
           borderColor: "var(--primary-dark)",
@@ -79,7 +79,7 @@ function StatsCards({ stats, loading }) {
       >
 
         <FaClock
-          className="text-3xl mb-4"
+          className="text-2xl sm:text-3xl mb-2 sm:mb-4"
           style={{
             color: "var(--primary-light)",
           }}
