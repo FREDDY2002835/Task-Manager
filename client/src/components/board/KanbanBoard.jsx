@@ -15,6 +15,7 @@ import Avatar from "../common/Avatar";
 import { resolveAssetUrl } from "../../services/api";
 import { useLanguage } from "../../context/LanguageContext";
 import { PRIORITY_STYLES } from "../../utils/priority";
+import { useMediaQuery } from "../../utils/useMediaQuery";
 
 // The three columns, mapped to the task statuses stored in the database
 const COLUMNS = [
@@ -100,7 +101,7 @@ function CardBody({ task, onMove, onEdit }) {
               onMouseDown={stop}
               onTouchStart={stop}
               title={t("kanban.movePrev")}
-              className="rounded-lg bg-black/25 p-2 text-xs text-gray-300 hover:text-white disabled:opacity-30"
+              className="flex items-center justify-center rounded-lg bg-black/25 p-3 text-sm text-gray-300 hover:text-white disabled:opacity-30"
             >
               <FaChevronLeft />
             </button>
@@ -111,7 +112,7 @@ function CardBody({ task, onMove, onEdit }) {
               onMouseDown={stop}
               onTouchStart={stop}
               title={t("kanban.moveNext")}
-              className="rounded-lg bg-black/25 p-2 text-xs text-gray-300 hover:text-white disabled:opacity-30"
+              className="flex items-center justify-center rounded-lg bg-black/25 p-3 text-sm text-gray-300 hover:text-white disabled:opacity-30"
             >
               <FaChevronRight />
             </button>
@@ -124,7 +125,7 @@ function CardBody({ task, onMove, onEdit }) {
               onMouseDown={stop}
               onTouchStart={stop}
               title={t("tasks.edit")}
-              className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs text-gray-300 hover:text-white"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-3 text-xs text-gray-300 hover:text-white"
             >
               <FaEdit /> {t("tasks.edit")}
             </button>
@@ -151,13 +152,42 @@ function DraggableCard({ task, onMove, onEdit }) {
   );
 }
 
+// Phone tab: shows the column name + how many cards. You can also drop a
+// dragged card onto a tab to move it there.
+function TabButton({ column, count, active, onSelect }) {
+  const { t } = useLanguage();
+  const { setNodeRef, isOver } = useDroppable({ id: `tab:${column.status}` });
+
+  return (
+    <button
+      ref={setNodeRef}
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onSelect}
+      className={`flex min-w-0 flex-col items-center gap-0.5 rounded-lg px-1 py-2 transition ${
+        active ? "text-white" : "text-gray-300"
+      }`}
+      style={{
+        background: active ? "var(--primary)" : isOver ? "var(--primary-dark)" : "transparent",
+        boxShadow: isOver ? "0 0 0 2px var(--primary)" : undefined,
+      }}
+    >
+      <span className="max-w-full truncate text-xs font-semibold">{t(column.labelKey)}</span>
+      <span className="flex items-center gap-1 text-xs opacity-90">
+        <span className={`h-2 w-2 rounded-full ${column.dot}`} />
+        {count}
+      </span>
+    </button>
+  );
+}
+
 function Column({ column, tasks, onMove, onEdit }) {
   const { t } = useLanguage();
   const { setNodeRef, isOver } = useDroppable({ id: column.status });
 
   return (
-    // On phones each column is ~82% wide and snaps; on tablets/computers the 3 columns share the row
-    <div className="w-[82%] shrink-0 snap-center md:w-auto md:min-w-0">
+    <div className="w-full min-w-0">
       <div
         ref={setNodeRef}
         data-column={column.status}
@@ -200,6 +230,8 @@ function Column({ column, tasks, onMove, onEdit }) {
 function KanbanBoard({ tasks, onMove, onEdit }) {
   const { t } = useLanguage();
   const [activeId, setActiveId] = useState(null);
+  const [tab, setTab] = useState("Pending"); // phones: which column is showing
+  const isWide = useMediaQuery("(min-width: 768px)");
 
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 6 } }),
@@ -211,8 +243,12 @@ function KanbanBoard({ tasks, onMove, onEdit }) {
   const handleDragEnd = ({ active, over }) => {
     setActiveId(null);
     const task = tasks.find((x) => x._id === active.id);
-    if (task && over && over.id !== task.status) onMove(task, over.id);
+    // A card can be dropped on a column, or on a phone tab ("tab:<status>")
+    const target = over ? String(over.id).replace(/^tab:/, "") : null;
+    if (task && target && target !== task.status) onMove(task, target);
   };
+
+  const inColumn = (status) => tasks.filter((task) => task.status === status);
 
   return (
     <DndContext
@@ -222,19 +258,42 @@ function KanbanBoard({ tasks, onMove, onEdit }) {
       onDragEnd={handleDragEnd}
       onDragCancel={() => setActiveId(null)}
     >
-      <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 md:grid md:grid-cols-3 md:overflow-visible">
-        {COLUMNS.map((column) => (
+      {isWide ? (
+        // Tablets and computers: all three columns side by side
+        <div className="grid grid-cols-3 gap-3">
+          {COLUMNS.map((column) => (
+            <Column key={column.status} column={column} tasks={inColumn(column.status)} onMove={onMove} onEdit={onEdit} />
+          ))}
+        </div>
+      ) : (
+        // Phones: one full-width column at a time, picked with tabs
+        <div className="space-y-3">
+          <div
+            role="tablist"
+            className="grid grid-cols-3 gap-1 rounded-xl bg-[#162117] p-1"
+            style={cardBorder}
+          >
+            {COLUMNS.map((column) => (
+              <TabButton
+                key={column.status}
+                column={column}
+                count={inColumn(column.status).length}
+                active={tab === column.status}
+                onSelect={() => setTab(column.status)}
+              />
+            ))}
+          </div>
+
           <Column
-            key={column.status}
-            column={column}
-            tasks={tasks.filter((task) => task.status === column.status)}
+            column={COLUMNS.find((c) => c.status === tab)}
+            tasks={inColumn(tab)}
             onMove={onMove}
             onEdit={onEdit}
           />
-        ))}
-      </div>
 
-      <p className="mt-1 text-center text-[11px] text-gray-500 md:hidden">{t("kanban.hint")}</p>
+          <p className="text-center text-xs text-gray-500">{t("kanban.hint")}</p>
+        </div>
+      )}
 
       <DragOverlay>
         {activeTask ? (

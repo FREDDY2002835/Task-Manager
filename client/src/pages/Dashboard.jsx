@@ -27,10 +27,10 @@ function Dashboard() {
   return (
     <PageTransition>
       <MainLayout>
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto space-y-4 sm:space-y-8">
 
         {/* ================= HERO ================= */}
-        <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#0D1F10] to-[#12351A] p-5 sm:p-8 lg:p-12">
+        <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-gradient-to-r from-[#08110A] via-[#0D1F10] to-[#12351A] p-4 sm:p-8 lg:p-12">
 
           {/* Glow Effects */}
           <div
@@ -45,25 +45,25 @@ function Dashboard() {
 
           <div className="relative z-10 max-w-2xl">
 
-            <div className="w-16 sm:w-20 h-1 rounded mb-6 bg-[var(--primary)]"></div>
+            <div className="w-12 sm:w-20 h-1 rounded mb-3 sm:mb-6 bg-[var(--primary)]"></div>
 
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+            <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
               {t("dashboard.title1")}
-              <br />
+              <br className="hidden sm:block" />{" "}
               {t("dashboard.title2")}
-              <br />
+              <br className="hidden sm:block" />{" "}
               {t("dashboard.title3")}
             </h1>
 
-            <p className="mt-6 text-sm sm:text-base lg:text-lg text-gray-300 leading-6 lg:leading-8">
+            <p className="mt-2 sm:mt-6 text-sm sm:text-base lg:text-lg text-gray-300 leading-5 sm:leading-6 lg:leading-8">
               {t("dashboard.welcome")}
-              <br />
+              <br className="hidden sm:block" />{" "}
               {t("dashboard.subtitle")}
             </p>
 
             <button
               onClick={() => navigate("/tasks")}
-              className="mt-8 w-full sm:w-fit flex items-center justify-center gap-3 border border-[var(--primary)] px-6 py-3 sm:px-8 sm:py-4 rounded-xl text-white hover:bg-[var(--primary)] transition duration-300"
+              className="mt-4 sm:mt-8 w-full sm:w-fit flex items-center justify-center gap-3 border border-[var(--primary)] px-6 py-2.5 sm:px-8 sm:py-4 rounded-xl text-white hover:bg-[var(--primary)] transition duration-300"
             >
 
               <FaPlus />
@@ -80,7 +80,7 @@ function Dashboard() {
 
         <section className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
 
-          <div className="bg-[#162117] border border-[var(--primary-dark)] rounded-2xl p-3 sm:p-6 hover:-translate-y-1 transition duration-300">
+          <div className="bg-[#162117] border border-[var(--primary-dark)] rounded-2xl p-3.5 sm:p-6 hover:-translate-y-1 transition duration-300">
 
             <FaTasks className="text-2xl sm:text-4xl text-[var(--primary-light)] mb-2 sm:mb-5" />
 
@@ -94,7 +94,7 @@ function Dashboard() {
 
           </div>
 
-          <div className="bg-[#162117] rounded-2xl p-3 sm:p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
+          <div className="bg-[#162117] rounded-2xl p-3.5 sm:p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
             <FaCheckCircle className="text-2xl sm:text-4xl text-[var(--primary-light)] mb-2 sm:mb-5" />
 
@@ -108,7 +108,7 @@ function Dashboard() {
 
           </div>
 
-          <div className="bg-[#162117] rounded-2xl p-3 sm:p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
+          <div className="bg-[#162117] rounded-2xl p-3.5 sm:p-6 hover:-translate-y-1 transition duration-300" style={{ borderWidth: 1, borderColor: "var(--primary-dark)" }}>
 
             <FaClock className="text-2xl sm:text-4xl text-yellow-400 mb-2 sm:mb-5" />
 

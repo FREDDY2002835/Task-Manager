@@ -24,7 +24,7 @@ function MainLayout({ children }) {
       flex-1
       min-w-0
       lg:ml-64
-      p-3
+      p-4
       sm:p-5
       md:p-8
       lg:p-10

@@ -1,13 +1,22 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
-/* ---------- Phones: smaller text and boxes ----------
-   Tailwind sizes text, padding, buttons and cards in rem, so shrinking the
-   base size on phones scales ALL of them together - on every page.
+/* ---------- Phones: comfortable boxes, never-tiny text ----------
+   Boxes, buttons and cards keep their normal size on phones. Small text
+   gets a minimum size so nothing is hard to read (13px for labels and
+   captions, 14.5px for small body text).
    Tablets and computers (640px and up) are untouched. */
 @media (max-width: 639px) {
-  html {
-    font-size: 14px;
+  .text-xs,
+  .text-\[10px\],
+  .text-\[11px\] {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .text-sm {
+    font-size: 14.5px;
+    line-height: 1.45;
   }
 }
 
