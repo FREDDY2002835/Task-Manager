@@ -310,7 +310,7 @@ function SettingItem({ icon, title, value, onClick, toggle, checked, onToggle, d
               e.stopPropagation();
               onToggle();
             }}
-            className="relative w-11 h-6 rounded-full transition disabled:opacity-60"
+            className="relative w-11 h-6 rounded-full transition disabled:opacity-60 after:absolute after:-inset-2.5 after:content-['']"
             style={{
               background: checked ? "var(--primary)" : "#374151",
             }}

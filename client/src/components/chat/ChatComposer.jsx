@@ -251,7 +251,7 @@ function ChatComposer({ onSubmit, tasks = null, initialTaskId = "" }) {
             onClick={() => fileInputRef.current?.click()}
             disabled={sending || Boolean(attachment)}
             title={t("chat.attach")}
-            className="rounded-full p-3 text-gray-300 hover:bg-white/10 hover:text-white disabled:opacity-40"
+            className="rounded-full p-3.5 text-gray-300 hover:bg-white/10 hover:text-white disabled:opacity-40"
           >
             <FaPaperclip />
           </button>
@@ -261,7 +261,7 @@ function ChatComposer({ onSubmit, tasks = null, initialTaskId = "" }) {
             onClick={handleMic}
             disabled={sending || Boolean(attachment)}
             title={t("chat.record")}
-            className="rounded-full p-3 text-gray-300 hover:bg-white/10 hover:text-white disabled:opacity-40"
+            className="rounded-full p-3.5 text-gray-300 hover:bg-white/10 hover:text-white disabled:opacity-40"
           >
             <FaMicrophone />
           </button>
@@ -283,7 +283,7 @@ function ChatComposer({ onSubmit, tasks = null, initialTaskId = "" }) {
             onClick={handleSend}
             disabled={!canSend}
             title={t("chat.send")}
-            className="rounded-full p-3 text-white transition disabled:opacity-40"
+            className="rounded-full p-3.5 text-white transition disabled:opacity-40"
             style={{ background: "var(--primary)" }}
           >
             <FaPaperPlane />

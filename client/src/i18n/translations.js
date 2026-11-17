@@ -189,7 +189,7 @@ const translations = {
       saveError: "Something went wrong. Please try again.",
     },
     chat: {
-      placeholder: "Write a message...",
+      placeholder: "Message",
       empty: "No messages yet - say hello or share an update.",
       loading: "Loading...",
       loadOlder: "Load earlier messages",
@@ -445,7 +445,7 @@ const translations = {
       saveError: "Une erreur est survenue. Veuillez réessayer.",
     },
     chat: {
-      placeholder: "Écrire un message...",
+      placeholder: "Message",
       empty: "Aucun message - dites bonjour ou partagez une mise à jour.",
       loading: "Chargement...",
       loadOlder: "Charger les messages précédents",

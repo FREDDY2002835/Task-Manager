@@ -101,7 +101,7 @@ function CardBody({ task, onMove, onEdit }) {
               onMouseDown={stop}
               onTouchStart={stop}
               title={t("kanban.movePrev")}
-              className="flex items-center justify-center rounded-lg bg-black/25 p-3 text-sm text-gray-300 hover:text-white disabled:opacity-30"
+              className="flex items-center justify-center rounded-lg bg-black/25 p-3.5 text-sm text-gray-300 hover:text-white disabled:opacity-30"
             >
               <FaChevronLeft />
             </button>
@@ -112,7 +112,7 @@ function CardBody({ task, onMove, onEdit }) {
               onMouseDown={stop}
               onTouchStart={stop}
               title={t("kanban.moveNext")}
-              className="flex items-center justify-center rounded-lg bg-black/25 p-3 text-sm text-gray-300 hover:text-white disabled:opacity-30"
+              className="flex items-center justify-center rounded-lg bg-black/25 p-3.5 text-sm text-gray-300 hover:text-white disabled:opacity-30"
             >
               <FaChevronRight />
             </button>
@@ -125,7 +125,7 @@ function CardBody({ task, onMove, onEdit }) {
               onMouseDown={stop}
               onTouchStart={stop}
               title={t("tasks.edit")}
-              className="flex items-center gap-1.5 rounded-lg px-3 py-3 text-xs text-gray-300 hover:text-white"
+              className="tap flex items-center gap-1.5 rounded-lg px-3 py-3 text-sm text-gray-300 hover:text-white"
             >
               <FaEdit /> {t("tasks.edit")}
             </button>

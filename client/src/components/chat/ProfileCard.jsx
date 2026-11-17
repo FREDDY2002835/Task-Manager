@@ -78,7 +78,7 @@ function ProfileCard({ member, isMe, myId, dm, onClose }) {
             type="button"
             onClick={onClose}
             title={t("groups.cancel")}
-            className="absolute right-3 top-3 rounded-full p-2 text-gray-400 hover:bg-white/10 hover:text-white"
+            className="absolute right-2 top-2 rounded-full p-3 text-gray-400 hover:bg-white/10 hover:text-white"
           >
             <FaTimes />
           </button>

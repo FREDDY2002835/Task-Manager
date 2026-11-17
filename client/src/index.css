@@ -1,22 +1,46 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
-/* ---------- Phones: comfortable boxes, never-tiny text ----------
-   Boxes, buttons and cards keep their normal size on phones. Small text
-   gets a minimum size so nothing is hard to read (13px for labels and
-   captions, 14.5px for small body text).
+/* ---------- Phones: WhatsApp-style sizing ----------
+   WhatsApp on a phone uses 16px for message text, 13px for times and
+   captions, and 48px-tall rows and buttons. TaskFlow now follows the same
+   scale on phones. To make everything on phones a little bigger or smaller,
+   change --phone-root (the base size) or the two text sizes below.
    Tablets and computers (640px and up) are untouched. */
 @media (max-width: 639px) {
+  :root {
+    --phone-root: 17px;
+    --phone-body: 16px;
+    --phone-caption: 13px;
+  }
+
+  html {
+    font-size: var(--phone-root);
+  }
+
+  /* captions, times, badges: never smaller than 13px */
   .text-xs,
   .text-\[10px\],
   .text-\[11px\] {
-    font-size: 13px;
+    font-size: var(--phone-caption);
+    line-height: 1.35;
+  }
+
+  /* everyday text: 16px, like a WhatsApp message */
+  .text-sm {
+    font-size: var(--phone-body);
     line-height: 1.4;
   }
 
-  .text-sm {
-    font-size: 14.5px;
-    line-height: 1.45;
+  /* buttons and links marked "tap" are at least 44px tall, easy to hit with a thumb */
+  .tap {
+    min-height: 44px;
+  }
+
+  /* text boxes and dropdowns are easy to hit, like WhatsApp's message box */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="color"]),
+  select {
+    min-height: 48px;
   }
 }
 

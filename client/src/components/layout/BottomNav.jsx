@@ -34,7 +34,7 @@ function BottomNav() {
     >
       {tabs.map(({ to, icon: Icon, label }) => (
         <NavLink key={to} to={to} className={linkClass} style={linkStyle}>
-          <Icon size={20} />
+          <Icon size={24} />
           <span className="max-w-full truncate">{label}</span>
         </NavLink>
       ))}

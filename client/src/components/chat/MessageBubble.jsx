@@ -52,7 +52,7 @@ function MessageBubble({
           <Avatar
             src={resolveAssetUrl(sender.avatar)}
             alt={sender.name}
-            sizeClass="w-8 h-8"
+            sizeClass="w-10 h-10"
           />
           {!mine && <UnreadBadge count={unreadCount} />}
         </button>
@@ -69,7 +69,7 @@ function MessageBubble({
             type="button"
             onClick={openProfile}
             disabled={!canOpen}
-            className={`mb-1 block max-w-full truncate text-left text-xs font-semibold ${
+            className={`-my-2 mb-0 block max-w-full truncate py-2 text-left text-[14px] font-semibold ${
               canOpen ? "cursor-pointer hover:underline" : "cursor-default"
             }`}
             style={{ color: mine ? "rgba(255,255,255,0.92)" : "var(--primary-light)" }}
@@ -131,7 +131,7 @@ function MessageBubble({
               type="button"
               onClick={() => onDelete(message._id)}
               title={t("chat.delete")}
-              className="hover:text-red-300 transition"
+              className="-m-3.5 p-3.5 hover:text-red-300 transition"
             >
               <FaTrash />
             </button>

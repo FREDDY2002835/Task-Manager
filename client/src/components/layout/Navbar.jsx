@@ -81,7 +81,7 @@ function Navbar() {
 
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
-          className="p-2 rounded-full hover:bg-white/10 transition"
+          className="p-3 rounded-full hover:bg-white/10 transition"
         >
           <FaEllipsisV className="text-lg" />
         </button>

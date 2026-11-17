@@ -269,7 +269,7 @@ function GroupDetail() {
   const backLink = (
     <Link
       to="/groups"
-      className="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white transition"
+      className="tap inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white transition"
     >
       <FaArrowLeft /> {t("groups.back")}
     </Link>
@@ -411,7 +411,7 @@ function GroupDetail() {
                   setTab(tabItem.key);
                   setChatTaskId(""); // a manual tab switch drops the "Discuss" preselection
                 }}
-                className={`rounded-xl px-5 py-3 text-sm transition ${
+                className={`flex-1 min-w-0 whitespace-nowrap rounded-xl px-2 py-3 text-[15px] transition sm:flex-none sm:px-5 sm:text-sm ${
                   tab === tabItem.key ? "text-white" : "bg-[#162117] text-gray-300 hover:bg-[#1D2C20]"
                 }`}
                 style={
@@ -476,7 +476,7 @@ function GroupDetail() {
                     key={v}
                     type="button"
                     onClick={() => setView(v)}
-                    className={`flex-1 rounded-lg px-4 py-2 text-xs sm:text-sm transition ${view === v ? "text-white" : "text-gray-300"}`}
+                    className={`tap flex-1 rounded-lg px-4 py-2 text-sm transition ${view === v ? "text-white" : "text-gray-300"}`}
                     style={view === v ? { background: "var(--primary)" } : undefined}
                   >
                     {v === "list" ? t("kanban.viewList") : t("kanban.viewBoard")}

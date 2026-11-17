@@ -85,7 +85,7 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus, onDiscuss, canDelete
 
         <button
           onClick={() => onToggleStatus(task)}
-          className="flex items-center gap-2 text-left"
+          className="tap flex items-center gap-2 text-left"
           style={{ color: "var(--primary-light)" }}
         >
           <FaCheckCircle />
@@ -127,7 +127,7 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus, onDiscuss, canDelete
         {onDiscuss && (
           <button
             onClick={() => onDiscuss(task)}
-            className="flex items-center gap-2 text-xs transition hover:text-white"
+            className="tap flex items-center gap-2 px-1 text-sm transition hover:text-white"
             style={{ color: "var(--primary-light)" }}
           >
             <FaComments /> {t("chat.discuss")}
@@ -136,7 +136,7 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus, onDiscuss, canDelete
 
         <button
           onClick={() => onEdit(task)}
-          className="flex items-center gap-2 text-xs text-gray-400 hover:text-white transition"
+          className="tap flex items-center gap-2 px-1 text-sm text-gray-400 hover:text-white transition"
         >
           <FaEdit /> {t("tasks.edit")}
         </button>
@@ -144,7 +144,7 @@ function TaskCard({ task, onEdit, onDelete, onToggleStatus, onDiscuss, canDelete
         {canDelete && (
           <button
             onClick={() => onDelete(task._id)}
-            className="flex items-center gap-2 text-xs text-red-400 hover:text-red-300 transition"
+            className="tap flex items-center gap-2 px-1 text-sm text-red-400 hover:text-red-300 transition"
           >
             <FaTrash /> {t("tasks.delete")}
           </button>

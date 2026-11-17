@@ -6,7 +6,7 @@ import { useLanguage } from "../../context/LanguageContext";
 function ViewToggle({ active }) {
   const { t } = useLanguage();
 
-  const base = "flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm transition";
+  const base = "tap flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm transition";
   const on = { background: "var(--primary)", color: "white" };
 
   return (

@@ -19,7 +19,7 @@ function ThemeSwitcher() {
         Choose Theme
       </h2>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-3 sm:gap-4">
 
         {colors.map((color) => (
       <button
@@ -27,7 +27,7 @@ function ThemeSwitcher() {
         onClick={() => {
         setTheme(color);
       }}
-        className={`w-6 h-6 rounded-full border-2 transition-all duration-200 cursor-pointer ${
+        className={`w-10 h-10 sm:w-6 sm:h-6 rounded-full border-2 transition-all duration-200 cursor-pointer ${
           theme === color
             ? "border-white scale-125"
             : "border-transparent hover:scale-110"
