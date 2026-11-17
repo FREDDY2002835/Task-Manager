@@ -22,6 +22,7 @@ export async function deleteGroupChat(groupId) {
 }
 
 // Used when someone leaves or is removed: cuts off their live updates.
+
 export function kickFromGroupChat(userId, groupId) {
   emitToUser(userId, "group:removed", { groupId: String(groupId) });
   removeUserFromGroupRoom(userId, groupId);
